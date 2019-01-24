@@ -19,7 +19,20 @@
             <th><span class="planet-header">Surface Waters Percentage</span></th>
             <th><span class="planet-header">Population</span></th>
             <th><span class="planet-header">Residents</span></th>
-            <th><span class="planet-header-l">...</span></th>
+            <th><span class="planet-header"></span></th>
+            {% for planet in planets %}
+                <tr>
+                    <td>{{ planet.name }}</td>
+                    <td>{{ planet.diameter }} km</td>
+                    <td>{{ planet.climate }}</td>
+                    <td>{{ planet.terrain }} km</td>
+                    <td>{{ planet.surface_water + '%' if planet.surface_water != 'unknown' else 'unknown'}}</td>
+                    <td>{{ planet.population }}</td>
+                    <td>{{ planet.residents|length }}</td>
+                    <td><button type="button" class="btn btn-secondary">Vote</button></td>
+                </tr>
+            {% endfor %}
+
         </table>
     </div>
 {% endblock %}

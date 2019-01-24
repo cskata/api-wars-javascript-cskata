@@ -15,21 +15,23 @@ body {
     text-align: center;
 }
 
-#planets {
+#planets, #planets th, #planets td {
     border: 1px solid gray;
     border-radius: 3px;
-    border-collapse: separate;
+    border-collapse: collapse;
 }
 
-#planets, .planet-header, .planet-header-l {
+#planets, .planet-header {
     font-size: 14px;
-}
-
-.planet-header {
-    border-right: 1px solid gray;
     padding: 3px;
 }
 
 .btn-primary {
     background-color: #296294;
+}
+
+.btn-secondary {
+    background-color: #ebebeb;
+    color: black;
+    margin: 1px;
 }
