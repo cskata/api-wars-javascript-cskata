@@ -104,21 +104,11 @@ function addDataToCells(cell1, cell2, cell3, cell4, cell5, cell6, planet) {
 }
 
 
-function switchToNextPage() {
+function switchPage() {
     let currentPage = document.getElementById('planets');
     let currentPageNo = parseInt(document.getElementById('planets').dataset.page);
-    let nextPage = currentPageNo + 1;
-    currentPage.dataset.page = nextPage.toString();
-
-    deleteData();
-    getData();
-}
-
-
-function switchToPrevPage() {
-    let currentPage = document.getElementById('planets');
-    let currentPageNo = parseInt(document.getElementById('planets').dataset.page);
-    let nextPage = currentPageNo - 1;
+    let step = parseInt(event.target.dataset.value);
+    let nextPage = currentPageNo + step;
     currentPage.dataset.page = nextPage.toString();
 
     deleteData();
@@ -138,8 +128,8 @@ function init() {
     getData();
 
     let nextButton = document.getElementById('next-button');
-    nextButton.addEventListener('click', switchToNextPage);
+    nextButton.addEventListener('click', switchPage);
 
     let prevButton = document.getElementById('prev-button');
-    prevButton.addEventListener('click', switchToPrevPage);
+    prevButton.addEventListener('click', switchPage);
 }
