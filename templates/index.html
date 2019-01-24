@@ -7,13 +7,9 @@
 {% block content %}
     <div id="title">
         <h1>Star Wars universe planets</h1>
-        {% if page == 1 %}
-            <button class="btn btn-primary" type="submit"
-                    id="prev-button" name="prev-button" data-value="-1" disabled>Previous</button>
-        {% else %}
-            <button class="btn btn-primary" type="submit"
+        <button class="btn btn-primary" type="submit"
                     id="prev-button" name="prev-button" data-value="-1">Previous</button>
-        {% endif %}
+
         <button class="btn btn-primary" type="submit"
                 id="next-button" name="next-button" data-value="1">Next</button>
     </div>

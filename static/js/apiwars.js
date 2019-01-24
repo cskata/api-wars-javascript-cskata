@@ -94,6 +94,10 @@ function switchToNextPage() {
     let nextPage = currentPageNo + 1;
     currentPage.dataset.page = nextPage.toString();
 
+    if (nextPage > 7) {
+        currentPage.dataset.page = '7';
+    }
+
     deleteData();
     getData();
 }
@@ -103,7 +107,12 @@ function switchToPrevPage() {
     let currentPage = document.getElementById('planets');
     let currentPageNo = parseInt(document.getElementById('planets').dataset.page);
     let nextPage = currentPageNo - 1;
+
     currentPage.dataset.page = nextPage.toString();
+
+    if (nextPage < 1) {
+        currentPage.dataset.page = '1';
+    }
 
     deleteData();
     getData();
@@ -113,7 +122,7 @@ function switchToPrevPage() {
 function deleteData() {
     let table = document.getElementById('planets');
     for (let i=1; i<11; i++) {
-        table.childNodes[1].childNodes[1].remove()
+        table.childNodes[1].childNodes[1].remove();
     }
 }
 
@@ -125,5 +134,5 @@ function init() {
     nextButton.addEventListener('click', switchToNextPage);
 
     let prevButton = document.getElementById('prev-button');
-    prevButton.addEventListener('click', switchToPrevPage)
+    prevButton.addEventListener('click', switchToPrevPage);
 }
