@@ -90,11 +90,31 @@ function addDataToCells(cell1, cell2, cell3, cell4, cell5, cell6, planet) {
 
 function switchToNextPage() {
     let currentPage = document.getElementById('planets');
-    console.log()
     let currentPageNo = parseInt(document.getElementById('planets').dataset.page);
     let nextPage = currentPageNo + 1;
     currentPage.dataset.page = nextPage.toString();
+
+    deleteData();
     getData();
+}
+
+
+function switchToPrevPage() {
+    let currentPage = document.getElementById('planets');
+    let currentPageNo = parseInt(document.getElementById('planets').dataset.page);
+    let nextPage = currentPageNo - 1;
+    currentPage.dataset.page = nextPage.toString();
+
+    deleteData();
+    getData();
+}
+
+
+function deleteData() {
+    let table = document.getElementById('planets');
+    for (let i=1; i<11; i++) {
+        table.childNodes[1].childNodes[1].remove()
+    }
 }
 
 
@@ -103,4 +123,7 @@ function init() {
 
     let nextButton = document.getElementById('next-button');
     nextButton.addEventListener('click', switchToNextPage);
+
+    let prevButton = document.getElementById('prev-button');
+    prevButton.addEventListener('click', switchToPrevPage)
 }
