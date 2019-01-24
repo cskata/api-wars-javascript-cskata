@@ -11,28 +11,44 @@
         <button class="btn btn-primary" type="submit">Next</button>
     </div>
     <div class="main-content">
-        <table id="planets">
-            <th><span class="planet-header">Name</span></th>
-            <th><span class="planet-header">Diameter</span></th>
-            <th><span class="planet-header">Climate</span></th>
-            <th><span class="planet-header">Terrain</span></th>
-            <th><span class="planet-header">Surface Waters Percentage</span></th>
-            <th><span class="planet-header">Population</span></th>
-            <th><span class="planet-header">Residents</span></th>
-            <th><span class="planet-header"></span></th>
-            {% for planet in planets %}
-                <tr>
-                    <td>{{ planet.name }}</td>
-                    <td>{{ planet.diameter }} km</td>
-                    <td>{{ planet.climate }}</td>
-                    <td>{{ planet.terrain }} km</td>
-                    <td>{{ planet.surface_water + '%' if planet.surface_water != 'unknown' else 'unknown'}}</td>
-                    <td>{{ planet.population }}</td>
-                    <td>{{ planet.residents|length }}</td>
-                    <td><button type="button" class="btn btn-secondary">Vote</button></td>
-                </tr>
-            {% endfor %}
+        <div class="planet-container">
+            <table id="planets">
+                <th><span class="planet-header">Name</span></th>
+                <th><span class="planet-header">Diameter</span></th>
+                <th><span class="planet-header">Climate</span></th>
+                <th><span class="planet-header">Terrain</span></th>
+                <th><span class="planet-header">Surface Waters Percentage</span></th>
+                <th><span class="planet-header">Population</span></th>
+                <th><span class="planet-header">Residents</span></th>
+                <th><span class="planet-header"></span></th>
 
-        </table>
+                {% for planet in planets %}
+                    <tr>
+                        <td><span class="planet-data">{{ planet.name }}</span></td>
+                        <td><span class="planet-data">{{ planet.diameter }} km</span></td>
+                        <td><span class="planet-data">{{ planet.climate }}</span></td>
+                        <td><span class="planet-data">{{ planet.terrain }} km</span></td>
+                        <td><span class="planet-data">{{ planet.surface_water + '%'
+                        if planet.surface_water != 'unknown' else 'unknown'}}</span></td>
+                        <td><span class="planet-data">{{ planet.population }}</span></td>
+                        <td><span class="planet-data">
+                            {% if planet.residents|length == 0 %}
+                                No known residents.
+                            {% else %}
+                                <button type="button" class="btn btn-secondary">
+                                    <span class="residents">
+                                        <span class="bold">{{ planet.residents|length }}</span> resident(s)</span>
+                                </button>
+                            {% endif %}
+                        </span></td>
+                        <td>
+                            <span class="planet-data">
+                                <button type="button" class="btn btn-secondary">Vote</button>
+                            </span>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>
 {% endblock %}

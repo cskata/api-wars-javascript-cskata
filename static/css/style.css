@@ -5,14 +5,18 @@ body {
     color: black;
 }
 
-#title {
-    padding: 1vw;
+#title, .planet-data {
+    padding: 3px;
 }
 
 .main-content {
-    padding: 1vw;
-    width: 100%;
     text-align: center;
+    width: 100%;
+}
+
+.planet-container {
+    display: inline-block;
+    padding-top: 1vw;
 }
 
 #planets, #planets th, #planets td {
@@ -34,4 +38,12 @@ body {
     background-color: #ebebeb;
     color: black;
     margin: 1px;
+}
+
+.residents {
+    font-size: 13px;
+}
+
+.bold {
+    font-weight: bold;
 }
