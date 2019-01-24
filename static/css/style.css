@@ -1,0 +1,35 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    color: black;
+}
+
+#title {
+    padding: 1vw;
+}
+
+.main-content {
+    padding: 1vw;
+    width: 100%;
+    text-align: center;
+}
+
+#planets {
+    border: 1px solid gray;
+    border-radius: 3px;
+    border-collapse: separate;
+}
+
+#planets, .planet-header, .planet-header-l {
+    font-size: 14px;
+}
+
+.planet-header {
+    border-right: 1px solid gray;
+    padding: 3px;
+}
+
+.btn-primary {
+    background-color: #296294;
+}

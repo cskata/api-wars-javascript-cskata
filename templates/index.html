@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    <title>Planets</title>
+{% endblock %}
+
+{% block content %}
+    <div id="title">
+        <h1>Star Wars universe planets</h1>
+        <button class="btn btn-primary" type="submit" disabled>Previous</button>
+        <button class="btn btn-primary" type="submit">Next</button>
+    </div>
+    <div class="main-content">
+        <table id="planets">
+            <th><span class="planet-header">Name</span></th>
+            <th><span class="planet-header">Diameter</span></th>
+            <th><span class="planet-header">Climate</span></th>
+            <th><span class="planet-header">Terrain</span></th>
+            <th><span class="planet-header">Surface Waters Percentage</span></th>
+            <th><span class="planet-header">Population</span></th>
+            <th><span class="planet-header">Residents</span></th>
+            <th><span class="planet-header-l">...</span></th>
+        </table>
+    </div>
+{% endblock %}
