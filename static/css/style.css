@@ -9,6 +9,12 @@ body {
     padding: 3px;
 }
 
+.title-content {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+}
+
 .main-content {
     text-align: center;
     width: 100%;
