@@ -8,15 +8,18 @@
     <div id="title">
         <h1>Star Wars universe planets</h1>
         {% if page == 1 %}
-            <button class="btn btn-primary" type="submit" disabled>Previous</button>
+            <button class="btn btn-primary" type="submit"
+                    id="prev-button" name="prev-button" data-value="-1" disabled>Previous</button>
         {% else %}
-            <button class="btn btn-primary" type="submit">Previous</button>
+            <button class="btn btn-primary" type="submit"
+                    id="prev-button" name="prev-button" data-value="-1">Previous</button>
         {% endif %}
-        <button class="btn btn-primary" type="submit" name="next" value="1">Next</button>
+        <button class="btn btn-primary" type="submit"
+                id="next-button" name="next-button" data-value="1">Next</button>
     </div>
     <div class="main-content">
         <div class="planet-container">
-            <table id="planets">
+            <table id="planets" data-page="{{ page }}">
                 <th><span class="planet-header">Name</span></th>
                 <th><span class="planet-header">Diameter</span></th>
                 <th><span class="planet-header">Climate</span></th>
@@ -25,33 +28,6 @@
                 <th><span class="planet-header">Population</span></th>
                 <th><span class="planet-header">Residents</span></th>
                 <th><span class="planet-header"></span></th>
-
-                {% for planet in planets %}
-                    <tr>
-                        <td><span class="planet-data">{{ planet.name }}</span></td>
-                        <td><span class="planet-data">{{ planet.diameter }} km</span></td>
-                        <td><span class="planet-data">{{ planet.climate }}</span></td>
-                        <td><span class="planet-data">{{ planet.terrain }} km</span></td>
-                        <td><span class="planet-data">{{ planet.surface_water + '%'
-                        if planet.surface_water != 'unknown' else 'unknown'}}</span></td>
-                        <td><span class="planet-data">{{ planet.population }}</span></td>
-                        <td><span class="planet-data">
-                            {% if planet.residents|length == 0 %}
-                                No known residents.
-                            {% else %}
-                                <button type="button" class="btn btn-secondary">
-                                    <span class="residents">
-                                        <span class="bold">{{ planet.residents|length }}</span> resident(s)</span>
-                                </button>
-                            {% endif %}
-                        </span></td>
-                        <td>
-                            <span class="planet-data">
-                                <button type="button" class="btn btn-secondary">Vote</button>
-                            </span>
-                        </td>
-                    </tr>
-                {% endfor %}
             </table>
         </div>
     </div>
