@@ -61,3 +61,13 @@ def verify_user(cursor, login_data):
         stored_hash_password_from_db = stored_hash_password[0]['hashed_pw']
         pw_check = verify_password(password, salt, stored_hash_password_from_db)
         return pw_check
+
+
+def format_planet_data(universe_data):
+    planets = universe_data['results']
+    for planet in planets:
+        planet['diameter'] = format(int(planet['diameter']), ',d')
+        planet['population'] = format(int(planet['population']), ',d') \
+            if planet['population'] != 'unknown' else 'unknown'
+
+    return planets
