@@ -5,6 +5,19 @@ function getData() {
     let whichPage = document.getElementById('planets').dataset.page;
     let targetURL = 'https://swapi.co/api/planets/?page=' + whichPage;
 
+    let prevButton = document.getElementById('prev-button');
+    let nextButton = document.getElementById('next-button');
+
+    if (parseInt(whichPage) === 1) {
+        prevButton.disabled = true;
+    } else if (parseInt(whichPage) > 1 && parseInt(whichPage) < 7) {
+        prevButton.disabled = false;
+        nextButton.disabled = false;
+    } else if (parseInt(whichPage) === 7) {
+        nextButton.disabled = true;
+    }
+
+
     $.ajax({
         dataType: "json",
         url: targetURL,
@@ -13,7 +26,10 @@ function getData() {
             let planets = response['results'];
 
             for (let planet of planets) {
-                planet['diameter'] = planet['diameter'].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                if (planet['diameter'] !== 'unknown') {
+                    planet['diameter'] = planet['diameter'].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    planet['diameter'] = planet['diameter'] + ' km';
+                }
 
                 if (planet['population'] !== 'unknown') {
                     planet['population'] = planet['population'].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -94,10 +110,6 @@ function switchToNextPage() {
     let nextPage = currentPageNo + 1;
     currentPage.dataset.page = nextPage.toString();
 
-    if (nextPage > 7) {
-        currentPage.dataset.page = '7';
-    }
-
     deleteData();
     getData();
 }
@@ -107,12 +119,7 @@ function switchToPrevPage() {
     let currentPage = document.getElementById('planets');
     let currentPageNo = parseInt(document.getElementById('planets').dataset.page);
     let nextPage = currentPageNo - 1;
-
     currentPage.dataset.page = nextPage.toString();
-
-    if (nextPage < 1) {
-        currentPage.dataset.page = '1';
-    }
 
     deleteData();
     getData();
@@ -121,7 +128,7 @@ function switchToPrevPage() {
 
 function deleteData() {
     let table = document.getElementById('planets');
-    for (let i=1; i<11; i++) {
+    for (let i = 1; i < 11; i++) {
         table.childNodes[1].childNodes[1].remove();
     }
 }
