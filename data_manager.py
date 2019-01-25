@@ -82,3 +82,18 @@ def save_planet_vote(cursor, vote_data):
         (planet_id, planet_name, user_id, submission_time)
         VALUES (%(planet_id)s, %(planet_name)s, %(user_id)s, %(submission_time)s);
         """, vote_data)
+
+
+@connection_handler
+def get_votes_by_user_id(cursor, user_id):
+    user = dict()
+    user['user_id'] = user_id
+
+    cursor.execute("""
+        SELECT planet_name, COUNT(id) FROM planet_votes
+        WHERE user_id = %(user_id)s
+        GROUP BY planet_name
+        ORDER BY planet_name;
+        """, user)
+    votes = cursor.fetchall()
+    return votes

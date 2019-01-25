@@ -1,6 +1,5 @@
-from flask import Flask, render_template, redirect, session, request, url_for
+from flask import Flask, render_template, redirect, session, request, url_for, jsonify
 import data_manager
-import requests
 
 
 app = Flask(__name__)
@@ -67,6 +66,14 @@ def save_planet_vote():
     response = request.get_json()
     data_manager.save_planet_vote(response)
     return 'response'
+
+
+@app.route('/get-vote')
+def get_user_votes():
+    username = session['username']
+    user_id = data_manager.get_user_id_by_username(username)
+    votes = data_manager.get_votes_by_user_id(user_id)
+    return jsonify(votes)
 
 
 if __name__ == '__main__':
