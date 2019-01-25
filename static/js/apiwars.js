@@ -192,9 +192,11 @@ function addGender(cell8, residentData) {
 
     if (residentData['gender'] === 'female') {
         icon.classList.add('fa-venus');
+        icon.title = "female";
         cell8.appendChild(icon);
     } else if (residentData['gender'] === 'male') {
         icon.classList.add('fa-mars');
+        icon.title = "male";
         cell8.appendChild(icon);
     } else {
         cell8.innerHTML = residentData['gender'];
