@@ -122,3 +122,8 @@ body {
     border-bottom: 1px solid black;
     text-align: left;
 }
+
+#close-button {
+    margin: 3px;
+    float: right;
+}
