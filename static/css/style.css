@@ -127,3 +127,7 @@ body {
     margin: 3px;
     float: right;
 }
+
+.col {
+    width: 300px;
+}

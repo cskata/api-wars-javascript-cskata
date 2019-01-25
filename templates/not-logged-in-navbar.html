@@ -5,15 +5,16 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="#">Register</a>
+            <a class="nav-link" href="{{ url_for('new_user_registration') }}">Register</a>
         </li>
 
         <li class="nav-item dropdown">
             <div class="nav-link dropdown-toggle" id="navbarDropdown"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login</div>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #343a40">
-                    <div class="col" style="width: 300px">
-                        <form class="form" role="form" action="/login" method=POST id="login-nav">
+                    <div class="col">
+                        <form class="form" role="form" action="{{ url_for('log_in_user') }}"
+                              method=POST id="login-nav">
                             <div class="form-group">
                                 <label class="sr-only" for="exampleInputEmail2">Username</label>
                                 <input type="text" class="form-control" id="username" name="username"
