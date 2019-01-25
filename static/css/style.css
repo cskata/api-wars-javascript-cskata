@@ -1,5 +1,4 @@
 html {
-    background-color: #3B666B;
     font-family: sans-serif;
 }
 
@@ -138,10 +137,6 @@ body {
 
 /* Registration from style */
 
-#reg-background {
-    background-color: #3B666B;
-}
-
 #reg-form-wrapper {
     width: 70%;
     margin: 0 auto;
@@ -152,11 +147,11 @@ body {
     width: 60%;
     display: inline-block;
     min-width: 200px;
-    background-color: #ffffff;
     height: 400px;
     margin: 20px;
     box-shadow: 0 1px 5px rgba(0, 0, 0, .9);
     border-radius: 4px;
+    background-color: #3B666B;
 }
 
 .reg-title {
@@ -190,8 +185,7 @@ body {
 }
 
 .reg-button {
-    background-color: #3B666B;
-    border-color: #01579b;
+    background-color: #000000;
     color: #ffffff;
     border-radius: 4px;
     margin: 10px;
