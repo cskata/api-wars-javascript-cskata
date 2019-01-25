@@ -364,6 +364,8 @@ function openVoteStatistics() {
             let head2 = row.insertCell(1);
             head1.innerHTML = 'Planet name';
             head2.innerHTML = 'Received votes';
+            head1.classList.add('vote-header');
+            head2.classList.add('vote-header');
 
             for (let planet of voted_planets) {
                 let row = table.insertRow(-1);

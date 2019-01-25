@@ -29,18 +29,18 @@ body {
     text-align: left;
 }
 
-#planets, #planets th, #planets td, #residents, #residents th, #residents td {
+#planets, #planets th, #planets td, #residents, #residents th, #residents td, #votes, #votes th, #votes td {
     border: 1px solid gray;
     border-radius: 3px;
     border-collapse: collapse;
 }
 
-#planets, .planet-header, .resident-header, #residents th, #residents td {
+#planets, .planet-header, .resident-header, #residents th, #residents td, #votes th, #votes td {
     font-size: 14px;
     padding: 3px;
 }
 
-.planet-header, .resident-header {
+.planet-header, .resident-header, .vote-header {
     font-weight: bold;
 }
 
@@ -140,7 +140,7 @@ body {
 }
 
 #close-button, #close-votes-button {
-    margin: 3px;
+    margin: 8px;
     float: right;
 }
 
