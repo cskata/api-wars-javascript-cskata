@@ -8,6 +8,7 @@ function getData() {
     disableButtonIfNecessary(whichPage);
 
     $.ajax({
+        type: "GET",
         dataType: "json",
         url: targetURL,
         success: function (response) {
@@ -131,8 +132,13 @@ function saveVote() {
 
     let data = {'planet_id':planetId, 'planet_name': planetName, 'user_id':userId, 'submission_time': submissionTime};
 
-    $.ajax({'type': 'post', 'url': 'http://127.0.0.1:5000/send-vote',
-        'contentType':'application/json', 'data': JSON.stringify(data)});
+    $.ajax({
+        type: "POST",
+        url: "http://127.0.0.1:5000/send-vote",
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify(data)
+    });
 }
 
 

@@ -62,7 +62,7 @@ def log_user_out():
     return redirect(url_for('index'))
 
 
-@app.route('/send-vote', methods=['GET', 'POST'])
+@app.route('/send-vote', methods=['POST'])
 def save_planet_vote():
     response = request.get_json()
     data_manager.save_planet_vote(response)
