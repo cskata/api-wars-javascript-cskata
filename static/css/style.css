@@ -204,3 +204,12 @@ body {
     background-color: #ffffff;
     color: black;
 }
+
+.signed-in-user {
+    color: #9E9E9E;
+    margin-top: 9px;
+}
+
+#logged-in-username {
+    color: white;
+}
