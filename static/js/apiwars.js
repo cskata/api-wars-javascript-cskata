@@ -199,10 +199,19 @@ function addKgToMass(cell3, residentData) {
     }
 }
 
+function convertHeightToMeters(cell2, residentData) {
+    if (residentData['height'] === "unknown"){
+        cell2.innerHTML = residentData['height'];
+    } else {
+        let height = parseInt(residentData['height']) / 100;
+        cell2.innerHTML = height.toString() + ' m';
+    }
+}
+
 
 function addDataToCellsAtResidentPage(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, residentData) {
     cell1.innerHTML = residentData['name'];
-    cell2.innerHTML = residentData['height'];
+    convertHeightToMeters(cell2, residentData);
     addKgToMass(cell3, residentData);
     cell4.innerHTML = residentData['hair_color'];
     cell5.innerHTML = residentData['skin_color'];
