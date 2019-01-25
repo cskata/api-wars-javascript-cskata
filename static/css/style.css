@@ -88,6 +88,15 @@ body {
     width: 80%;
 }
 
+.w3-modal-content-votes {
+    margin: auto;
+    background-color: #fff;
+    position: relative;
+    padding-top: 2.5%;
+    outline: 0;
+    width: 25%;
+}
+
 .w3-container {
     padding: 10px;
     text-align: -webkit-center;
