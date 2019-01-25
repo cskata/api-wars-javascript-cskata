@@ -81,6 +81,9 @@ function getData() {
                 let text = document.createTextNode('Vote');
                 voteBtn.appendChild(text);
                 cell8.appendChild(voteBtn);
+                if (table.dataset.session === "") {
+                    voteBtn.style.visibility = "hidden";
+                }
             }
         }
     });

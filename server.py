@@ -47,7 +47,8 @@ def log_in_user():
 
     if login_check:
         session['username'] = login_data['username']
-    return redirect(url_for('index'))
+        return redirect(url_for('index'))
+    return render_template('index.html')
 
 
 @app.route('/logout')
