@@ -228,3 +228,7 @@ body {
 .centered-text {
     text-align: center;
 }
+
+#vote-stats:hover {
+    cursor: pointer;
+}
