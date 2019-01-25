@@ -26,21 +26,6 @@ function getData() {
             let planets = response['results'];
 
             for (let planet of planets) {
-                if (planet['diameter'] !== 'unknown') {
-                    planet['diameter'] = planet['diameter'].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    planet['diameter'] = planet['diameter'] + ' km';
-                }
-
-                if (planet['population'] !== 'unknown') {
-                    planet['population'] = planet['population'].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    planet['population'] = planet['population'] + ' people';
-                }
-
-                if (planet['surface_water'] !== 'unknown') {
-                    planet['surface_water'] = planet['surface_water'] + '%';
-                }
-
-
                 let row = table.insertRow(-1);
 
                 let cell1 = row.insertCell(0);
@@ -55,38 +40,47 @@ function getData() {
                 addClassToCells(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, 'planet-data');
                 addDataToCellsAtMainPage(cell1, cell2, cell3, cell4, cell5, cell6, planet);
 
-                if (planet['residents'].length === 0) {
-                    cell7.innerHTML = 'No known residents';
-                } else if (planet['residents'].length > 0) {
-                    let residentBtn = document.createElement('button');
-
-                    let noOfResidents = planet['residents'].length.toString();
-                    let fullResidentTxt = noOfResidents + ' resident(s)';
-                    let residentBtnTxt = document.createTextNode(fullResidentTxt);
-
-                    residentBtn.appendChild(residentBtnTxt);
-                    residentBtn.classList.add('btn');
-                    residentBtn.classList.add('btn-secondary');
-                    cell7.appendChild(residentBtn);
-                    residentBtn.dataset.planet = planet['name'];
-                    residentBtn.dataset.residents = planet['residents'];
-                    residentBtn.dataset.numberofresidents = planet['residents'].length;
-                    residentBtn.addEventListener('click', openModal);
-                }
-
-                let voteBtn = document.createElement('button');
-                voteBtn.classList.add('btn');
-                voteBtn.classList.add('btn-secondary');
-
-                let text = document.createTextNode('Vote');
-                voteBtn.appendChild(text);
-                cell8.appendChild(voteBtn);
-                if (table.dataset.session === "") {
-                    voteBtn.style.visibility = "hidden";
-                }
+                addResidentsButton(planet, cell7);
+                addVoteButton(cell8, table);
             }
         }
     });
+}
+
+function addResidentsButton(planet, cell7) {
+    if (planet['residents'].length === 0) {
+        cell7.innerHTML = 'No known residents';
+    } else if (planet['residents'].length > 0) {
+        let residentBtn = document.createElement('button');
+
+        let noOfResidents = planet['residents'].length.toString();
+        let fullResidentTxt = noOfResidents + ' resident(s)';
+        let residentBtnTxt = document.createTextNode(fullResidentTxt);
+
+        residentBtn.appendChild(residentBtnTxt);
+        residentBtn.classList.add('btn');
+        residentBtn.classList.add('btn-secondary');
+        cell7.appendChild(residentBtn);
+
+        residentBtn.dataset.planet = planet['name'];
+        residentBtn.dataset.residents = planet['residents'];
+        residentBtn.dataset.numberofresidents = planet['residents'].length;
+        residentBtn.addEventListener('click', openModal);
+    }
+}
+
+
+function addVoteButton(cell8, table) {
+    let voteBtn = document.createElement('button');
+    voteBtn.classList.add('btn');
+    voteBtn.classList.add('btn-secondary');
+
+    let text = document.createTextNode('Vote');
+    voteBtn.appendChild(text);
+    cell8.appendChild(voteBtn);
+    if (table.dataset.session === "") {
+        voteBtn.style.visibility = "hidden";
+    }
 }
 
 
@@ -101,12 +95,30 @@ function addClassToCells(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8,
     cell8.classList.add(cellClass);
 }
 
+
 function addDataToCellsAtMainPage(cell1, cell2, cell3, cell4, cell5, cell6, planet) {
     cell1.innerHTML = planet['name'];
+
+    if (planet['diameter'] !== 'unknown') {
+        planet['diameter'] = planet['diameter'].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        planet['diameter'] = planet['diameter'] + ' km';
+    }
+
     cell2.innerHTML = planet['diameter'];
     cell3.innerHTML = planet['climate'];
     cell4.innerHTML = planet['terrain'];
+
+    if (planet['surface_water'] !== 'unknown') {
+        planet['surface_water'] = planet['surface_water'] + '%';
+    }
+
     cell5.innerHTML = planet['surface_water'];
+
+    if (planet['population'] !== 'unknown') {
+        planet['population'] = planet['population'].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        planet['population'] = planet['population'] + ' people';
+    }
+
     cell6.innerHTML = planet['population'];
 }
 
@@ -192,7 +204,7 @@ function addGender(cell8, residentData) {
 }
 
 function addKgToMass(cell3, residentData) {
-    if (residentData['mass'] === "unknown"){
+    if (residentData['mass'] === "unknown") {
         cell3.innerHTML = residentData['mass'];
     } else {
         cell3.innerHTML = residentData['mass'] + ' kg';
@@ -200,7 +212,7 @@ function addKgToMass(cell3, residentData) {
 }
 
 function convertHeightToMeters(cell2, residentData) {
-    if (residentData['height'] === "unknown"){
+    if (residentData['height'] === "unknown") {
         cell2.innerHTML = residentData['height'];
     } else {
         let height = parseInt(residentData['height']) / 100;
