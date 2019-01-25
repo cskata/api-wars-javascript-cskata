@@ -166,9 +166,7 @@ function openModal() {
                 let cell8 = row.insertCell(7);
 
                 addClassToCells(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, 'resident-data');
-                addDataToCellsAtResidentPage(cell1, cell2, cell3, cell4, cell5, cell6, cell7, residentData);
-
-                addGender(cell8, residentData);
+                addDataToCellsAtResidentPage(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, residentData);
             }
         });
     }
@@ -193,15 +191,24 @@ function addGender(cell8, residentData) {
 
 }
 
+function addKgToMass(cell3, residentData) {
+    if (residentData['mass'] === "unknown"){
+        cell3.innerHTML = residentData['mass'];
+    } else {
+        cell3.innerHTML = residentData['mass'] + ' kg';
+    }
+}
 
-function addDataToCellsAtResidentPage(cell1, cell2, cell3, cell4, cell5, cell6, cell7, residentData) {
+
+function addDataToCellsAtResidentPage(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, residentData) {
     cell1.innerHTML = residentData['name'];
     cell2.innerHTML = residentData['height'];
-    cell3.innerHTML = residentData['mass'];
+    addKgToMass(cell3, residentData);
     cell4.innerHTML = residentData['hair_color'];
     cell5.innerHTML = residentData['skin_color'];
     cell6.innerHTML = residentData['eye_color'];
     cell7.innerHTML = residentData['birth_year'];
+    addGender(cell8, residentData);
 }
 
 
