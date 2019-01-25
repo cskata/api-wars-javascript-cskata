@@ -39,7 +39,7 @@ function getData() {
 }
 
 function insertPlanetHeaders(table) {
-    let header = table.insertRow(-1);
+    let header = table.insertRow(0);
 
     let head1 = header.insertCell(0);
     let head2 = header.insertCell(1);
