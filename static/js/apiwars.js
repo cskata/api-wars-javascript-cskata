@@ -169,7 +169,8 @@ function switchPage() {
 
 function deleteData() {
     let table = document.getElementById('planets');
-    let planetTableLengthWithHeader = 11;
+    let planetTableLengthWithHeader = table.childNodes[1].childNodes.length;
+
     for (let i = 1; i <= planetTableLengthWithHeader; i++) {
         table.childNodes[1].childNodes[0].remove();
     }
