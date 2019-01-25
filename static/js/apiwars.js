@@ -169,52 +169,9 @@ function switchPage() {
 
 function deleteData() {
     let table = document.getElementById('planets');
-    for (let i = 1; i <= 11; i++) {
+    let planetTableLengthWithHeader = 11;
+    for (let i = 1; i <= planetTableLengthWithHeader; i++) {
         table.childNodes[1].childNodes[0].remove();
-    }
-}
-
-
-function openModal() {
-    let modal = document.getElementById('resident-container');
-    modal.style.display = 'block';
-
-    let planet = event.target.dataset.planet;
-
-    let title = document.getElementById('which-planet');
-    title.innerHTML = 'Residents of ' + planet;
-
-    let residentsOrig = event.target.dataset.residents;
-    let numberOfResidents = event.target.dataset.numberofresidents;
-    let residents = residentsOrig.split(',');
-
-    let modalCloseButton = document.getElementById('close-modal');
-    modalCloseButton.dataset.numberofresidents = numberOfResidents;
-
-    insertResidentHeaders();
-
-    for (let resident of residents) {
-        $.ajax({
-            dataType: "json",
-            url: resident,
-            success: function (residentData) {
-                let table = document.getElementById('residents');
-
-                let row = table.insertRow(-1);
-
-                let cell1 = row.insertCell(0);
-                let cell2 = row.insertCell(1);
-                let cell3 = row.insertCell(2);
-                let cell4 = row.insertCell(3);
-                let cell5 = row.insertCell(4);
-                let cell6 = row.insertCell(5);
-                let cell7 = row.insertCell(6);
-                let cell8 = row.insertCell(7);
-
-                addClassToCells(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, 'resident-data');
-                addDataToCellsAtResidentPage(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, residentData);
-            }
-        });
     }
 }
 
@@ -294,6 +251,49 @@ function addDataToCellsAtResidentPage(cell1, cell2, cell3, cell4, cell5, cell6, 
     cell6.innerHTML = residentData['eye_color'];
     cell7.innerHTML = residentData['birth_year'];
     addGender(cell8, residentData);
+}
+
+function openModal() {
+    let modal = document.getElementById('resident-container');
+    modal.style.display = 'block';
+
+    let planet = event.target.dataset.planet;
+
+    let title = document.getElementById('which-planet');
+    title.innerHTML = 'Residents of ' + planet;
+
+    let residentsOrig = event.target.dataset.residents;
+    let numberOfResidents = event.target.dataset.numberofresidents;
+    let residents = residentsOrig.split(',');
+
+    let modalCloseButton = document.getElementById('close-modal');
+    modalCloseButton.dataset.numberofresidents = numberOfResidents;
+
+    insertResidentHeaders();
+
+    for (let resident of residents) {
+        $.ajax({
+            dataType: "json",
+            url: resident,
+            success: function (residentData) {
+                let table = document.getElementById('residents');
+
+                let row = table.insertRow(-1);
+
+                let cell1 = row.insertCell(0);
+                let cell2 = row.insertCell(1);
+                let cell3 = row.insertCell(2);
+                let cell4 = row.insertCell(3);
+                let cell5 = row.insertCell(4);
+                let cell6 = row.insertCell(5);
+                let cell7 = row.insertCell(6);
+                let cell8 = row.insertCell(7);
+
+                addClassToCells(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, 'resident-data');
+                addDataToCellsAtResidentPage(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, residentData);
+            }
+        });
+    }
 }
 
 
