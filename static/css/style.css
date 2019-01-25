@@ -1,7 +1,11 @@
+html {
+    background-color: #3B666B;
+    font-family: sans-serif;
+}
+
 body {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
     color: black;
 }
 
@@ -68,8 +72,8 @@ body {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .w3-modal-content {
@@ -86,7 +90,7 @@ body {
     text-align: -webkit-center;
 }
 
-.w3-container:after,.w3-container:before  {
+.w3-container:after, .w3-container:before {
     content: "";
     display: table;
     clear: both;
@@ -130,4 +134,73 @@ body {
 
 .col {
     width: 300px;
+}
+
+/* Registration from style */
+
+#reg-background {
+    background-color: #3B666B;
+}
+
+#reg-form-wrapper {
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#reg-form {
+    width: 60%;
+    display: inline-block;
+    min-width: 200px;
+    background-color: #ffffff;
+    height: 400px;
+    margin: 20px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, .9);
+    border-radius: 4px;
+}
+
+.reg-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    color: black;
+}
+
+.input {
+    width: 50%;
+    height: 30px;
+    border-radius: 4px;
+    box-shadow: none;
+    border: 1px solid #01579b;
+    text-indent: 5px;
+}
+
+.label {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+}
+
+.message {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: red;
+}
+
+.reg-button {
+    background-color: #3B666B;
+    border-color: #01579b;
+    color: #ffffff;
+    border-radius: 4px;
+    margin: 10px;
+    width: 50%;
+    height: 30px;
+    box-shadow: none;
+}
+
+.reg-button:hover {
+    background-color: #ffffff;
+    color: black;
 }
