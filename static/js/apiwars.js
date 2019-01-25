@@ -124,6 +124,18 @@ function deleteData() {
 }
 
 
+function openModal() {
+    let table = document.getElementById('residents');
+    table.style.display='block';
+}
+
+
+function closeModal() {
+    let table = document.getElementById('residents');
+    table.style.display='none';
+}
+
+
 function init() {
     getData();
 
@@ -132,4 +144,16 @@ function init() {
 
     let prevButton = document.getElementById('prev-button');
     prevButton.addEventListener('click', switchPage);
+    
+    let modalOpenButton = document.getElementById('modal-button');
+    modalOpenButton.addEventListener('click', openModal);
+
+    let modalCloseButton = document.getElementById('close-modal');
+    modalCloseButton.addEventListener('click', closeModal);
 }
+
+/*
+minden resident gombhoz egy eventlistener hozzárendelése, ami kattintásra hozzáad egy modalt és megnyitja
+a modalban először csak szöveg van
+utána komplett tábla hozzáadása a residentek adataival
+ */
