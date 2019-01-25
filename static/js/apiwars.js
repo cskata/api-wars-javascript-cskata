@@ -5,18 +5,7 @@ function getData() {
     let whichPage = document.getElementById('planets').dataset.page;
     let targetURL = 'https://swapi.co/api/planets/?page=' + whichPage;
 
-    let prevButton = document.getElementById('prev-button');
-    let nextButton = document.getElementById('next-button');
-
-    if (parseInt(whichPage) === 1) {
-        prevButton.disabled = true;
-    } else if (parseInt(whichPage) > 1 && parseInt(whichPage) < 7) {
-        prevButton.disabled = false;
-        nextButton.disabled = false;
-    } else if (parseInt(whichPage) === 7) {
-        nextButton.disabled = true;
-    }
-
+    disableButtonIfNecessary(whichPage);
 
     $.ajax({
         dataType: "json",
@@ -40,14 +29,30 @@ function getData() {
                 addClassToCells(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, 'planet-data');
                 addDataToCellsAtMainPage(cell1, cell2, cell3, cell4, cell5, cell6, planet);
 
-                addResidentsButton(planet, cell7);
+                addResidentsButton(cell7, planet);
                 addVoteButton(cell8, table);
             }
         }
     });
 }
 
-function addResidentsButton(planet, cell7) {
+
+function disableButtonIfNecessary(whichPage) {
+    let prevButton = document.getElementById('prev-button');
+    let nextButton = document.getElementById('next-button');
+
+    if (parseInt(whichPage) === 1) {
+        prevButton.disabled = true;
+    } else if (parseInt(whichPage) > 1 && parseInt(whichPage) < 7) {
+        prevButton.disabled = false;
+        nextButton.disabled = false;
+    } else if (parseInt(whichPage) === 7) {
+        nextButton.disabled = true;
+    }
+}
+
+
+function addResidentsButton(cell7, planet) {
     if (planet['residents'].length === 0) {
         cell7.innerHTML = 'No known residents';
     } else if (planet['residents'].length > 0) {
