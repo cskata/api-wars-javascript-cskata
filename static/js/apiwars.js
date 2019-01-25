@@ -209,9 +209,9 @@ function init() {
     let prevButton = document.getElementById('prev-button');
     prevButton.addEventListener('click', switchPage);
 
-    let modalCloseButtonUp = document.getElementById('close-modal');
-    modalCloseButtonUp.addEventListener('click', closeModal);
+    let modalCloseButtonTopRight = document.getElementById('close-modal');
+    modalCloseButtonTopRight.addEventListener('click', closeModal);
 
-    let modalCloseButtonDown = document.getElementById('close-button');
-    modalCloseButtonDown.addEventListener('click', closeModal);
+    let modalCloseButtonTopLeft = document.getElementById('close-button');
+    modalCloseButtonTopLeft.addEventListener('click', closeModal);
 }
