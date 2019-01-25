@@ -70,6 +70,7 @@ function getData() {
                     cell7.appendChild(residentBtn);
                     residentBtn.dataset.planet = planet['name'];
                     residentBtn.dataset.residents = planet['residents'];
+                    residentBtn.dataset.numberofresidents = planet['residents'].length;
                     residentBtn.addEventListener('click', openModal);
                 }
 
@@ -132,11 +133,16 @@ function openModal() {
     modal.style.display = 'block';
 
     let planet = event.target.dataset.planet;
+
     let title = document.getElementById('which-planet');
     title.innerHTML = 'Residents of ' + planet;
 
     let residentsOrig = event.target.dataset.residents;
+    let numberOfResidents = event.target.dataset.numberofresidents;
     let residents = residentsOrig.split(',');
+
+    let modalCloseButton = document.getElementById('close-modal');
+    modalCloseButton.dataset.numberofresidents = numberOfResidents;
 
     for (let resident of residents) {
         $.ajax({
@@ -144,7 +150,7 @@ function openModal() {
             url: resident,
             success: function (residentData) {
                 let table = document.getElementById('residents');
-                // console.log(table);
+
                 let row = table.insertRow(-1);
 
                 let cell1 = row.insertCell(0);
@@ -177,8 +183,17 @@ function addDataToCellsAtResidentPage(cell1, cell2, cell3, cell4, cell5, cell6, 
 
 
 function closeModal() {
-    let table = document.getElementById('resident-container');
-    table.style.display = 'none';
+    let modalCloseButton = document.getElementById('close-modal');
+    let numberOfResidents = parseInt(modalCloseButton.dataset.numberofresidents);
+
+    let table = document.getElementById('residents');
+
+    for (let i = 1; i <= numberOfResidents; i++) {
+        table.childNodes[1].childNodes[1].remove();
+    }
+
+    let modal = document.getElementById('resident-container');
+    modal.style.display = 'none';
 }
 
 
@@ -190,9 +205,6 @@ function init() {
 
     let prevButton = document.getElementById('prev-button');
     prevButton.addEventListener('click', switchPage);
-
-    // let modalOpenButton = document.getElementById('modal-button');
-    // modalOpenButton.addEventListener('click', openModal);
 
     let modalCloseButton = document.getElementById('close-modal');
     modalCloseButton.addEventListener('click', closeModal);
