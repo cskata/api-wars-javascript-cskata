@@ -127,10 +127,10 @@ function saveVote() {
     let planetName = event.target.dataset.planetname;
     let userId = parseInt(document.getElementById('planets').dataset.userid);
     let currentDate = new Date();
-    let submissionTime = currentDate.getFullYear() + '-0' + (currentDate.getMonth()+1) + '-' + currentDate.getDate()
-    + ' ' + currentDate.getHours() + ':' + currentDate.getMinutes() + ':' + currentDate.getSeconds();
+    let submissionTime = currentDate.getFullYear() + '-0' + (currentDate.getMonth() + 1) + '-' + currentDate.getDate()
+        + ' ' + currentDate.getHours() + ':' + currentDate.getMinutes() + ':' + currentDate.getSeconds();
 
-    let data = {'planet_id':planetId, 'planet_name': planetName, 'user_id':userId, 'submission_time': submissionTime};
+    let data = {'planet_id': planetId, 'planet_name': planetName, 'user_id': userId, 'submission_time': submissionTime};
 
     $.ajax({
         type: "POST",
@@ -339,6 +339,58 @@ function closeModal() {
 }
 
 
+function openVoteStatistics() {
+    let modal = document.getElementById('votes-container');
+    modal.style.display = 'block';
+
+    let modalCloseButtonOne = document.getElementById('close-votes');
+    let modalCloseButtonTwo = document.getElementById('close-votes-button');
+    modalCloseButtonOne.addEventListener('click', closeVoteStatistics);
+    modalCloseButtonTwo.addEventListener('click', closeVoteStatistics);
+
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "http://127.0.0.1:5000/get-vote",
+        success: function (response) {
+            console.log(response);
+            let table = document.getElementById('votes');
+            let voted_planets = response;
+            table.dataset.votes = voted_planets.length;
+
+            let row = table.insertRow(0);
+
+            let head1 = row.insertCell(0);
+            let head2 = row.insertCell(1);
+            head1.innerHTML = 'Planet name';
+            head2.innerHTML = 'Received votes';
+
+            for (let planet of voted_planets) {
+                let row = table.insertRow(-1);
+
+                let cell1 = row.insertCell(0);
+                let cell2 = row.insertCell(1);
+
+                cell1.innerHTML = planet['planet_name'];
+                cell2.innerHTML = planet['count'];
+            }
+        }
+    });
+}
+
+function closeVoteStatistics() {
+    let table = document.getElementById('votes');
+    let elements = parseInt(table.dataset.votes);
+
+    for (let i = 1; i <= elements + 1; i++) {
+        table.childNodes[1].childNodes[0].remove();
+    }
+
+    let modal = document.getElementById('votes-container');
+    modal.style.display = 'none';
+}
+
+
 function init() {
     getData();
 
@@ -353,4 +405,7 @@ function init() {
 
     let modalCloseButtonTopLeft = document.getElementById('close-button');
     modalCloseButtonTopLeft.addEventListener('click', closeModal);
+
+    let voteStatistics = document.getElementById('vote-stats');
+    voteStatistics.addEventListener('click', openVoteStatistics);
 }
