@@ -166,14 +166,35 @@ function openModal() {
                 let cell8 = row.insertCell(7);
 
                 addClassToCells(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, 'resident-data');
-                addDataToCellsAtResidentPage(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, residentData);
+                addDataToCellsAtResidentPage(cell1, cell2, cell3, cell4, cell5, cell6, cell7, residentData);
+
+                addGender(cell8, residentData);
             }
         });
     }
 }
 
+function addGender(cell8, residentData) {
+    let icon = document.createElement('i');
+    icon.classList.add('fas');
+    icon.classList.add('fa-lg');
+    icon.classList.add('centered-icon');
 
-function addDataToCellsAtResidentPage(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, residentData) {
+    if (residentData['gender'] === 'female') {
+        icon.classList.add('fa-venus');
+        cell8.appendChild(icon);
+    } else if (residentData['gender'] === 'male') {
+        icon.classList.add('fa-mars');
+        cell8.appendChild(icon);
+    } else {
+        cell8.innerHTML = residentData['gender'];
+        cell8.classList.add('centered-text');
+    }
+
+}
+
+
+function addDataToCellsAtResidentPage(cell1, cell2, cell3, cell4, cell5, cell6, cell7, residentData) {
     cell1.innerHTML = residentData['name'];
     cell2.innerHTML = residentData['height'];
     cell3.innerHTML = residentData['mass'];
@@ -181,7 +202,6 @@ function addDataToCellsAtResidentPage(cell1, cell2, cell3, cell4, cell5, cell6, 
     cell5.innerHTML = residentData['skin_color'];
     cell6.innerHTML = residentData['eye_color'];
     cell7.innerHTML = residentData['birth_year'];
-    cell8.innerHTML = residentData['gender'];
 }
 
 

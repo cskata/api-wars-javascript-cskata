@@ -213,3 +213,11 @@ body {
 #logged-in-username {
     color: white;
 }
+
+.centered-icon {
+    margin-left: 35%;
+}
+
+.centered-text {
+    text-align: center;
+}
