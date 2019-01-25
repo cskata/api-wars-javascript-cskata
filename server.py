@@ -1,12 +1,19 @@
 from flask import Flask, render_template, redirect, session, request, url_for
 import data_manager
 
+
 app = Flask(__name__)
+app.secret_key = "titkoskulcs"
 
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    if 'username' not in session:
+        return render_template('index.html')
+    else:
+        login_status = True
+        username = session['username']
+        return render_template('index.html', login_status=login_status, username=username)
 
 
 @app.route('/registration', methods=['GET', 'POST'])
@@ -25,6 +32,7 @@ def new_user_registration():
         else:
             data_manager.register_new_user(new_user)
             return redirect(url_for('index'))
+
     return render_template('registration.html')
 
 
@@ -36,11 +44,10 @@ def log_in_user():
     }
 
     login_check = data_manager.verify_user(login_data)
+
     if login_check:
         session['username'] = login_data['username']
-        return redirect(url_for('show_user_profile'))
-    else:
-        return redirect(url_for('index'))
+    return redirect(url_for('index'))
 
 
 @app.route('/logout')

@@ -38,8 +38,8 @@ def check_username_in_database(cursor, new_user):
         return True
 
 
-def verify_password(plain_text_password, salt, hashed_password):
-    this_was_hashed = plain_text_password + salt
+def verify_password(plain_text_password, hashed_password):
+    this_was_hashed = plain_text_password
     hashed_bytes_password = hashed_password.encode('utf-8')
     return bcrypt.checkpw(this_was_hashed.encode('utf-8'), hashed_bytes_password)
 
@@ -57,7 +57,7 @@ def verify_user(cursor, login_data):
         return False
     else:
         password = login_data['password']
-        salt = stored_hash_password[0]['salt']
         stored_hash_password_from_db = stored_hash_password[0]['hashed_pw']
-        pw_check = verify_password(password, salt, stored_hash_password_from_db)
+        pw_check = verify_password(password, stored_hash_password_from_db)
         return pw_check
+
