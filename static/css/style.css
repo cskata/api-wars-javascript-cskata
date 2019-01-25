@@ -40,6 +40,10 @@ body {
     padding: 3px;
 }
 
+.planet-header {
+    font-weight: bold;
+}
+
 .btn-primary {
     background-color: #296294;
 }
