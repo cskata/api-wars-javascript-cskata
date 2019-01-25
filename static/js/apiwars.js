@@ -3,8 +3,6 @@ init();
 
 function getData() {
     let whichPage = document.getElementById('planets').dataset.page;
-    // console.log(document.getElementById('planets').dataset.username);
-    // console.log(document.getElementById('planets').dataset.userid);
     let targetURL = 'https://swapi.co/api/planets/?page=' + whichPage;
 
     disableButtonIfNecessary(whichPage);
