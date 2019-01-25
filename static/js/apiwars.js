@@ -52,8 +52,8 @@ function getData() {
                 let cell7 = row.insertCell(6);
                 let cell8 = row.insertCell(7);
 
-                addClassToCells(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8);
-                addDataToCells(cell1, cell2, cell3, cell4, cell5, cell6, planet);
+                addClassToCells(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, 'planet-data');
+                addDataToCellsAtMainPage(cell1, cell2, cell3, cell4, cell5, cell6, planet);
 
                 if (planet['residents'].length === 0) {
                     cell7.innerHTML = 'No known residents';
@@ -68,6 +68,9 @@ function getData() {
                     residentBtn.classList.add('btn');
                     residentBtn.classList.add('btn-secondary');
                     cell7.appendChild(residentBtn);
+                    residentBtn.dataset.planet = planet['name'];
+                    residentBtn.dataset.residents = planet['residents'];
+                    residentBtn.addEventListener('click', openModal);
                 }
 
                 let voteBtn = document.createElement('button');
@@ -83,18 +86,18 @@ function getData() {
 }
 
 
-function addClassToCells(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8) {
-    cell1.classList.add('planet-data');
-    cell2.classList.add('planet-data');
-    cell3.classList.add('planet-data');
-    cell4.classList.add('planet-data');
-    cell5.classList.add('planet-data');
-    cell6.classList.add('planet-data');
-    cell7.classList.add('planet-data');
-    cell8.classList.add('planet-data');
+function addClassToCells(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cellClass) {
+    cell1.classList.add(cellClass);
+    cell2.classList.add(cellClass);
+    cell3.classList.add(cellClass);
+    cell4.classList.add(cellClass);
+    cell5.classList.add(cellClass);
+    cell6.classList.add(cellClass);
+    cell7.classList.add(cellClass);
+    cell8.classList.add(cellClass);
 }
 
-function addDataToCells(cell1, cell2, cell3, cell4, cell5, cell6, planet) {
+function addDataToCellsAtMainPage(cell1, cell2, cell3, cell4, cell5, cell6, planet) {
     cell1.innerHTML = planet['name'];
     cell2.innerHTML = planet['diameter'];
     cell3.innerHTML = planet['climate'];
@@ -125,14 +128,57 @@ function deleteData() {
 
 
 function openModal() {
-    let table = document.getElementById('residents');
-    table.style.display='block';
+    let modal = document.getElementById('resident-container');
+    modal.style.display = 'block';
+
+    let planet = event.target.dataset.planet;
+    let title = document.getElementById('which-planet');
+    title.innerHTML = 'Residents of ' + planet;
+
+    let residentsOrig = event.target.dataset.residents;
+    let residents = residentsOrig.split(',');
+
+    for (let resident of residents) {
+        $.ajax({
+            dataType: "json",
+            url: resident,
+            success: function (residentData) {
+                let table = document.getElementById('residents');
+                // console.log(table);
+                let row = table.insertRow(-1);
+
+                let cell1 = row.insertCell(0);
+                let cell2 = row.insertCell(1);
+                let cell3 = row.insertCell(2);
+                let cell4 = row.insertCell(3);
+                let cell5 = row.insertCell(4);
+                let cell6 = row.insertCell(5);
+                let cell7 = row.insertCell(6);
+                let cell8 = row.insertCell(7);
+
+                addClassToCells(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, 'resident-data');
+                addDataToCellsAtResidentPage(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, residentData);
+            }
+        });
+    }
+}
+
+
+function addDataToCellsAtResidentPage(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, residentData) {
+    cell1.innerHTML = residentData['name'];
+    cell2.innerHTML = residentData['height'];
+    cell3.innerHTML = residentData['mass'];
+    cell4.innerHTML = residentData['hair_color'];
+    cell5.innerHTML = residentData['skin_color'];
+    cell6.innerHTML = residentData['eye_color'];
+    cell7.innerHTML = residentData['birth_year'];
+    cell8.innerHTML = residentData['gender'];
 }
 
 
 function closeModal() {
-    let table = document.getElementById('residents');
-    table.style.display='none';
+    let table = document.getElementById('resident-container');
+    table.style.display = 'none';
 }
 
 
@@ -144,16 +190,10 @@ function init() {
 
     let prevButton = document.getElementById('prev-button');
     prevButton.addEventListener('click', switchPage);
-    
-    let modalOpenButton = document.getElementById('modal-button');
-    modalOpenButton.addEventListener('click', openModal);
+
+    // let modalOpenButton = document.getElementById('modal-button');
+    // modalOpenButton.addEventListener('click', openModal);
 
     let modalCloseButton = document.getElementById('close-modal');
     modalCloseButton.addEventListener('click', closeModal);
 }
-
-/*
-minden resident gombhoz egy eventlistener hozzárendelése, ami kattintásra hozzáad egy modalt és megnyitja
-a modalban először csak szöveg van
-utána komplett tábla hozzáadása a residentek adataival
- */
