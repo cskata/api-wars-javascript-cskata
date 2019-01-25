@@ -61,3 +61,15 @@ def verify_user(cursor, login_data):
         pw_check = verify_password(password, stored_hash_password_from_db)
         return pw_check
 
+
+@connection_handler
+def get_user_id_by_username(cursor, username):
+    user = dict()
+    user['username'] = username
+
+    cursor.execute("""
+        SELECT * FROM registered_users
+        WHERE username=%(username)s;
+        """, user)
+    user_id = cursor.fetchall()
+    return user_id[0]['id']

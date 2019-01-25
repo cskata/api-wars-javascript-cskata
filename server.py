@@ -13,7 +13,11 @@ def index():
     else:
         login_status = True
         username = session['username']
-        return render_template('index.html', login_status=login_status, username=username)
+
+        user_id = data_manager.get_user_id_by_username(username)
+        session['user_id'] = user_id
+
+        return render_template('index.html', login_status=login_status, username=username, user_id=user_id)
 
 
 @app.route('/registration', methods=['GET', 'POST'])
