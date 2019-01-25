@@ -14,7 +14,7 @@ function getData() {
             let table = document.getElementById('planets');
             let planets = response['results'];
 
-            insertPlanetHeaders(table);
+            insertPlanetHeaders();
 
             for (let planet of planets) {
                 let row = table.insertRow(-1);
@@ -38,7 +38,8 @@ function getData() {
     });
 }
 
-function insertPlanetHeaders(table) {
+function insertPlanetHeaders() {
+    let table = document.getElementById('planets');
     let header = table.insertRow(0);
 
     let head1 = header.insertCell(0);
@@ -61,7 +62,6 @@ function insertPlanetHeaders(table) {
     head7.innerHTML = 'Residents';
     head8.innerHTML = '';
 }
-
 
 
 function disableButtonIfNecessary(whichPage) {
@@ -191,6 +191,8 @@ function openModal() {
     let modalCloseButton = document.getElementById('close-modal');
     modalCloseButton.dataset.numberofresidents = numberOfResidents;
 
+    insertResidentHeaders();
+
     for (let resident of residents) {
         $.ajax({
             dataType: "json",
@@ -215,6 +217,34 @@ function openModal() {
         });
     }
 }
+
+
+function insertResidentHeaders() {
+    let table = document.getElementById('residents');
+
+    let header = table.insertRow(0);
+
+    let head1 = header.insertCell(0);
+    let head2 = header.insertCell(1);
+    let head3 = header.insertCell(2);
+    let head4 = header.insertCell(3);
+    let head5 = header.insertCell(4);
+    let head6 = header.insertCell(5);
+    let head7 = header.insertCell(6);
+    let head8 = header.insertCell(7);
+
+    addClassToCells(head1, head2, head3, head4, head5, head6, head7, head8, 'resident-header');
+
+    head1.innerHTML = 'Name';
+    head2.innerHTML = 'Height';
+    head3.innerHTML = 'Mass';
+    head4.innerHTML = 'Hair color';
+    head5.innerHTML = 'Skin color';
+    head6.innerHTML = 'Eye color';
+    head7.innerHTML = 'Birth year';
+    head8.innerHTML = 'Gender';
+}
+
 
 function addGender(cell8, residentData) {
     let icon = document.createElement('i');
@@ -273,8 +303,8 @@ function closeModal() {
 
     let table = document.getElementById('residents');
 
-    for (let i = 1; i <= numberOfResidents; i++) {
-        table.childNodes[1].childNodes[1].remove();
+    for (let i = 1; i <= numberOfResidents + 1; i++) {
+        table.childNodes[1].childNodes[0].remove();
     }
 
     let modal = document.getElementById('resident-container');

@@ -40,7 +40,7 @@ body {
     padding: 3px;
 }
 
-.planet-header {
+.planet-header, .resident-header {
     font-weight: bold;
 }
 
