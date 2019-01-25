@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, session, request, url_for
 import data_manager
+import requests
 
 
 app = Flask(__name__)
@@ -59,6 +60,13 @@ def log_in_user():
 def log_user_out():
     session.pop('username', None)
     return redirect(url_for('index'))
+
+
+@app.route('/send-vote', methods=['GET', 'POST'])
+def save_planet_vote():
+    response = request.get_json()
+    data_manager.save_planet_vote(response)
+    return 'response'
 
 
 if __name__ == '__main__':

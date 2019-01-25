@@ -3,6 +3,8 @@ init();
 
 function getData() {
     let whichPage = document.getElementById('planets').dataset.page;
+    // console.log(document.getElementById('planets').dataset.username);
+    // console.log(document.getElementById('planets').dataset.userid);
     let targetURL = 'https://swapi.co/api/planets/?page=' + whichPage;
 
     disableButtonIfNecessary(whichPage);
@@ -32,7 +34,7 @@ function getData() {
                 addDataToCellsAtMainPage(cell1, cell2, cell3, cell4, cell5, cell6, planet);
 
                 addResidentsButton(cell7, planet);
-                addVoteButton(cell8, table);
+                addVoteButton(cell8, table, planet);
             }
         }
     });
@@ -102,7 +104,7 @@ function addResidentsButton(cell7, planet) {
 }
 
 
-function addVoteButton(cell8, table) {
+function addVoteButton(cell8, table, planet) {
     let voteBtn = document.createElement('button');
     voteBtn.classList.add('btn');
     voteBtn.classList.add('btn-secondary');
@@ -113,6 +115,26 @@ function addVoteButton(cell8, table) {
     if (table.dataset.session === "") {
         voteBtn.style.visibility = "hidden";
     }
+    let planetId = (planet['url'].split("/"))[5];
+    voteBtn.dataset.planetid = planetId;
+    voteBtn.dataset.planetname = planet['name'];
+
+    voteBtn.addEventListener('click', saveVote);
+}
+
+
+function saveVote() {
+    let planetId = parseInt(event.target.dataset.planetid);
+    let planetName = event.target.dataset.planetname;
+    let userId = parseInt(document.getElementById('planets').dataset.userid);
+    let currentDate = new Date();
+    let submissionTime = currentDate.getFullYear() + '-0' + (currentDate.getMonth()+1) + '-' + currentDate.getDate()
+    + ' ' + currentDate.getHours() + ':' + currentDate.getMinutes() + ':' + currentDate.getSeconds();
+
+    let data = {'planet_id':planetId, 'planet_name': planetName, 'user_id':userId, 'submission_time': submissionTime};
+
+    $.ajax({'type': 'post', 'url': 'http://127.0.0.1:5000/send-vote',
+        'contentType':'application/json', 'data': JSON.stringify(data)});
 }
 
 

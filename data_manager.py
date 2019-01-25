@@ -73,3 +73,12 @@ def get_user_id_by_username(cursor, username):
         """, user)
     user_id = cursor.fetchall()
     return user_id[0]['id']
+
+
+@connection_handler
+def save_planet_vote(cursor, vote_data):
+    cursor.execute("""
+    INSERT INTO planet_votes
+        (planet_id, planet_name, user_id, submission_time)
+        VALUES (%(planet_id)s, %(planet_name)s, %(user_id)s, %(submission_time)s);
+        """, vote_data)
