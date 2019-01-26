@@ -3,7 +3,7 @@ init();
 
 function getData() {
     let whichPage = document.getElementById('planets').dataset.page;
-    let targetURL = 'https://swapi.co/api/planets/?page=' + whichPage;
+    let targetURL = `https://swapi.co/api/planets/?page=${whichPage}`;
 
     disableButtonIfNecessary(whichPage);
 
@@ -87,7 +87,7 @@ function addResidentsButton(cell7, planet) {
         let residentBtn = document.createElement('button');
 
         let noOfResidents = planet['residents'].length.toString();
-        let fullResidentTxt = noOfResidents + ' resident(s)';
+        let fullResidentTxt = `${noOfResidents} resident(s)`;
         let residentBtnTxt = document.createTextNode(fullResidentTxt);
 
         residentBtn.appendChild(residentBtnTxt);
@@ -161,7 +161,7 @@ function addDataToCellsAtMainPage(cell1, cell2, cell3, cell4, cell5, cell6, plan
 
     if (planet['diameter'] !== 'unknown') {
         planet['diameter'] = planet['diameter'].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        planet['diameter'] = planet['diameter'] + ' km';
+        planet['diameter'] = `${planet['diameter']} km`;
     }
 
     cell2.innerHTML = planet['diameter'];
@@ -169,14 +169,14 @@ function addDataToCellsAtMainPage(cell1, cell2, cell3, cell4, cell5, cell6, plan
     cell4.innerHTML = planet['terrain'];
 
     if (planet['surface_water'] !== 'unknown') {
-        planet['surface_water'] = planet['surface_water'] + '%';
+        planet['surface_water'] = `${planet['surface_water']}%`;
     }
 
     cell5.innerHTML = planet['surface_water'];
 
     if (planet['population'] !== 'unknown') {
         planet['population'] = planet['population'].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        planet['population'] = planet['population'] + ' people';
+        planet['population'] = `${planet['population']} people`;
     }
 
     cell6.innerHTML = planet['population'];
