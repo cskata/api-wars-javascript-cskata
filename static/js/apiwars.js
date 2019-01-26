@@ -139,6 +139,8 @@ function saveVote() {
         dataType: "json",
         data: JSON.stringify(data)
     });
+
+    alert(`Your vote for ${planetName} is saved.`);
 }
 
 
@@ -353,7 +355,6 @@ function openVoteStatistics() {
         dataType: "json",
         url: "http://127.0.0.1:5000/get-vote",
         success: function (response) {
-            console.log(response);
             let table = document.getElementById('votes');
             let voted_planets = response;
             table.dataset.votes = voted_planets.length;
