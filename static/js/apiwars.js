@@ -302,6 +302,7 @@ function openModal() {
 
     for (let resident of residents) {
         $.ajax({
+            type: "GET",
             dataType: "json",
             url: resident,
             success: function (residentData) {
