@@ -387,7 +387,7 @@ function closeVoteStatistics() {
     let elements = parseInt(table.dataset.votes);
 
     for (let i = 1; i <= elements + 1; i++) {
-        table.childNodes[1].childNodes[0].remove();
+        table.childNodes[0].childNodes[0].remove();
     }
 
     let modal = document.getElementById('votes-container');
