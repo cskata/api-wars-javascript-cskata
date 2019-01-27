@@ -233,8 +233,8 @@ function insertResidentHeaders() {
     head1.innerHTML = 'Name';
     head2.innerHTML = 'Height';
     head3.innerHTML = 'Mass';
-    head4.innerHTML = 'Hair color';
-    head5.innerHTML = 'Skin color';
+    head4.innerHTML = 'Skin color';
+    head5.innerHTML = 'Hair color';
     head6.innerHTML = 'Eye color';
     head7.innerHTML = 'Birth year';
     head8.innerHTML = 'Gender';
@@ -284,8 +284,8 @@ function addDataToCellsAtResidentPage(cell1, cell2, cell3, cell4, cell5, cell6, 
     cell1.innerHTML = residentData['name'];
     convertHeightToMeters(cell2, residentData);
     addKgToMass(cell3, residentData);
-    cell4.innerHTML = residentData['hair_color'];
-    cell5.innerHTML = residentData['skin_color'];
+    cell4.innerHTML = residentData['skin_color'];
+    cell5.innerHTML = residentData['hair_color'];
     cell6.innerHTML = residentData['eye_color'];
     cell7.innerHTML = residentData['birth_year'];
     addGender(cell8, residentData);
