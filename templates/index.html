@@ -7,16 +7,10 @@
 {% block content %}
     <div id="title">
         <div class="title-content">
-            <h1>Star Wars universe planets</h1>
-            <button class="btn btn-primary" type="submit"
-                    id="prev-button" name="prev-button" data-value="-1">Previous
-            </button>
-
-            <button class="btn btn-primary" type="submit"
-                    id="next-button" name="next-button" data-value="1">Next
-            </button>
+            <h1 id="main-title">Star Wars universe planets</h1>
         </div>
     </div>
+
     <div id="resident-container" class="w3-modal">
         <div class="w3-modal-content">
             <span id="close-modal" class="w3-button w3-display-topright"><i class="far fa-times-circle"></i></span>
@@ -30,6 +24,7 @@
             </div>
         </div>
     </div>
+
     <div id="votes-container" class="w3-modal">
         <div class="w3-modal-content-votes">
             <span id="close-votes" class="w3-button w3-display-topright"><i class="far fa-times-circle"></i></span>
@@ -43,8 +38,17 @@
             </div>
         </div>
     </div>
+
     <div class="main-content">
         <div class="planet-container">
+            <div id="button-box">
+                <button class="btn btn-primary" type="submit"
+                        id="prev-button" name="prev-button" data-value="-1">Previous
+                </button>
+                <button class="btn btn-primary" type="submit"
+                        id="next-button" name="next-button" data-value="1">Next
+                </button>
+            </div>
             <table id="planets" data-page="1" data-username="{{ username }}" data-userid="{{ user_id }}">
             </table>
         </div>
