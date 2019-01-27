@@ -15,7 +15,7 @@ function getData() {
             let table = document.getElementById('planets');
             let planets = response['results'];
 
-            insertPlanetHeaders();
+            insertPlanetHeaders(table);
 
             for (let planet of planets) {
                 let row = table.insertRow(-1);
@@ -39,8 +39,8 @@ function getData() {
     });
 }
 
-function insertPlanetHeaders() {
-    let table = document.getElementById('planets');
+
+function insertPlanetHeaders(table) {
     let header = table.insertRow(0);
 
     let head1 = header.insertCell(0);
@@ -83,14 +83,14 @@ function disableButtonIfNecessary(whichPage) {
 function addResidentsButton(cell7, planet) {
     if (planet['residents'].length === 0) {
         cell7.innerHTML = 'No known residents';
-    } else if (planet['residents'].length > 0) {
+    } else {
         let residentBtn = document.createElement('button');
 
         let noOfResidents = planet['residents'].length.toString();
         let fullResidentTxt = `${noOfResidents} resident(s)`;
         let residentBtnTxt = document.createTextNode(fullResidentTxt);
-
         residentBtn.appendChild(residentBtnTxt);
+
         residentBtn.classList.add('btn');
         residentBtn.classList.add('btn-secondary');
         cell7.appendChild(residentBtn);
@@ -111,6 +111,7 @@ function addVoteButton(cell8, planet) {
     let text = document.createTextNode('Vote');
     voteBtn.appendChild(text);
     cell8.appendChild(voteBtn);
+
     let datasetContainer = document.getElementById('all-content');
 
     if (datasetContainer.dataset.login === "") {
@@ -189,7 +190,7 @@ function addDataToCellsAtMainPage(cell1, cell2, cell3, cell4, cell5, cell6, plan
 function switchPage() {
     let currentPage = document.getElementById('planets');
     let currentPageNo = parseInt(document.getElementById('planets').dataset.page);
-    let step = parseInt(event.target.dataset.value);
+    let step = parseInt(event.target.dataset.value);    //direction is stored in button's dataset (1/-1)
     let nextPage = currentPageNo + step;
     currentPage.dataset.page = nextPage.toString();
 
@@ -294,14 +295,14 @@ function openModal() {
     let title = document.getElementById('which-planet');
     title.innerHTML = 'Residents of ' + planet;
 
-    let residentsOrig = event.target.dataset.residents;
     let numberOfResidents = event.target.dataset.numberofresidents;
-    let residents = residentsOrig.split(',');
-
     let modalCloseButton = document.getElementById('close-modal');
     modalCloseButton.dataset.numberofresidents = numberOfResidents;
 
     insertResidentHeaders();
+
+    let residentsOrig = event.target.dataset.residents;
+    let residents = residentsOrig.split(',');
 
     for (let resident of residents) {
         $.ajax({
