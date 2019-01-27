@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, session, request, url_for, jsonify
+from flask import Flask, render_template, redirect, session, request, url_for, jsonify, flash
 import data_manager
 
 
@@ -31,10 +31,11 @@ def new_user_registration():
         is_username_taken = data_manager.check_username_in_database(new_user)
 
         if is_username_taken:
-            message = "That username is already taken, please choose something else."
-            return render_template('registration.html', message=message)
+            flash("Username is already taken, please choose something else.")
+            return redirect(url_for('new_user_registration'))
         else:
             data_manager.register_new_user(new_user)
+            flash("Registration was successful!")
             return redirect(url_for('index'))
 
     return render_template('registration.html')
@@ -53,6 +54,7 @@ def log_in_user():
         session['username'] = login_data['username']
         return redirect(url_for('index'))
 
+    flash("Invalid username or password!")
     return render_template('index.html')
 
 
