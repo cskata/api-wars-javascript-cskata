@@ -33,7 +33,7 @@ function getData() {
                 addDataToCellsAtMainPage(cell1, cell2, cell3, cell4, cell5, cell6, planet);
 
                 addResidentsButton(cell7, planet);
-                addVoteButton(cell8, table, planet);
+                addVoteButton(cell8, planet);
             }
         }
     });
@@ -103,7 +103,7 @@ function addResidentsButton(cell7, planet) {
 }
 
 
-function addVoteButton(cell8, table, planet) {
+function addVoteButton(cell8, planet) {
     let voteBtn = document.createElement('button');
     voteBtn.classList.add('btn');
     voteBtn.classList.add('btn-secondary');
@@ -111,9 +111,12 @@ function addVoteButton(cell8, table, planet) {
     let text = document.createTextNode('Vote');
     voteBtn.appendChild(text);
     cell8.appendChild(voteBtn);
-    if (table.dataset.session === "") {
+    let datasetContainer = document.getElementById('all-content');
+
+    if (datasetContainer.dataset.login === "") {
         voteBtn.style.visibility = "hidden";
     }
+
     let planetId = (planet['url'].split("/"))[5];
     voteBtn.dataset.planetid = planetId;
     voteBtn.dataset.planetname = planet['name'];
@@ -125,7 +128,7 @@ function addVoteButton(cell8, table, planet) {
 function saveVote() {
     let planetId = parseInt(event.target.dataset.planetid);
     let planetName = event.target.dataset.planetname;
-    let userId = parseInt(document.getElementById('planets').dataset.userid);
+    let userId = parseInt(document.getElementById('all-content').dataset.userid);
     let currentDate = new Date();
     let submissionTime = currentDate.getFullYear() + '-0' + (currentDate.getMonth() + 1) + '-' + currentDate.getDate()
         + ' ' + currentDate.getHours() + ':' + currentDate.getMinutes() + ':' + currentDate.getSeconds();
@@ -418,6 +421,9 @@ function init() {
     let modalCloseButtonTopLeft = document.getElementById('close-button');
     modalCloseButtonTopLeft.addEventListener('click', closeModal);
 
-    let voteStatistics = document.getElementById('vote-stats');
-    voteStatistics.addEventListener('click', openVoteStatistics);
+    let isUserLoggedIn = document.getElementById('all-content').dataset.login;
+    if (isUserLoggedIn === 'True') {
+        let voteStatistics = document.getElementById('vote-stats');
+        voteStatistics.addEventListener('click', openVoteStatistics);
+    }
 }
