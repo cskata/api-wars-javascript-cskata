@@ -131,10 +131,16 @@ function saveVote() {
     const planetName = event.target.dataset.planetname;
     const userId = parseInt(document.getElementById('all-content').dataset.userid);
     const currentDate = new Date();
-    const submissionTime = currentDate.getFullYear() + '-0' + (currentDate.getMonth() + 1) + '-' + currentDate.getDate()
-        + ' ' + currentDate.getHours() + ':' + currentDate.getMinutes() + ':' + currentDate.getSeconds();
+    const submissionTime =
+        currentDate.getFullYear() + '-0' + (currentDate.getMonth() + 1) + '-' + currentDate.getDate() + ' ' +
+        currentDate.getHours() + ':' + currentDate.getMinutes() + ':' + currentDate.getSeconds();
 
-    const data = {'planet_id': planetId, 'planet_name': planetName, 'user_id': userId, 'submission_time': submissionTime};
+    const data = {
+        planet_id: planetId,
+        planet_name: planetName,
+        user_id: userId,
+        submission_time: submissionTime
+    };
 
     $.ajax({
         type: "POST",
