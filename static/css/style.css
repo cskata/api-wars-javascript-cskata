@@ -147,7 +147,7 @@ body {
     width: 300px;
 }
 
-#vote-table {
+#vote-table, #resident-table {
     padding: 1vw;
 }
 
