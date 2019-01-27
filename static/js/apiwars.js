@@ -334,7 +334,7 @@ function closeModal() {
     let table = document.getElementById('residents');
 
     for (let i = 1; i <= numberOfResidents + 1; i++) {
-        table.childNodes[1].childNodes[0].remove();
+        table.childNodes[0].childNodes[0].remove();
     }
 
     let modal = document.getElementById('resident-container');
