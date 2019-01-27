@@ -144,7 +144,7 @@ function saveVote() {
 
     $.ajax({
         type: "POST",
-        url: "/send-vote",
+        url: "/voting",
         contentType: "application/json",
         dataType: "json",
         data: JSON.stringify(data)
@@ -364,7 +364,7 @@ function openVoteStatistics() {
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: "/get-vote",
+        url: "/voting",
         success: function (response) {
             listVotedPlanets(response);
         }

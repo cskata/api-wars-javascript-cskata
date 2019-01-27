@@ -12,8 +12,8 @@ def index():
         return render_template('index.html')
     else:
         login_status = True
-        username = session['username']
 
+        username = session['username']
         user_id = data_manager.get_user_id_by_username(username)
         session['user_id'] = user_id
 
@@ -52,6 +52,7 @@ def log_in_user():
     if login_check:
         session['username'] = login_data['username']
         return redirect(url_for('index'))
+
     return render_template('index.html')
 
 
@@ -61,17 +62,14 @@ def log_user_out():
     return redirect(url_for('index'))
 
 
-@app.route('/send-vote', methods=['POST'])
-def save_planet_vote():
-    response = request.get_json()
-    data_manager.save_planet_vote(response)
-    return 'response'
+@app.route('/voting', methods=['GET', 'POST'])
+def show_and_save_votes():
+    if request.method == 'POST':
+        response = request.get_json()
+        data_manager.save_planet_vote(response)
+        return jsonify(response)
 
-
-@app.route('/get-vote')
-def get_user_votes():
-    username = session['username']
-    user_id = data_manager.get_user_id_by_username(username)
+    user_id = session['user_id']
     votes = data_manager.get_votes_by_user_id(user_id)
     return jsonify(votes)
 
