@@ -1,7 +1,7 @@
 init();
 
 
-function getData() {
+function loadPlanetData() {
     let whichPage = document.getElementById('planets').dataset.page;
     let targetURL = `https://swapi.co/api/planets/?page=${whichPage}`;
 
@@ -194,16 +194,15 @@ function switchPage() {
     let nextPage = currentPageNo + step;
     currentPage.dataset.page = nextPage.toString();
 
-    deleteData();
-    getData();
+    deleteData(currentPage);
+    loadPlanetData();
 }
 
 
-function deleteData() {
-    let table = document.getElementById('planets');
+function deleteData(table) {
     let planetTableLengthWithHeader = table.childNodes[1].childNodes.length;
 
-    for (let i = 1; i <= planetTableLengthWithHeader; i++) {
+    for (let i = 0; i < planetTableLengthWithHeader; i++) {
         table.childNodes[1].childNodes[0].remove();
     }
 }
@@ -408,7 +407,7 @@ function closeVoteStatistics() {
 
 
 function init() {
-    getData();
+    loadPlanetData();
 
     let nextButton = document.getElementById('next-button');
     nextButton.addEventListener('click', switchPage);
