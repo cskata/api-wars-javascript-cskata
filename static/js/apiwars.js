@@ -2,8 +2,8 @@ init();
 
 
 function loadPlanetData() {
-    let whichPage = document.getElementById('planets').dataset.page;
-    let targetURL = `https://swapi.co/api/planets/?page=${whichPage}`;
+    const whichPage = document.getElementById('planets').dataset.page;
+    const targetURL = `https://swapi.co/api/planets/?page=${whichPage}`;
 
     disableButtonIfNecessary(whichPage);
 
@@ -12,22 +12,22 @@ function loadPlanetData() {
         dataType: "json",
         url: targetURL,
         success: function (response) {
-            let table = document.getElementById('planets');
-            let planets = response['results'];
+            const table = document.getElementById('planets');
+            const planets = response['results'];
 
             insertPlanetHeaders(table);
 
-            for (let planet of planets) {
-                let row = table.insertRow(-1);
+            for (const planet of planets) {
+                const row = table.insertRow(-1);
 
-                let cell1 = row.insertCell(0);
-                let cell2 = row.insertCell(1);
-                let cell3 = row.insertCell(2);
-                let cell4 = row.insertCell(3);
-                let cell5 = row.insertCell(4);
-                let cell6 = row.insertCell(5);
-                let cell7 = row.insertCell(6);
-                let cell8 = row.insertCell(7);
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+                const cell3 = row.insertCell(2);
+                const cell4 = row.insertCell(3);
+                const cell5 = row.insertCell(4);
+                const cell6 = row.insertCell(5);
+                const cell7 = row.insertCell(6);
+                const cell8 = row.insertCell(7);
 
                 addClassToCells(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, 'planet-data');
                 addDataToCellsAtMainPage(cell1, cell2, cell3, cell4, cell5, cell6, planet);
@@ -41,18 +41,16 @@ function loadPlanetData() {
 
 
 function insertPlanetHeaders(table) {
-    let header = table.insertRow(0);
+    const header = table.insertRow(0);
 
-    let head1 = header.insertCell(0);
-    let head2 = header.insertCell(1);
-    let head3 = header.insertCell(2);
-    let head4 = header.insertCell(3);
-    let head5 = header.insertCell(4);
-    let head6 = header.insertCell(5);
-    let head7 = header.insertCell(6);
-    let head8 = header.insertCell(7);
-
-    addClassToCells(head1, head2, head3, head4, head5, head6, head7, head8, 'planet-header');
+    const head1 = header.insertCell(0);
+    const head2 = header.insertCell(1);
+    const head3 = header.insertCell(2);
+    const head4 = header.insertCell(3);
+    const head5 = header.insertCell(4);
+    const head6 = header.insertCell(5);
+    const head7 = header.insertCell(6);
+    const head8 = header.insertCell(7);
 
     head1.innerHTML = 'Name';
     head2.innerHTML = 'Diameter';
@@ -62,12 +60,14 @@ function insertPlanetHeaders(table) {
     head6.innerHTML = 'Population';
     head7.innerHTML = 'Residents';
     head8.innerHTML = '';
+
+    addClassToCells(head1, head2, head3, head4, head5, head6, head7, head8, 'planet-header');
 }
 
 
 function disableButtonIfNecessary(whichPage) {
-    let prevButton = document.getElementById('prev-button');
-    let nextButton = document.getElementById('next-button');
+    const prevButton = document.getElementById('prev-button');
+    const nextButton = document.getElementById('next-button');
 
     if (parseInt(whichPage) === 1) {
         prevButton.disabled = true;
@@ -84,11 +84,11 @@ function addResidentsButton(cell7, planet) {
     if (planet['residents'].length === 0) {
         cell7.innerHTML = 'No known residents';
     } else {
-        let residentBtn = document.createElement('button');
+        const residentBtn = document.createElement('button');
 
-        let noOfResidents = planet['residents'].length.toString();
-        let fullResidentTxt = `${noOfResidents} resident(s)`;
-        let residentBtnTxt = document.createTextNode(fullResidentTxt);
+        const noOfResidents = planet['residents'].length.toString();
+        const fullResidentTxt = `${noOfResidents} resident(s)`;
+        const residentBtnTxt = document.createTextNode(fullResidentTxt);
         residentBtn.appendChild(residentBtnTxt);
 
         residentBtn.classList.add('btn');
@@ -104,21 +104,21 @@ function addResidentsButton(cell7, planet) {
 
 
 function addVoteButton(cell8, planet) {
-    let voteBtn = document.createElement('button');
+    const voteBtn = document.createElement('button');
     voteBtn.classList.add('btn');
     voteBtn.classList.add('btn-secondary');
 
-    let text = document.createTextNode('Vote');
+    const text = document.createTextNode('Vote');
     voteBtn.appendChild(text);
     cell8.appendChild(voteBtn);
 
-    let datasetContainer = document.getElementById('all-content');
+    const datasetContainer = document.getElementById('all-content');
 
     if (datasetContainer.dataset.login === "") {
         voteBtn.style.visibility = "hidden";
     }
 
-    let planetId = (planet['url'].split("/"))[5];
+    const planetId = (planet['url'].split("/"))[5];
     voteBtn.dataset.planetid = planetId;
     voteBtn.dataset.planetname = planet['name'];
 
@@ -127,14 +127,14 @@ function addVoteButton(cell8, planet) {
 
 
 function saveVote() {
-    let planetId = parseInt(event.target.dataset.planetid);
-    let planetName = event.target.dataset.planetname;
-    let userId = parseInt(document.getElementById('all-content').dataset.userid);
-    let currentDate = new Date();
-    let submissionTime = currentDate.getFullYear() + '-0' + (currentDate.getMonth() + 1) + '-' + currentDate.getDate()
+    const planetId = parseInt(event.target.dataset.planetid);
+    const planetName = event.target.dataset.planetname;
+    const userId = parseInt(document.getElementById('all-content').dataset.userid);
+    const currentDate = new Date();
+    const submissionTime = currentDate.getFullYear() + '-0' + (currentDate.getMonth() + 1) + '-' + currentDate.getDate()
         + ' ' + currentDate.getHours() + ':' + currentDate.getMinutes() + ':' + currentDate.getSeconds();
 
-    let data = {'planet_id': planetId, 'planet_name': planetName, 'user_id': userId, 'submission_time': submissionTime};
+    const data = {'planet_id': planetId, 'planet_name': planetName, 'user_id': userId, 'submission_time': submissionTime};
 
     $.ajax({
         type: "POST",
@@ -188,10 +188,10 @@ function addDataToCellsAtMainPage(cell1, cell2, cell3, cell4, cell5, cell6, plan
 
 
 function switchPage() {
-    let currentPage = document.getElementById('planets');
-    let currentPageNo = parseInt(document.getElementById('planets').dataset.page);
-    let step = parseInt(event.target.dataset.value);    //direction is stored in button's dataset (1/-1)
-    let nextPage = currentPageNo + step;
+    const currentPage = document.getElementById('planets');
+    const currentPageNo = parseInt(document.getElementById('planets').dataset.page);
+    const step = parseInt(event.target.dataset.value);    //direction is stored in button's dataset (1/-1)
+    const nextPage = currentPageNo + step;
     currentPage.dataset.page = nextPage.toString();
 
     deleteData(currentPage);
@@ -200,7 +200,7 @@ function switchPage() {
 
 
 function deleteData(table) {
-    let planetTableLengthWithHeader = table.childNodes[1].childNodes.length;
+    const planetTableLengthWithHeader = table.childNodes[1].childNodes.length;
 
     for (let i = 0; i < planetTableLengthWithHeader; i++) {
         table.childNodes[1].childNodes[0].remove();
@@ -209,18 +209,18 @@ function deleteData(table) {
 
 
 function insertResidentHeaders() {
-    let table = document.getElementById('residents');
+    const table = document.getElementById('residents');
 
-    let header = table.insertRow(0);
+    const header = table.insertRow(0);
 
-    let head1 = header.insertCell(0);
-    let head2 = header.insertCell(1);
-    let head3 = header.insertCell(2);
-    let head4 = header.insertCell(3);
-    let head5 = header.insertCell(4);
-    let head6 = header.insertCell(5);
-    let head7 = header.insertCell(6);
-    let head8 = header.insertCell(7);
+    const head1 = header.insertCell(0);
+    const head2 = header.insertCell(1);
+    const head3 = header.insertCell(2);
+    const head4 = header.insertCell(3);
+    const head5 = header.insertCell(4);
+    const head6 = header.insertCell(5);
+    const head7 = header.insertCell(6);
+    const head8 = header.insertCell(7);
 
     addClassToCells(head1, head2, head3, head4, head5, head6, head7, head8, 'resident-header');
 
@@ -236,7 +236,7 @@ function insertResidentHeaders() {
 
 
 function addGender(cell8, residentData) {
-    let icon = document.createElement('i');
+    const icon = document.createElement('i');
     icon.classList.add('fas');
     icon.classList.add('fa-lg');
     icon.classList.add('centered-icon');
@@ -268,7 +268,7 @@ function convertHeightToMeters(cell2, residentData) {
     if (residentData['height'] === "unknown") {
         cell2.innerHTML = residentData['height'];
     } else {
-        let height = parseInt(residentData['height']) / 100;
+        const height = parseInt(residentData['height']) / 100;
         cell2.innerHTML = height.toString() + ' m';
     }
 }
@@ -286,41 +286,41 @@ function addDataToCellsAtResidentPage(cell1, cell2, cell3, cell4, cell5, cell6, 
 }
 
 function openModal() {
-    let modal = document.getElementById('resident-container');
+    const modal = document.getElementById('resident-container');
     modal.style.display = 'block';
 
-    let planet = event.target.dataset.planet;
+    const planet = event.target.dataset.planet;
 
-    let title = document.getElementById('which-planet');
+    const title = document.getElementById('which-planet');
     title.innerHTML = 'Residents of ' + planet;
 
-    let numberOfResidents = event.target.dataset.numberofresidents;
-    let modalCloseButton = document.getElementById('close-modal');
+    const numberOfResidents = event.target.dataset.numberofresidents;
+    const modalCloseButton = document.getElementById('close-modal');
     modalCloseButton.dataset.numberofresidents = numberOfResidents;
 
     insertResidentHeaders();
 
-    let residentsOrig = event.target.dataset.residents;
-    let residents = residentsOrig.split(',');
+    const residentsOrig = event.target.dataset.residents;
+    const residents = residentsOrig.split(',');
 
-    for (let resident of residents) {
+    for (const resident of residents) {
         $.ajax({
             type: "GET",
             dataType: "json",
             url: resident,
             success: function (residentData) {
-                let table = document.getElementById('residents');
+                const table = document.getElementById('residents');
 
-                let row = table.insertRow(-1);
+                const row = table.insertRow(-1);
 
-                let cell1 = row.insertCell(0);
-                let cell2 = row.insertCell(1);
-                let cell3 = row.insertCell(2);
-                let cell4 = row.insertCell(3);
-                let cell5 = row.insertCell(4);
-                let cell6 = row.insertCell(5);
-                let cell7 = row.insertCell(6);
-                let cell8 = row.insertCell(7);
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+                const cell3 = row.insertCell(2);
+                const cell4 = row.insertCell(3);
+                const cell5 = row.insertCell(4);
+                const cell6 = row.insertCell(5);
+                const cell7 = row.insertCell(6);
+                const cell8 = row.insertCell(7);
 
                 addClassToCells(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, 'resident-data');
                 addDataToCellsAtResidentPage(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, residentData);
@@ -331,28 +331,28 @@ function openModal() {
 
 
 function closeModal() {
-    let modalCloseButton = document.getElementById('close-modal');
-    let numberOfResidents = parseInt(modalCloseButton.dataset.numberofresidents);
+    const modalCloseButton = document.getElementById('close-modal');
+    const numberOfResidents = parseInt(modalCloseButton.dataset.numberofresidents);
 
-    let table = document.getElementById('residents');
+    const table = document.getElementById('residents');
 
     for (let i = 1; i <= numberOfResidents + 1; i++) {
         table.childNodes[0].childNodes[0].remove();
     }
 
-    let modal = document.getElementById('resident-container');
+    const modal = document.getElementById('resident-container');
     modal.style.display = 'none';
 }
 
 
 function openVoteStatistics() {
-    let modal = document.getElementById('votes-container');
+    const modal = document.getElementById('votes-container');
     modal.style.display = 'block';
 
-    let modalCloseButtonOne = document.getElementById('close-votes');
+    const modalCloseButtonOne = document.getElementById('close-votes');
     modalCloseButtonOne.addEventListener('click', closeVoteStatistics);
 
-    let modalCloseButtonTwo = document.getElementById('close-votes-button');
+    const modalCloseButtonTwo = document.getElementById('close-votes-button');
     modalCloseButtonTwo.addEventListener('click', closeVoteStatistics);
 
     $.ajax({
@@ -367,14 +367,14 @@ function openVoteStatistics() {
 
 
 function listVotedPlanets(response) {
-    let table = document.getElementById('votes');
-    let voted_planets = response;
+    const table = document.getElementById('votes');
+    const voted_planets = response;
     table.dataset.votes = voted_planets.length;
 
-    let row = table.insertRow(0);
+    const row = table.insertRow(0);
 
-    let head1 = row.insertCell(0);
-    let head2 = row.insertCell(1);
+    const head1 = row.insertCell(0);
+    const head2 = row.insertCell(1);
 
     head1.innerHTML = 'Planet name';
     head2.innerHTML = 'Received votes';
@@ -382,11 +382,11 @@ function listVotedPlanets(response) {
     head1.classList.add('vote-header');
     head2.classList.add('vote-header');
 
-    for (let planet of voted_planets) {
-        let row = table.insertRow(-1);
+    for (const planet of voted_planets) {
+        const row = table.insertRow(-1);
 
-        let cell1 = row.insertCell(0);
-        let cell2 = row.insertCell(1);
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
 
         cell1.innerHTML = planet['planet_name'];
         cell2.innerHTML = planet['count'];
@@ -394,14 +394,14 @@ function listVotedPlanets(response) {
 }
 
 function closeVoteStatistics() {
-    let table = document.getElementById('votes');
-    let elements = parseInt(table.dataset.votes);
+    const table = document.getElementById('votes');
+    const elements = parseInt(table.dataset.votes);
 
     for (let i = 1; i <= elements + 1; i++) {
         table.childNodes[0].childNodes[0].remove();
     }
 
-    let modal = document.getElementById('votes-container');
+    const modal = document.getElementById('votes-container');
     modal.style.display = 'none';
 }
 
@@ -409,21 +409,21 @@ function closeVoteStatistics() {
 function init() {
     loadPlanetData();
 
-    let nextButton = document.getElementById('next-button');
+    const nextButton = document.getElementById('next-button');
     nextButton.addEventListener('click', switchPage);
 
-    let prevButton = document.getElementById('prev-button');
+    const prevButton = document.getElementById('prev-button');
     prevButton.addEventListener('click', switchPage);
 
-    let modalCloseButtonTopRight = document.getElementById('close-modal');
+    const modalCloseButtonTopRight = document.getElementById('close-modal');
     modalCloseButtonTopRight.addEventListener('click', closeModal);
 
-    let modalCloseButtonTopLeft = document.getElementById('close-button');
+    const modalCloseButtonTopLeft = document.getElementById('close-button');
     modalCloseButtonTopLeft.addEventListener('click', closeModal);
 
-    let isUserLoggedIn = document.getElementById('all-content').dataset.login;
+    const isUserLoggedIn = document.getElementById('all-content').dataset.login;
     if (isUserLoggedIn === 'True') {
-        let voteStatistics = document.getElementById('vote-stats');
+        const voteStatistics = document.getElementById('vote-stats');
         voteStatistics.addEventListener('click', openVoteStatistics);
     }
 }
