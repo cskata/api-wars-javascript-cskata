@@ -147,6 +147,10 @@ body {
     width: 300px;
 }
 
+#vote-table {
+    padding: 1vw;
+}
+
 /* Registration from style */
 
 #reg-form-wrapper {
