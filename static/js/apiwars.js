@@ -347,8 +347,9 @@ function openVoteStatistics() {
     modal.style.display = 'block';
 
     let modalCloseButtonOne = document.getElementById('close-votes');
-    let modalCloseButtonTwo = document.getElementById('close-votes-button');
     modalCloseButtonOne.addEventListener('click', closeVoteStatistics);
+
+    let modalCloseButtonTwo = document.getElementById('close-votes-button');
     modalCloseButtonTwo.addEventListener('click', closeVoteStatistics);
 
     $.ajax({
@@ -356,30 +357,37 @@ function openVoteStatistics() {
         dataType: "json",
         url: "http://127.0.0.1:5000/get-vote",
         success: function (response) {
-            let table = document.getElementById('votes');
-            let voted_planets = response;
-            table.dataset.votes = voted_planets.length;
-
-            let row = table.insertRow(0);
-
-            let head1 = row.insertCell(0);
-            let head2 = row.insertCell(1);
-            head1.innerHTML = 'Planet name';
-            head2.innerHTML = 'Received votes';
-            head1.classList.add('vote-header');
-            head2.classList.add('vote-header');
-
-            for (let planet of voted_planets) {
-                let row = table.insertRow(-1);
-
-                let cell1 = row.insertCell(0);
-                let cell2 = row.insertCell(1);
-
-                cell1.innerHTML = planet['planet_name'];
-                cell2.innerHTML = planet['count'];
-            }
+            listVotedPlanets(response);
         }
     });
+}
+
+
+function listVotedPlanets(response) {
+    let table = document.getElementById('votes');
+    let voted_planets = response;
+    table.dataset.votes = voted_planets.length;
+
+    let row = table.insertRow(0);
+
+    let head1 = row.insertCell(0);
+    let head2 = row.insertCell(1);
+
+    head1.innerHTML = 'Planet name';
+    head2.innerHTML = 'Received votes';
+
+    head1.classList.add('vote-header');
+    head2.classList.add('vote-header');
+
+    for (let planet of voted_planets) {
+        let row = table.insertRow(-1);
+
+        let cell1 = row.insertCell(0);
+        let cell2 = row.insertCell(1);
+
+        cell1.innerHTML = planet['planet_name'];
+        cell2.innerHTML = planet['count'];
+    }
 }
 
 function closeVoteStatistics() {
