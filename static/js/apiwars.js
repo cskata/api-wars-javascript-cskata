@@ -4,8 +4,11 @@ init();
 function loadPlanetData() {
     const whichPage = document.getElementById('planets').dataset.page;
     const targetURL = `https://swapi.co/api/planets/?page=${whichPage}`;
+    const prevButton = document.getElementById('prev-button');
+    const nextButton = document.getElementById('next-button');
+    prevButton.disabled = true;
+    nextButton.disabled = true;
 
-    disableButtonIfNecessary(whichPage);
 
     $.ajax({
         type: "GET",
@@ -34,9 +37,15 @@ function loadPlanetData() {
 
                 addResidentsButton(cell7, planet);
                 addVoteButton(cell8, planet);
+
+                prevButton.disabled = false;
+                nextButton.disabled = false;
+                disableButtonIfNecessary(whichPage);
+
             }
         }
     });
+
 }
 
 
