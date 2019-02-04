@@ -215,10 +215,10 @@ function switchPage() {
 
 
 function deleteData(table) {
-    const planetTableLengthWithHeader = table.childNodes[1].childNodes.length;
+    const planetTableLengthWithHeader = table.childNodes[0].childNodes.length;
 
     for (let i = 0; i < planetTableLengthWithHeader; i++) {
-        table.childNodes[1].childNodes[0].remove();
+        table.childNodes[0].childNodes[0].remove();
     }
 }
 
