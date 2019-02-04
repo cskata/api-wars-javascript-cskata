@@ -125,6 +125,9 @@ function addVoteButton(cell8, planet) {
 
     if (datasetContainer.dataset.login === "") {
         voteBtn.style.visibility = "hidden";
+        voteBtn.parentElement.style.visibility = "hidden";
+        let lastHeader = document.getElementsByClassName('planet-header');
+        lastHeader[7].style.visibility = "hidden";
     }
 
     const planetId = (planet['url'].split("/"))[5];
