@@ -26,6 +26,7 @@ body {
 
 #planets {
     display: table;
+    width: 90vw;
 }
 
 #planets th, #planets td, #residents, #residents th, #residents td, #votes, #votes th, #votes td {
@@ -277,7 +278,12 @@ body {
 
 #button-box {
     padding-bottom: 1em;
-    display: inline-block;
+    width: 90vw;
+}
+
+#planet-data {
+    width: 90vw;
+    display: flex;
 }
 
 .fa-times {
