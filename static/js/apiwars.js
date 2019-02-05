@@ -1,5 +1,6 @@
 import {templates} from "./templates.js";
 import {dom} from "./dom.js";
+import {dataHandler} from "./data_handler.js";
 
 init();
 
@@ -100,7 +101,6 @@ function addVoteButton(newRow, planet) {
         voteBtn.parentElement.style.visibility = "hidden";
         let lastHeader = document.getElementsByClassName('planet-header');
         lastHeader[7].style.visibility = "hidden";
-
     }
 }
 
@@ -121,14 +121,7 @@ function saveVote() {
         submission_time: submissionTime
     };
 
-    $.ajax({
-        type: "POST",
-        url: "/voting",
-        contentType: "application/json",
-        dataType: "json",
-        data: JSON.stringify(data)
-    });
-
+    dataHandler.saveVote(data);
     alert(`Your vote for ${planetName} is saved.`);
 }
 
