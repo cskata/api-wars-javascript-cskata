@@ -41,9 +41,8 @@ function loadPlanetData() {
                 table.appendChild(newRow);
 
                 addDataToCellsAtMainPage(newRow, planet, planetData);
-
                 addResidentsButton(newRow, planet);
-                // addVoteButton(cell8, planet);
+                addVoteButton(newRow, planet);
 
                 prevButton.disabled = false;
                 nextButton.disabled = false;
@@ -89,14 +88,14 @@ function addResidentsButton(newRow, planet) {
 }
 
 
-function addVoteButton(cell8, planet) {
+function addVoteButton(newRow, planet) {
     const voteBtn = document.createElement('button');
     voteBtn.classList.add('btn');
     voteBtn.classList.add('btn-secondary');
 
     const text = document.createTextNode('Vote');
     voteBtn.appendChild(text);
-    cell8.appendChild(voteBtn);
+    newRow.children[7].appendChild(voteBtn);
 
     const datasetContainer = document.getElementById('all-content');
 
