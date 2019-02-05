@@ -55,5 +55,9 @@ export let dom = {
         const table = document.querySelector('#votes');
         const header = templates.createVotesHeaderElement();
         table.appendChild(header);
+    },
+    createVotesDataRow: function (table, planet) {
+        const row = templates.createVotesRow(planet);
+        table.appendChild(row);
     }
 };

@@ -21,15 +21,15 @@ export let templates = {
         newRow.classList.add('planet-row');
         newRow.innerHTML =
             `
-            <td class="planet-data"></td>
-            <td class="planet-data"></td>
-            <td class="planet-data"></td>
-            <td class="planet-data"></td>
-            <td class="planet-data"></td>
-            <td class="planet-data"></td>
-            <td class="planet-data"></td>
-            <td class="planet-data"></td>
-        `;
+                <td class="planet-data"></td>
+                <td class="planet-data"></td>
+                <td class="planet-data"></td>
+                <td class="planet-data"></td>
+                <td class="planet-data"></td>
+                <td class="planet-data"></td>
+                <td class="planet-data"></td>
+                <td class="planet-data"></td>
+            `;
 
         return newRow;
     },
@@ -55,16 +55,15 @@ export let templates = {
         newRow.classList.add('planet-row');
         newRow.innerHTML =
             `
-            <td class="resident-data"></td>
-            <td class="resident-data"></td>
-            <td class="resident-data"></td>
-            <td class="resident-data"></td>
-            <td class="resident-data"></td>
-            <td class="resident-data"></td>
-            <td class="resident-data"></td>
-            <td class="resident-data"></td>
-
-        `;
+                <td class="resident-data"></td>
+                <td class="resident-data"></td>
+                <td class="resident-data"></td>
+                <td class="resident-data"></td>
+                <td class="resident-data"></td>
+                <td class="resident-data"></td>
+                <td class="resident-data"></td>
+                <td class="resident-data"></td>
+            `;
 
         return newRow;
     },
@@ -76,8 +75,18 @@ export let templates = {
             <th class="vote-header">Planet name</th>
             <th class="vote-header">Received votes</th>
 
-        `;
+            `;
 
         return header;
+    },
+    createVotesRow: function (planet) {
+        let newRow = document.createElement('tr');
+        newRow.innerHTML =
+            `
+                <td>${planet['planet_name']}</td>
+                <td>${planet['count']}</td>
+            `;
+
+        return newRow;
     }
 };

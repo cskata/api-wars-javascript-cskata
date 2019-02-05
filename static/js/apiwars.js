@@ -283,13 +283,7 @@ function listVotedPlanets(response) {
     dom.createVotesHeader();
 
     for (const planet of voted_planets) {
-        const row = table.insertRow(-1);
-
-        const cell1 = row.insertCell(0);
-        const cell2 = row.insertCell(1);
-
-        cell1.innerHTML = planet['planet_name'];
-        cell2.innerHTML = planet['count'];
+        dom.createVotesDataRow(table, planet);
     }
 }
 
