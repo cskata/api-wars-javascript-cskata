@@ -1,3 +1,5 @@
+import {templates} from "./templates.js";
+
 export let dataHandler = {
     saveVote: function (data) {
         $.ajax({
@@ -20,12 +22,24 @@ export let dataHandler = {
     },
     getVotes: function (listVotedPlanets) {
         $.ajax({
-        type: "GET",
-        dataType: "json",
-        url: "/voting",
-        success: function (response) {
-            listVotedPlanets(response);
-        }
-    });
+            type: "GET",
+            dataType: "json",
+            url: "/voting",
+            success: function (response) {
+                listVotedPlanets(response);
+            }
+        });
+    },
+    getResidentsData: function (addDataToCellsAtResidentPage, table, resident) {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: resident,
+            success: function (residentData) {
+                const row = templates.createResidentRow();
+                table.appendChild(row);
+                addDataToCellsAtResidentPage(row, residentData);
+            }
+        });
     }
 };

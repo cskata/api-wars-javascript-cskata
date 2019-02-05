@@ -1,6 +1,5 @@
 import {dom} from "./dom.js";
 import {dataHandler} from "./data_handler.js";
-import {templates} from "./templates.js";
 
 
 init();
@@ -241,18 +240,10 @@ function openModal() {
     const residentsOrig = event.target.dataset.residents;
     const residents = residentsOrig.split(',');
 
+    const table = document.querySelector('#residents');
+
     for (const resident of residents) {
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: resident,
-            success: function (residentData) {
-                const table = document.querySelector('#residents');
-                const row = templates.createResidentRow();
-                table.appendChild(row);
-                addDataToCellsAtResidentPage(row, residentData);
-            }
-        });
+        dataHandler.getResidentsData(addDataToCellsAtResidentPage, table, resident)
     }
 }
 
