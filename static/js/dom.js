@@ -32,7 +32,7 @@ export let dom = {
 
         return voteBtn;
     },
-    createPlanetDataTable: function () {
+    createPlanetDataRows: function () {
         const table = document.querySelector('#planets');
         const header = templates.createHeaderElement();
         table.appendChild(header);

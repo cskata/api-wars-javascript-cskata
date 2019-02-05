@@ -18,7 +18,7 @@ function loadPlanetData() {
 
 
 export default function createPlanetTable(planets, prevButton, nextButton, whichPage) {
-    dom.createPlanetDataTable();
+    dom.createPlanetDataRows();
 
     insertPlanetHeadersData();
     insertPlanetData(planets);
