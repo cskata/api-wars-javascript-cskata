@@ -13,28 +13,26 @@ function loadPlanetData() {
     prevButton.disabled = true;
     nextButton.disabled = true;
 
-    const headers = [
-        'Name', 'Diameter', 'Climate',
-        'Terrain', 'Surface Waters Percentage',
-        'Population', 'Residents', ''
-    ];
+    dataHandler.getAllPlanetData(targetURL, prevButton, nextButton, whichPage);
+}
 
+
+export default function createPlanetTable(planets, prevButton, nextButton, whichPage) {
+    dom.createPlanetDataTable();
+
+    insertPlanetHeadersData();
+    insertPlanetData(planets, whichPage);
+
+    prevButton.disabled = false;
+    nextButton.disabled = false;
+}
+
+
+function insertPlanetData(planets, whichPage) {
     const planetData = [
         'name', 'diameter', 'climate',
         'terrain', 'surface_water', 'population'
     ];
-
-    dataHandler.getAllPlanetData(
-        targetURL, headers, planetData,
-        prevButton, nextButton, whichPage
-    );
-}
-
-
-export default function createPlanetTable(planets, headers, planetData, prevButton, nextButton, whichPage) {
-    dom.createPlanetDataTable();
-
-    insertPlanetHeadersData(headers);
 
     const table = document.querySelector('#planets');
 
@@ -45,13 +43,18 @@ export default function createPlanetTable(planets, headers, planetData, prevButt
         addResidentsButton(currentRow, planets[i]);
         addVoteButton(currentRow, planets[i]);
 
-        prevButton.disabled = false;
-        nextButton.disabled = false;
         disablePaginationButtons(whichPage);
     }
 }
 
-function insertPlanetHeadersData(headers) {
+
+function insertPlanetHeadersData() {
+    const headers = [
+        'Name', 'Diameter', 'Climate',
+        'Terrain', 'Surface Waters Percentage',
+        'Population', 'Residents', ''
+    ];
+
     let planetHeaders = document.querySelector('#main-header').children;
 
     for (let i = 0; i < headers.length; i++) {

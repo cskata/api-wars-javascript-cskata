@@ -10,15 +10,13 @@ export let dataHandler = {
             data: JSON.stringify(data)
         });
     },
-    getAllPlanetData: function (targetURL, headers, planetData,
-                                prevButton, nextButton, whichPage) {
+    getAllPlanetData: function (targetURL, prevButton, nextButton, whichPage) {
         $.ajax({
             type: "GET",
             dataType: "json",
             url: targetURL,
             success: function (response) {
-                createPlanetTable(response['results'], headers,
-                    planetData, prevButton, nextButton, whichPage);
+                createPlanetTable(response['results'], prevButton, nextButton, whichPage);
             }
         });
     }
