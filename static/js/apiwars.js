@@ -1,5 +1,6 @@
 import {dom} from "./dom.js";
 import {dataHandler} from "./data_handler.js";
+import {templates} from "./templates.js";
 
 
 init();
@@ -127,18 +128,6 @@ function saveVote() {
 }
 
 
-function addClassToCells(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cellClass) {
-    cell1.classList.add(cellClass);
-    cell2.classList.add(cellClass);
-    cell3.classList.add(cellClass);
-    cell4.classList.add(cellClass);
-    cell5.classList.add(cellClass);
-    cell6.classList.add(cellClass);
-    cell7.classList.add(cellClass);
-    cell8.classList.add(cellClass);
-}
-
-
 function addDataToCellsAtMainPage(newRow, planet, planetData) {
     let formattedPlanetData = formatPlanetData(planet);
 
@@ -220,33 +209,51 @@ function addGender(cell8, residentData) {
 
 }
 
-function addKgToMass(cell3, residentData) {
-    if (residentData['mass'] === "unknown") {
-        cell3.innerHTML = residentData['mass'];
-    } else {
-        cell3.innerHTML = residentData['mass'] + ' kg';
-    }
-}
 
-function convertHeightToMeters(cell2, residentData) {
-    if (residentData['height'] === "unknown") {
-        cell2.innerHTML = residentData['height'];
-    } else {
+function formatResidentData(row, residentData) {
+    if (residentData['height'] !== "unknown") {
         const height = parseInt(residentData['height']) / 100;
-        cell2.innerHTML = height.toString() + ' m';
+        residentData['height'] = height.toString() + ' m';
     }
+
+    if (residentData['mass'] !== "unknown") {
+        residentData['mass'] = residentData['mass'] + ' kg';
+    }
+
+    const icon = document.createElement('i');
+    icon.classList.add('fas');
+    icon.classList.add('fa-lg');
+    icon.classList.add('centered-icon');
+
+    const lastResidentCell = 7;
+
+    if (residentData['gender'] === 'female') {
+        icon.classList.add('fa-venus');
+        icon.title = "female";
+        row.children[lastResidentCell].appendChild(icon);
+    } else if (residentData['gender'] === 'male') {
+        icon.classList.add('fa-mars');
+        icon.title = "male";
+        row.children[lastResidentCell].appendChild(icon);
+    } else {
+        row.children[lastResidentCell].innerHTML = residentData['gender'];
+        row.children[lastResidentCell].classList.add('centered-text');
+    }
+
+    return residentData;
 }
 
 
-function addDataToCellsAtResidentPage(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, residentData) {
-    cell1.innerHTML = residentData['name'];
-    convertHeightToMeters(cell2, residentData);
-    addKgToMass(cell3, residentData);
-    cell4.innerHTML = residentData['skin_color'];
-    cell5.innerHTML = residentData['hair_color'];
-    cell6.innerHTML = residentData['eye_color'];
-    cell7.innerHTML = residentData['birth_year'];
-    addGender(cell8, residentData);
+function addDataToCellsAtResidentPage(row, residentData) {
+    const formattedResidentData = formatResidentData(row, residentData);
+    const residentDataColumns = [
+        'name', 'height', 'mass', 'skin_color', 'hair_color', 'eye_color', 'birth_year', 'gender'
+    ];
+
+    for (let i = 0; i < residentDataColumns.length - 1; i++) {
+        row.children[i].innerHTML = formattedResidentData[`${residentDataColumns[i]}`];
+    }
+
 }
 
 function openModal() {
@@ -273,21 +280,10 @@ function openModal() {
             dataType: "json",
             url: resident,
             success: function (residentData) {
-                const table = document.getElementById('residents');
-
-                const row = table.insertRow(-1);
-
-                const cell1 = row.insertCell(0);
-                const cell2 = row.insertCell(1);
-                const cell3 = row.insertCell(2);
-                const cell4 = row.insertCell(3);
-                const cell5 = row.insertCell(4);
-                const cell6 = row.insertCell(5);
-                const cell7 = row.insertCell(6);
-                const cell8 = row.insertCell(7);
-
-                addClassToCells(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, 'resident-data');
-                addDataToCellsAtResidentPage(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, residentData);
+                const table = document.querySelector('#residents');
+                const row = templates.createResidentRow();
+                table.appendChild(row);
+                addDataToCellsAtResidentPage(row, residentData);
             }
         });
     }
@@ -301,14 +297,8 @@ function createResidentsTable() {
 
 
 function closeModal() {
-    const modalCloseButton = document.getElementById('close-modal');
-    const numberOfResidents = parseInt(modalCloseButton.dataset.numberofresidents);
-
     const table = document.getElementById('residents');
-
-    for (let i = 1; i <= numberOfResidents + 1; i++) {
-        table.childNodes[0].childNodes[0].remove();
-    }
+    table.innerHTML = "";
 
     const modal = document.getElementById('resident-container');
     modal.style.display = 'none';

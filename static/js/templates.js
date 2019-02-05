@@ -49,5 +49,23 @@ export let templates = {
             `;
 
         return header;
+    },
+    createResidentRow: function () {
+        let newRow = document.createElement('tr');
+        newRow.classList.add('planet-row');
+        newRow.innerHTML =
+            `
+            <td class="resident-data"></td>
+            <td class="resident-data"></td>
+            <td class="resident-data"></td>
+            <td class="resident-data"></td>
+            <td class="resident-data"></td>
+            <td class="resident-data"></td>
+            <td class="resident-data"></td>
+            <td class="resident-data"></td>
+
+        `;
+
+        return newRow;
     }
 };
