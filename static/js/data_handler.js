@@ -8,33 +8,33 @@ export let dataHandler = {
             data: JSON.stringify(data)
         });
     },
-    getVotes: function (listVotedPlanets) {
+    getVotes: function (callback) {
         $.ajax({
             type: "GET",
             dataType: "json",
             url: "/voting",
             success: function (response) {
-                listVotedPlanets(response);
+                callback(response);
             }
         });
     },
-    getAllPlanetData: function (createPlanetTable, targetURL, prevButton, nextButton, whichPage) {
+    getAllPlanetData: function (callback, targetURL, prevButton, nextButton, whichPage) {
         $.ajax({
             type: "GET",
             dataType: "json",
             url: targetURL,
             success: function (response) {
-                createPlanetTable(response['results'], prevButton, nextButton, whichPage);
+                callback(response['results'], prevButton, nextButton, whichPage);
             }
         });
     },
-    getResidentsData: function (addDataToCellsAtResidentPage, table, residentsURLs, i) {
+    getResidentsData: function (callback, table, residentsURLs, i) {
         $.ajax({
             type: "GET",
             dataType: "json",
             url: residentsURLs[i],
             success: function (residentData) {
-                addDataToCellsAtResidentPage(residentData, table, i);
+                callback(residentData, table, i);
             }
         });
     }
