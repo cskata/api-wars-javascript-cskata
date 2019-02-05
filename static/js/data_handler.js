@@ -30,15 +30,13 @@ export let dataHandler = {
             }
         });
     },
-    getResidentsData: function (addDataToCellsAtResidentPage, table, resident) {
+    getResidentsData: function (addDataToCellsAtResidentPage, table, residentsURLs, i) {
         $.ajax({
             type: "GET",
             dataType: "json",
-            url: resident,
+            url: residentsURLs[i],
             success: function (residentData) {
-                const row = templates.createResidentRow();
-                table.appendChild(row);
-                addDataToCellsAtResidentPage(row, residentData);
+                addDataToCellsAtResidentPage(residentData, table, i);
             }
         });
     }

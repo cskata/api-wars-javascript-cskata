@@ -47,5 +47,9 @@ export let dom = {
         const table = document.querySelector('#residents');
         const header = templates.createResidentHeaderElement();
         table.appendChild(header);
+    },
+    createResidentDataRows: function (table) {
+        const row = templates.createResidentRow();
+        table.appendChild(row);
     }
 };

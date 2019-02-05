@@ -214,7 +214,8 @@ function formatResidentData(row, residentData) {
 }
 
 
-function addDataToCellsAtResidentPage(row, residentData) {
+function addDataToResidentsModal(residentData, table, i) {
+    let row = table.childNodes[i + 1];
     const formattedResidentData = formatResidentData(row, residentData);
     const residentDataColumns = [
         'name', 'height', 'mass', 'skin_color', 'hair_color', 'eye_color', 'birth_year', 'gender'
@@ -223,7 +224,6 @@ function addDataToCellsAtResidentPage(row, residentData) {
     for (let i = 0; i < residentDataColumns.length - 1; i++) {
         row.children[i].innerHTML = formattedResidentData[`${residentDataColumns[i]}`];
     }
-
 }
 
 function openModal() {
@@ -238,12 +238,12 @@ function openModal() {
     createResidentsTable();
 
     const residentsOrig = event.target.dataset.residents;
-    const residents = residentsOrig.split(',');
-
+    const residentsURLs = residentsOrig.split(',');
     const table = document.querySelector('#residents');
 
-    for (const resident of residents) {
-        dataHandler.getResidentsData(addDataToCellsAtResidentPage, table, resident)
+    for (let i = 0; i < residentsURLs.length; i++) {
+        dom.createResidentDataRows(table);
+        dataHandler.getResidentsData(addDataToResidentsModal, table, residentsURLs, i)
     }
 }
 
