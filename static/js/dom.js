@@ -32,11 +32,10 @@ export let dom = {
 
         return voteBtn;
     },
-    createPlanetDataRows: function () {
+    createPlanetDataRows: function (planetsPerPage) {
         const table = document.querySelector('#planets');
         const header = templates.createPlanetHeaderElement();
         table.appendChild(header);
-        const planetsPerPage = 10;
 
         for (let i = 0; i < planetsPerPage; i++) {
             let newRow = templates.createPlanetRow();

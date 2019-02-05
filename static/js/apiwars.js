@@ -19,7 +19,8 @@ function loadPlanetData() {
 
 
 function createPlanetTable(planets, prevButton, nextButton, whichPage) {
-    dom.createPlanetDataRows();
+    const planetsPerPage = planets.length;
+    dom.createPlanetDataRows(planetsPerPage);
 
     insertPlanetHeadersData();
     insertPlanetData(planets);
@@ -167,7 +168,7 @@ function switchPage() {
 }
 
 
-function insertResidentHeaders() {
+function insertResidentHeaderData() {
     const headers = [
         'Name', 'Height', 'Mass', 'Skin color', 'Hair color', 'Eye color', 'Birth year', 'Gender'
     ];
@@ -253,7 +254,7 @@ function openModal() {
 
 function createResidentsTable() {
     dom.createResidentHeader();
-    insertResidentHeaders();
+    insertResidentHeaderData();
 }
 
 
