@@ -1,7 +1,6 @@
 from flask import Flask, render_template, redirect, session, request, url_for, jsonify, flash
 import data_manager
 
-
 app = Flask(__name__)
 app.secret_key = "titkoskulcs"
 
@@ -64,16 +63,18 @@ def log_user_out():
     return redirect(url_for('index'))
 
 
-@app.route('/voting', methods=['GET', 'POST'])
+@app.route('/voting', methods=['GET'])
 def show_and_save_votes():
-    if request.method == 'POST':
-        response = request.get_json()
-        data_manager.save_planet_vote(response)
-        return jsonify(response)
-
     user_id = session['user_id']
     votes = data_manager.get_votes_by_user_id(user_id)
     return jsonify(votes)
+
+
+@app.route('/voting', methods=['POST'])
+def show_and_save_votes():
+    response = request.get_json()
+    data_manager.save_planet_vote(response)
+    return jsonify(response)
 
 
 if __name__ == '__main__':
