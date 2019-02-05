@@ -2,25 +2,32 @@ import os
 
 import psycopg2
 import psycopg2.extras
+import urllib
 
 
 def get_connection_string():
-    # setup connection string
-    # to do this, please define these environment variables first
-    # RUN THIS SHIT FROM PYCHARM TERMINAL
-    # NORMAL TERMINAL DOES NOT SUCK OUT THE GOD DAMN VARIABLES
-    user_name = os.environ.get('PSQL_USER_NAME')
-    password = os.environ.get('PSQL_PASSWORD')
-    host = os.environ.get('PSQL_HOST')
-    database_name = os.environ.get('PSQL_DB_NAME')
+    # user_name = os.environ.get('PSQL_USER_NAME')
+    # password = os.environ.get('PSQL_PASSWORD')
+    # host = os.environ.get('PSQL_HOST')
+    # database_name = os.environ.get('PSQL_DB_NAME')
+    urllib.parse.uses_netloc.append('postgres')
+    url = urllib.parse.urlparse(os.environ.get('DATABASE_URL'))
+    connection = psycopg2.connect(
+        database=url.path[1:],
+        user=url.username,
+        password=url.password,
+        host=url.hostname,
+        port=url.port
+    )
 
-    env_variables_defined = user_name and password and host and database_name
+    # env_variables_defined = user_name and password and host and database_name
 
-    if env_variables_defined:
-        connect_string = f"postgresql://{user_name}:{password}@{host}/{database_name}"
-        return connect_string
-    else:
-        raise KeyError('Some necessary environment variable(s) are not defined')
+    # if env_variables_defined:
+    #     connect_string = f"postgresql://{user_name}:{password}@{host}/{database_name}"
+    #     return connect_string
+    # else:
+    #     raise KeyError('Some necessary environment variable(s) are not defined')
+    return connection
 
 
 def open_database():
