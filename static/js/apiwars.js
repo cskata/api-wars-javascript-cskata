@@ -163,21 +163,14 @@ function switchPage() {
     const nextPage = currentPageNo + step;
     currentPage.dataset.page = nextPage.toString();
 
-    deleteData(currentPage);
+    currentPage.innerHTML = "";
     loadPlanetData();
-}
-
-
-function deleteData(table) {
-    table.innerHTML = "";
 }
 
 
 function insertResidentHeaders() {
     const headers = [
-        'Name', 'Height', 'Mass',
-        'Skin color', 'Hair color',
-        'Eye color', 'Birth year', 'Gender'
+        'Name', 'Height', 'Mass', 'Skin color', 'Hair color', 'Eye color', 'Birth year', 'Gender'
     ];
 
     let residentHeaders = document.querySelector('#resident-modal-header').children;
