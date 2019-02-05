@@ -17,7 +17,10 @@ export let templates = {
         return planetData;
     },
     createHeaderElement: function () {
-        let header = `
+        let header = document.createElement('tr');
+        header.id = 'main-header';
+        header.innerHTML =
+            `
                 <th class="planet-header"></th>
                 <th class="planet-header"></th>
                 <th class="planet-header"></th>
@@ -31,8 +34,10 @@ export let templates = {
         return header;
     },
     createPlanetRow: function () {
-        let newPlanet =
-        `<tr class="planet-row">
+        let newRow = document.createElement('tr');
+        newRow.classList.add('planet-row');
+        newRow.innerHTML =
+        `
             <td class="planet-data"></td>
             <td class="planet-data"></td>
             <td class="planet-data"></td>
@@ -41,8 +46,8 @@ export let templates = {
             <td class="planet-data"></td>
             <td class="planet-data"></td>
             <td class="planet-data"></td>
-        </tr>`;
+        `;
 
-        return newPlanet;
+        return newRow;
     }
 };
