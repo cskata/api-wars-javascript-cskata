@@ -1,5 +1,5 @@
 export let templates = {
-    createHeaderElement: function () {
+    createPlanetHeaderElement: function () {
         let header = document.createElement('tr');
         header.id = 'main-header';
         header.innerHTML =

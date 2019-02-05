@@ -34,7 +34,7 @@ export let dom = {
     },
     createPlanetDataRows: function () {
         const table = document.querySelector('#planets');
-        const header = templates.createHeaderElement();
+        const header = templates.createPlanetHeaderElement();
         table.appendChild(header);
         const planetsPerPage = 10;
 
