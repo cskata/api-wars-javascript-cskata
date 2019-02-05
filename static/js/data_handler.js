@@ -1,5 +1,3 @@
-import {templates} from "./templates.js";
-
 export let dataHandler = {
     saveVote: function (data) {
         $.ajax({
