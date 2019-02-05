@@ -15,5 +15,19 @@ export let dom = {
         residentBtn.dataset.numberofresidents = planet['residents'].length;
 
         return residentBtn;
+    },
+    createVoteButton: function (planet) {
+        const voteBtn = document.createElement('button');
+        voteBtn.classList.add('btn');
+        voteBtn.classList.add('btn-secondary');
+
+        const text = document.createTextNode('Vote');
+        voteBtn.appendChild(text);
+
+        const planetId = (planet['url'].split("/"))[5];
+        voteBtn.dataset.planetid = planetId;
+        voteBtn.dataset.planetname = planet['name'];
+
+        return voteBtn;
     }
 };
