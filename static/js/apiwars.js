@@ -24,29 +24,25 @@ function loadPlanetData() {
                 'Population', 'Residents', ''
             ];
 
-            let planetData = [];
+            let planetData = [
+                'name', 'diameter', 'climate',
+                'terrain', 'surface_water', 'population'
+            ];
 
             const table = document.querySelector('#planets');
+            const header = templates.createHeaderElement();
+            table.appendChild(header);
 
             insertPlanetHeaders(table, headers);
 
             for (const planet of planets) {
-                const row = table.insertRow(-1);
-                row.classList.add('planet-row');
-                const cell1 = row.insertCell(0);
-                const cell2 = row.insertCell(1);
-                const cell3 = row.insertCell(2);
-                const cell4 = row.insertCell(3);
-                const cell5 = row.insertCell(4);
-                const cell6 = row.insertCell(5);
-                const cell7 = row.insertCell(6);
-                const cell8 = row.insertCell(7);
+                let newRow = templates.createPlanetRow();
+                table.appendChild(newRow);
 
-                addClassToCells(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, 'planet-data');
-                addDataToCellsAtMainPage(cell1, cell2, cell3, cell4, cell5, cell6, planet);
+                addDataToCellsAtMainPage(newRow, planet, planetData);
 
-                addResidentsButton(cell7, planet);
-                addVoteButton(cell8, planet);
+                // addResidentsButton(cell7, planet);
+                // addVoteButton(cell8, planet);
 
                 prevButton.disabled = false;
                 nextButton.disabled = false;
@@ -58,12 +54,9 @@ function loadPlanetData() {
 
 
 function insertPlanetHeaders(table, headers) {
-    const headerFromTemplate = templates.createHeaderElement();
-    table.innerHTML = headerFromTemplate;
+    let planetHeaders = document.querySelector('#main-header').children;
 
-    let planetHeaders = table.firstElementChild.firstElementChild.children;
-
-    for (let i=0; i<headers.length; i++) {
+    for (let i = 0; i < headers.length; i++) {
         planetHeaders[i].innerHTML = headers[i];
     }
 }
@@ -173,35 +166,28 @@ function addClassToCells(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8,
 }
 
 
-function addDataToCellsAtMainPage(cell1, cell2, cell3, cell4, cell5, cell6, planet) {
-    cell1.innerHTML = planet['name'];
-
+function addDataToCellsAtMainPage(newRow, planet, planetData) {
     if (planet['diameter'] !== 'unknown') {
         planet['diameter'] = planet['diameter'].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         planet['diameter'] = `${planet['diameter']} km`;
     }
 
-    cell2.innerHTML = planet['diameter'];
-    cell3.innerHTML = planet['climate'];
-    cell4.innerHTML = planet['terrain'];
-
     if (planet['surface_water'] !== 'unknown') {
         planet['surface_water'] = `${planet['surface_water']}%`;
     }
-
-    cell5.innerHTML = planet['surface_water'];
 
     if (planet['population'] !== 'unknown') {
         planet['population'] = planet['population'].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         planet['population'] = `${planet['population']} people`;
     }
-
-    cell6.innerHTML = planet['population'];
+    for (let i = 0; i < planetData.length; i++) {
+        newRow.children[i].innerHTML = planet[`${planetData[i]}`];
+    }
 }
 
 
 function switchPage() {
-    const currentPage = document.getElementById('planets');
+    const currentPage = document.querySelector('#planets');
     const currentPageNo = parseInt(document.getElementById('planets').dataset.page);
     const step = parseInt(event.target.dataset.value);    //direction is stored in button's dataset (1/-1)
     const nextPage = currentPageNo + step;
@@ -213,11 +199,7 @@ function switchPage() {
 
 
 function deleteData(table) {
-    const planetTableLengthWithHeader = table.childNodes[0].childNodes.length;
-
-    for (let i = 0; i < planetTableLengthWithHeader; i++) {
-        table.childNodes[0].childNodes[0].remove();
-    }
+    table.innerHTML = "";
 }
 
 
