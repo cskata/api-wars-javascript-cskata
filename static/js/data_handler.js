@@ -19,5 +19,15 @@ export let dataHandler = {
                 createPlanetTable(response['results'], prevButton, nextButton, whichPage);
             }
         });
+    },
+    getVotes: function (listVotedPlanets) {
+        $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "/voting",
+        success: function (response) {
+            listVotedPlanets(response);
+        }
+    });
     }
 };

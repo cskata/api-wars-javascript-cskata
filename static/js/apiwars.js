@@ -289,14 +289,7 @@ function openVoteStatistics() {
     const modalCloseButtonTwo = document.getElementById('close-votes-button');
     modalCloseButtonTwo.addEventListener('click', closeVoteStatistics);
 
-    $.ajax({
-        type: "GET",
-        dataType: "json",
-        url: "/voting",
-        success: function (response) {
-            listVotedPlanets(response);
-        }
-    });
+    dataHandler.getVotes(listVotedPlanets);
 }
 
 
