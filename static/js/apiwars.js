@@ -5,7 +5,7 @@ import {dataHandler} from "./data_handler.js";
 init();
 
 
-function loadPlanetData() {
+function loadPlanetsData() {
     const whichPage = document.getElementById('planets').dataset.page;
     const targetURL = `https://swapi.co/api/planets/?page=${whichPage}`;
 
@@ -32,7 +32,7 @@ function createPlanetTable(planets, prevButton, nextButton, whichPage) {
 
 
 function insertPlanetData(planets) {
-    const planetData = [
+    const planetDataKeys = [
         'name', 'diameter', 'climate', 'terrain', 'surface_water', 'population'
     ];
 
@@ -41,22 +41,29 @@ function insertPlanetData(planets) {
     for (let i = 0; i < planets.length; i++) {
         let currentRow = table.childNodes[i + 1];
 
-        addDataToCellsAtMainPage(currentRow, planets[i], planetData);
+        addDataToCellsAtMainPage(currentRow, planets[i], planetDataKeys);
         addResidentsButton(currentRow, planets[i]);
         addVoteButton(currentRow, planets[i]);
+    }
+
+    const datasetContainer = document.getElementById('all-content');
+    if (datasetContainer.dataset.login === "") {
+        const headers = document.querySelectorAll('.planet-header');
+        const lastHeader = headers[7];
+        lastHeader.style.visibility = "hidden";
     }
 }
 
 
 function insertPlanetHeadersData() {
-    const headers = [
+    const headerNames = [
         'Name', 'Diameter', 'Climate', 'Terrain', 'Surface Waters Percentage', 'Population', 'Residents', ''
     ];
 
-    const planetHeaders = document.querySelector('#main-header').children;
+    const planetHeaderCells = document.querySelector('#main-header').children;
 
-    for (let i = 0; i < headers.length; i++) {
-        planetHeaders[i].innerHTML = headers[i];
+    for (let i = 0; i < headerNames.length; i++) {
+        planetHeaderCells[i].innerHTML = headerNames[i];
     }
 }
 
@@ -77,23 +84,23 @@ function disablePaginationButtons(whichPage) {
 
 
 function addResidentsButton(newRow, planet) {
-    const residentsColumn = 6;
+    const residentsColumn = newRow.children[6];
     const noResidentText = 'No known residents';
 
     if (planet['residents'].length === 0) {
-        newRow.children[residentsColumn].innerHTML = noResidentText;
+        residentsColumn.innerHTML = noResidentText;
     } else {
         const residentBtn = dom.createResidentButton(planet);
-        newRow.children[residentsColumn].appendChild(residentBtn);
+        residentsColumn.appendChild(residentBtn);
         residentBtn.addEventListener('click', openModal);
     }
 }
 
 
 function addVoteButton(newRow, planet) {
-    const lastColumn = 7;
+    const lastColumn = newRow.children[7];
     const voteBtn = dom.createVoteButton(planet);
-    newRow.children[lastColumn].appendChild(voteBtn);
+    lastColumn.appendChild(voteBtn);
     voteBtn.addEventListener('click', saveVote);
 
     const datasetContainer = document.getElementById('all-content');
@@ -101,8 +108,6 @@ function addVoteButton(newRow, planet) {
     if (datasetContainer.dataset.login === "") {
         voteBtn.style.visibility = "hidden";
         voteBtn.parentElement.style.visibility = "hidden";
-        const headers = document.getElementsByClassName('planet-header');
-        headers[lastColumn].style.visibility = "hidden";
     }
 }
 
@@ -124,15 +129,16 @@ function saveVote() {
     };
 
     dataHandler.saveVote(data);
-    alert(`Your vote for ${planetName} is saved.`);
+
+    alert(`Your vote for planet ${planetName} is saved.`);
 }
 
 
-function addDataToCellsAtMainPage(newRow, planet, planetData) {
+function addDataToCellsAtMainPage(newRow, planet, planetDataKeys) {
     const formattedPlanetData = formatPlanetData(planet);
 
-    for (let i = 0; i < planetData.length; i++) {
-        newRow.children[i].innerHTML = formattedPlanetData[`${planetData[i]}`];
+    for (let i = 0; i < planetDataKeys.length; i++) {
+        newRow.children[i].innerHTML = formattedPlanetData[`${planetDataKeys[i]}`];
     }
 }
 
@@ -164,7 +170,7 @@ function switchPage() {
     currentPage.dataset.page = nextPage.toString();
 
     currentPage.innerHTML = "";
-    loadPlanetData();
+    loadPlanetsData();
 }
 
 
@@ -324,7 +330,7 @@ function votingModalCanBeOpenedAndClosed() {
 
 
 function init() {
-    loadPlanetData();
+    loadPlanetsData();
     addingButtonClickEvents();
 
     const isUserLoggedIn = document.getElementById('all-content').dataset.login;
