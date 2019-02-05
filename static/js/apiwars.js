@@ -188,28 +188,6 @@ function insertResidentHeaders() {
 }
 
 
-function addGender(cell8, residentData) {
-    const icon = document.createElement('i');
-    icon.classList.add('fas');
-    icon.classList.add('fa-lg');
-    icon.classList.add('centered-icon');
-
-    if (residentData['gender'] === 'female') {
-        icon.classList.add('fa-venus');
-        icon.title = "female";
-        cell8.appendChild(icon);
-    } else if (residentData['gender'] === 'male') {
-        icon.classList.add('fa-mars');
-        icon.title = "male";
-        cell8.appendChild(icon);
-    } else {
-        cell8.innerHTML = residentData['gender'];
-        cell8.classList.add('centered-text');
-    }
-
-}
-
-
 function formatResidentData(row, residentData) {
     if (residentData['height'] !== "unknown") {
         const height = parseInt(residentData['height']) / 100;
@@ -264,10 +242,6 @@ function openModal() {
 
     const title = document.getElementById('which-planet');
     title.innerHTML = 'Residents of ' + planet;
-
-    const numberOfResidents = event.target.dataset.numberofresidents;
-    const modalCloseButton = document.getElementById('close-modal');
-    modalCloseButton.dataset.numberofresidents = numberOfResidents;
 
     createResidentsTable();
 
