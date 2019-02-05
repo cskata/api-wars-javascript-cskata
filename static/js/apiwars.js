@@ -279,16 +279,7 @@ function listVotedPlanets(response) {
     const voted_planets = response;
     table.dataset.votes = voted_planets.length;
 
-    const row = table.insertRow(0);
-
-    const head1 = row.insertCell(0);
-    const head2 = row.insertCell(1);
-
-    head1.innerHTML = 'Planet name';
-    head2.innerHTML = 'Received votes';
-
-    head1.classList.add('vote-header');
-    head2.classList.add('vote-header');
+    dom.createVotesHeader();
 
     for (const planet of voted_planets) {
         const row = table.insertRow(-1);

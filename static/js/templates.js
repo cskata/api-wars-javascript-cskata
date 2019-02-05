@@ -67,5 +67,17 @@ export let templates = {
         `;
 
         return newRow;
+    },
+    createVotesHeaderElement: function () {
+        let header = document.createElement('tr');
+        header.id = 'votes-modal-header';
+        header.innerHTML =
+            `
+            <th class="vote-header">Planet name</th>
+            <th class="vote-header">Received votes</th>
+
+        `;
+
+        return header;
     }
 };

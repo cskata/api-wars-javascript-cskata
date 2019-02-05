@@ -51,5 +51,10 @@ export let dom = {
     createResidentDataRows: function (table) {
         const row = templates.createResidentRow();
         table.appendChild(row);
+    },
+    createVotesHeader: function () {
+        const table = document.querySelector('#votes');
+        const header = templates.createVotesHeaderElement();
+        table.appendChild(header);
     }
 };
