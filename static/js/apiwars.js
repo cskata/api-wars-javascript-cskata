@@ -1,3 +1,5 @@
+import {templates} from "./templates.js";
+
 init();
 
 
@@ -15,14 +17,22 @@ function loadPlanetData() {
         dataType: "json",
         url: targetURL,
         success: function (response) {
-            const table = document.getElementById('planets');
             const planets = response['results'];
+            const headers = [
+                'Name', 'Diameter', 'Climate',
+                'Terrain', 'Surface Waters Percentage',
+                'Population', 'Residents', ''
+            ];
 
-            insertPlanetHeaders(table);
+            let planetData = [];
+
+            const table = document.querySelector('#planets');
+
+            insertPlanetHeaders(table, headers);
 
             for (const planet of planets) {
                 const row = table.insertRow(-1);
-
+                row.classList.add('planet-row');
                 const cell1 = row.insertCell(0);
                 const cell2 = row.insertCell(1);
                 const cell3 = row.insertCell(2);
@@ -41,36 +51,21 @@ function loadPlanetData() {
                 prevButton.disabled = false;
                 nextButton.disabled = false;
                 disableButtonIfNecessary(whichPage);
-
             }
         }
     });
-
 }
 
 
-function insertPlanetHeaders(table) {
-    const header = table.insertRow(0);
+function insertPlanetHeaders(table, headers) {
+    const headerFromTemplate = templates.createHeaderElement();
+    table.innerHTML = headerFromTemplate;
 
-    const head1 = header.insertCell(0);
-    const head2 = header.insertCell(1);
-    const head3 = header.insertCell(2);
-    const head4 = header.insertCell(3);
-    const head5 = header.insertCell(4);
-    const head6 = header.insertCell(5);
-    const head7 = header.insertCell(6);
-    const head8 = header.insertCell(7);
+    let planetHeaders = table.firstElementChild.firstElementChild.children;
 
-    head1.innerHTML = 'Name';
-    head2.innerHTML = 'Diameter';
-    head3.innerHTML = 'Climate';
-    head4.innerHTML = 'Terrain';
-    head5.innerHTML = 'Surface Waters Percentage';
-    head6.innerHTML = 'Population';
-    head7.innerHTML = 'Residents';
-    head8.innerHTML = '';
-
-    addClassToCells(head1, head2, head3, head4, head5, head6, head7, head8, 'planet-header');
+    for (let i=0; i<headers.length; i++) {
+        planetHeaders[i].innerHTML = headers[i];
+    }
 }
 
 
