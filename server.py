@@ -63,14 +63,14 @@ def log_user_out():
     return redirect(url_for('index'))
 
 
-@app.route('/voting/show', methods=['GET'])
+@app.route('/voting', methods=['GET'])
 def show_votes():
     user_id = session['user_id']
     votes = data_manager.get_votes_by_user_id(user_id)
     return jsonify(votes)
 
 
-@app.route('/voting/save', methods=['POST'])
+@app.route('/voting', methods=['POST'])
 def save_votes():
     response = request.get_json()
     data_manager.save_planet_vote(response)

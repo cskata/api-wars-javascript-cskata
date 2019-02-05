@@ -4,10 +4,20 @@ export let dataHandler = {
     saveVote: function (data) {
         $.ajax({
             type: "POST",
-            url: "/voting/save",
+            url: "/voting",
             contentType: "application/json",
             dataType: "json",
             data: JSON.stringify(data)
+        });
+    },
+    getVotes: function (listVotedPlanets) {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "/voting",
+            success: function (response) {
+                listVotedPlanets(response);
+            }
         });
     },
     getAllPlanetData: function (createPlanetTable, targetURL, prevButton, nextButton, whichPage) {
@@ -17,16 +27,6 @@ export let dataHandler = {
             url: targetURL,
             success: function (response) {
                 createPlanetTable(response['results'], prevButton, nextButton, whichPage);
-            }
-        });
-    },
-    getVotes: function (listVotedPlanets) {
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: "/voting/show",
-            success: function (response) {
-                listVotedPlanets(response);
             }
         });
     },
