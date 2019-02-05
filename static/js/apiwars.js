@@ -139,6 +139,15 @@ function addClassToCells(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8,
 
 
 function addDataToCellsAtMainPage(newRow, planet, planetData) {
+    let formattedPlanetData = formatPlanetData(planet);
+
+    for (let i = 0; i < planetData.length; i++) {
+        newRow.children[i].innerHTML = formattedPlanetData[`${planetData[i]}`];
+    }
+}
+
+
+function formatPlanetData(planet) {
     if (planet['diameter'] !== 'unknown') {
         planet['diameter'] = planet['diameter'].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         planet['diameter'] = `${planet['diameter']} km`;
@@ -152,9 +161,8 @@ function addDataToCellsAtMainPage(newRow, planet, planetData) {
         planet['population'] = planet['population'].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         planet['population'] = `${planet['population']} people`;
     }
-    for (let i = 0; i < planetData.length; i++) {
-        newRow.children[i].innerHTML = planet[`${planetData[i]}`];
-    }
+
+    return planet;
 }
 
 
