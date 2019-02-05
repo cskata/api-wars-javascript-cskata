@@ -267,21 +267,15 @@ function closeModal() {
 
 
 function openVoteStatistics() {
-    const modal = document.getElementById('votes-container');
+    const modal = document.querySelector('#votes-container');
     modal.style.display = 'block';
-
-    const modalCloseButtonOne = document.getElementById('close-votes');
-    modalCloseButtonOne.addEventListener('click', closeVoteStatistics);
-
-    const modalCloseButtonTwo = document.getElementById('close-votes-button');
-    modalCloseButtonTwo.addEventListener('click', closeVoteStatistics);
 
     dataHandler.getVotes(listVotedPlanets);
 }
 
 
 function listVotedPlanets(response) {
-    const table = document.getElementById('votes');
+    const table = document.querySelector('#votes');
     const voted_planets = response;
     table.dataset.votes = voted_planets.length;
 
@@ -320,24 +314,39 @@ function closeVoteStatistics() {
 }
 
 
-function init() {
-    loadPlanetData();
-
+function addingButtonClickEvents() {
     const nextButton = document.getElementById('next-button');
     nextButton.addEventListener('click', switchPage);
 
     const prevButton = document.getElementById('prev-button');
     prevButton.addEventListener('click', switchPage);
 
-    const modalCloseButtonTopRight = document.getElementById('close-modal');
-    modalCloseButtonTopRight.addEventListener('click', closeModal);
+    const residentModalCloseButtonTopRight = document.getElementById('close-modal');
+    residentModalCloseButtonTopRight.addEventListener('click', closeModal);
 
-    const modalCloseButtonTopLeft = document.getElementById('close-button');
-    modalCloseButtonTopLeft.addEventListener('click', closeModal);
+    const residentModalCloseButtonTopLeft = document.getElementById('close-button');
+    residentModalCloseButtonTopLeft.addEventListener('click', closeModal);
+}
+
+
+function votingModalCanBeOpenedAndClosed() {
+    const voteStatistics = document.getElementById('vote-stats');
+    voteStatistics.addEventListener('click', openVoteStatistics);
+
+    const votingModalCloseButtonTopRight = document.getElementById('close-votes');
+    votingModalCloseButtonTopRight.addEventListener('click', closeVoteStatistics);
+
+    const votingModalCloseButtonTopLeft = document.getElementById('close-votes-button');
+    votingModalCloseButtonTopLeft.addEventListener('click', closeVoteStatistics);
+}
+
+
+function init() {
+    loadPlanetData();
+    addingButtonClickEvents();
 
     const isUserLoggedIn = document.getElementById('all-content').dataset.login;
     if (isUserLoggedIn === 'True') {
-        const voteStatistics = document.getElementById('vote-stats');
-        voteStatistics.addEventListener('click', openVoteStatistics);
+        votingModalCanBeOpenedAndClosed();
     }
 }
