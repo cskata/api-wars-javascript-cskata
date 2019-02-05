@@ -24,19 +24,14 @@ function loadPlanetData() {
         'terrain', 'surface_water', 'population'
     ];
 
-    $.ajax({
-        type: "GET",
-        dataType: "json",
-        url: targetURL,
-        success: function (response) {
-            const planets = response['results'];
-            createPlanetTable(planets, headers, planetData, prevButton, nextButton, whichPage);
-        }
-    });
+    dataHandler.getAllPlanetData(
+        targetURL, headers, planetData,
+        prevButton, nextButton, whichPage
+    );
 }
 
 
-function createPlanetTable(planets, headers, planetData, prevButton, nextButton, whichPage) {
+export default function createPlanetTable(planets, headers, planetData, prevButton, nextButton, whichPage) {
     dom.createPlanetDataTable();
 
     insertPlanetHeadersData(headers);
@@ -44,7 +39,7 @@ function createPlanetTable(planets, headers, planetData, prevButton, nextButton,
     const table = document.querySelector('#planets');
 
     for (let i = 0; i < planets.length; i++) {
-        let currentRow = table.childNodes[i+1];
+        let currentRow = table.childNodes[i + 1];
 
         addDataToCellsAtMainPage(currentRow, planets[i], planetData);
         addResidentsButton(currentRow, planets[i]);
