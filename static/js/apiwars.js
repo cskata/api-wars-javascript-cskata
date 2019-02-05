@@ -81,11 +81,12 @@ function disablePaginationButtons(whichPage) {
 
 
 function addResidentsButton(newRow, planet) {
+    const residentsColumn = 6;
     if (planet['residents'].length === 0) {
-        newRow.children[6].innerHTML = 'No known residents';
+        newRow.children[residentsColumn].innerHTML = 'No known residents';
     } else {
         const residentBtn = dom.createResidentButton(planet);
-        newRow.children[6].appendChild(residentBtn);
+        newRow.children[residentsColumn].appendChild(residentBtn);
         residentBtn.addEventListener('click', openModal);
     }
 }
