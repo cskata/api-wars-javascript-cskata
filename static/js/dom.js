@@ -42,5 +42,10 @@ export let dom = {
             let newRow = templates.createPlanetRow();
             table.appendChild(newRow);
         }
+    },
+    createResidentHeader: function () {
+        const table = document.querySelector('#residents');
+        const header = templates.createResidentHeaderElement();
+        table.appendChild(header);
     }
 };

@@ -20,7 +20,7 @@ export let templates = {
         let newRow = document.createElement('tr');
         newRow.classList.add('planet-row');
         newRow.innerHTML =
-        `
+            `
             <td class="planet-data"></td>
             <td class="planet-data"></td>
             <td class="planet-data"></td>
@@ -32,5 +32,22 @@ export let templates = {
         `;
 
         return newRow;
+    },
+    createResidentHeaderElement: function () {
+        let header = document.createElement('tr');
+        header.id = 'resident-modal-header';
+        header.innerHTML =
+            `
+                <th class="resident-header"></th>
+                <th class="resident-header"></th>
+                <th class="resident-header"></th>
+                <th class="resident-header"></th>
+                <th class="resident-header"></th>
+                <th class="resident-header"></th>
+                <th class="resident-header"></th>
+                <th class="resident-header"></th>
+            `;
+
+        return header;
     }
 };

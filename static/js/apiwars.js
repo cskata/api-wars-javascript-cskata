@@ -185,29 +185,17 @@ function deleteData(table) {
 
 
 function insertResidentHeaders() {
-    const table = document.getElementById('residents');
+    const headers = [
+        'Name', 'Height', 'Mass',
+        'Skin color', 'Hair color',
+        'Eye color', 'Birth year', 'Gender'
+    ];
 
-    const header = table.insertRow(0);
+    let residentHeaders = document.querySelector('#resident-modal-header').children;
 
-    const head1 = header.insertCell(0);
-    const head2 = header.insertCell(1);
-    const head3 = header.insertCell(2);
-    const head4 = header.insertCell(3);
-    const head5 = header.insertCell(4);
-    const head6 = header.insertCell(5);
-    const head7 = header.insertCell(6);
-    const head8 = header.insertCell(7);
-
-    addClassToCells(head1, head2, head3, head4, head5, head6, head7, head8, 'resident-header');
-
-    head1.innerHTML = 'Name';
-    head2.innerHTML = 'Height';
-    head3.innerHTML = 'Mass';
-    head4.innerHTML = 'Skin color';
-    head5.innerHTML = 'Hair color';
-    head6.innerHTML = 'Eye color';
-    head7.innerHTML = 'Birth year';
-    head8.innerHTML = 'Gender';
+    for (let i = 0; i < headers.length; i++) {
+        residentHeaders[i].innerHTML = headers[i];
+    }
 }
 
 
@@ -274,7 +262,7 @@ function openModal() {
     const modalCloseButton = document.getElementById('close-modal');
     modalCloseButton.dataset.numberofresidents = numberOfResidents;
 
-    insertResidentHeaders();
+    createResidentsTable();
 
     const residentsOrig = event.target.dataset.residents;
     const residents = residentsOrig.split(',');
@@ -303,6 +291,12 @@ function openModal() {
             }
         });
     }
+}
+
+
+function createResidentsTable() {
+    dom.createResidentHeader();
+    insertResidentHeaders();
 }
 
 
