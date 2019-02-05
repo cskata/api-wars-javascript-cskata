@@ -89,13 +89,9 @@ function addResidentsButton(newRow, planet) {
 
 
 function addVoteButton(newRow, planet) {
-    const voteBtn = document.createElement('button');
-    voteBtn.classList.add('btn');
-    voteBtn.classList.add('btn-secondary');
-
-    const text = document.createTextNode('Vote');
-    voteBtn.appendChild(text);
+    const voteBtn = dom.createVoteButton(planet);
     newRow.children[7].appendChild(voteBtn);
+    voteBtn.addEventListener('click', saveVote);
 
     const datasetContainer = document.getElementById('all-content');
 
@@ -104,13 +100,8 @@ function addVoteButton(newRow, planet) {
         voteBtn.parentElement.style.visibility = "hidden";
         let lastHeader = document.getElementsByClassName('planet-header');
         lastHeader[7].style.visibility = "hidden";
+
     }
-
-    const planetId = (planet['url'].split("/"))[5];
-    voteBtn.dataset.planetid = planetId;
-    voteBtn.dataset.planetname = planet['name'];
-
-    voteBtn.addEventListener('click', saveVote);
 }
 
 
