@@ -14,11 +14,11 @@ function loadPlanetData() {
     prevButton.disabled = true;
     nextButton.disabled = true;
 
-    dataHandler.getAllPlanetData(targetURL, prevButton, nextButton, whichPage);
+    dataHandler.getAllPlanetData(createPlanetTable, targetURL, prevButton, nextButton, whichPage);
 }
 
 
-export default function createPlanetTable(planets, prevButton, nextButton, whichPage) {
+function createPlanetTable(planets, prevButton, nextButton, whichPage) {
     dom.createPlanetDataRows();
 
     insertPlanetHeadersData();

@@ -1,5 +1,3 @@
-import createPlanetTable from "./apiwars.js";
-
 export let dataHandler = {
     saveVote: function (data) {
         $.ajax({
@@ -10,7 +8,7 @@ export let dataHandler = {
             data: JSON.stringify(data)
         });
     },
-    getAllPlanetData: function (targetURL, prevButton, nextButton, whichPage) {
+    getAllPlanetData: function (createPlanetTable, targetURL, prevButton, nextButton, whichPage) {
         $.ajax({
             type: "GET",
             dataType: "json",
