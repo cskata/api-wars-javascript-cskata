@@ -8,6 +8,7 @@ init();
 function loadPlanetData() {
     const whichPage = document.getElementById('planets').dataset.page;
     const targetURL = `https://swapi.co/api/planets/?page=${whichPage}`;
+
     const prevButton = document.getElementById('prev-button');
     const nextButton = document.getElementById('next-button');
     prevButton.disabled = true;
@@ -31,8 +32,7 @@ function createPlanetTable(planets, prevButton, nextButton, whichPage) {
 
 function insertPlanetData(planets) {
     const planetData = [
-        'name', 'diameter', 'climate',
-        'terrain', 'surface_water', 'population'
+        'name', 'diameter', 'climate', 'terrain', 'surface_water', 'population'
     ];
 
     const table = document.querySelector('#planets');
@@ -49,12 +49,10 @@ function insertPlanetData(planets) {
 
 function insertPlanetHeadersData() {
     const headers = [
-        'Name', 'Diameter', 'Climate',
-        'Terrain', 'Surface Waters Percentage',
-        'Population', 'Residents', ''
+        'Name', 'Diameter', 'Climate', 'Terrain', 'Surface Waters Percentage', 'Population', 'Residents', ''
     ];
 
-    let planetHeaders = document.querySelector('#main-header').children;
+    const planetHeaders = document.querySelector('#main-header').children;
 
     for (let i = 0; i < headers.length; i++) {
         planetHeaders[i].innerHTML = headers[i];
@@ -79,8 +77,10 @@ function disablePaginationButtons(whichPage) {
 
 function addResidentsButton(newRow, planet) {
     const residentsColumn = 6;
+    const noResidentText = 'No known residents';
+
     if (planet['residents'].length === 0) {
-        newRow.children[residentsColumn].innerHTML = 'No known residents';
+        newRow.children[residentsColumn].innerHTML = noResidentText;
     } else {
         const residentBtn = dom.createResidentButton(planet);
         newRow.children[residentsColumn].appendChild(residentBtn);
@@ -90,8 +90,8 @@ function addResidentsButton(newRow, planet) {
 
 
 function addVoteButton(newRow, planet) {
-    const voteBtn = dom.createVoteButton(planet);
     const lastColumn = 7;
+    const voteBtn = dom.createVoteButton(planet);
     newRow.children[lastColumn].appendChild(voteBtn);
     voteBtn.addEventListener('click', saveVote);
 
@@ -100,8 +100,8 @@ function addVoteButton(newRow, planet) {
     if (datasetContainer.dataset.login === "") {
         voteBtn.style.visibility = "hidden";
         voteBtn.parentElement.style.visibility = "hidden";
-        let lastHeader = document.getElementsByClassName('planet-header');
-        lastHeader[lastColumn].style.visibility = "hidden";
+        const headers = document.getElementsByClassName('planet-header');
+        headers[lastColumn].style.visibility = "hidden";
     }
 }
 
@@ -128,7 +128,7 @@ function saveVote() {
 
 
 function addDataToCellsAtMainPage(newRow, planet, planetData) {
-    let formattedPlanetData = formatPlanetData(planet);
+    const formattedPlanetData = formatPlanetData(planet);
 
     for (let i = 0; i < planetData.length; i++) {
         newRow.children[i].innerHTML = formattedPlanetData[`${planetData[i]}`];
@@ -181,12 +181,12 @@ function insertResidentHeaders() {
 
 
 function formatResidentData(row, residentData) {
-    if (residentData['height'] !== "unknown") {
+    if (residentData['height'] !== 'unknown') {
         const height = parseInt(residentData['height']) / 100;
         residentData['height'] = height.toString() + ' m';
     }
 
-    if (residentData['mass'] !== "unknown") {
+    if (residentData['mass'] !== 'unknown') {
         residentData['mass'] = residentData['mass'] + ' kg';
     }
 
@@ -199,11 +199,11 @@ function formatResidentData(row, residentData) {
 
     if (residentData['gender'] === 'female') {
         icon.classList.add('fa-venus');
-        icon.title = "female";
+        icon.title = 'female';
         row.children[lastResidentCell].appendChild(icon);
     } else if (residentData['gender'] === 'male') {
         icon.classList.add('fa-mars');
-        icon.title = "male";
+        icon.title = 'male';
         row.children[lastResidentCell].appendChild(icon);
     } else {
         row.children[lastResidentCell].innerHTML = residentData['gender'];
@@ -215,7 +215,7 @@ function formatResidentData(row, residentData) {
 
 
 function addDataToResidentsModal(residentData, table, i) {
-    let row = table.childNodes[i + 1];
+    const row = table.childNodes[i + 1];
     const formattedResidentData = formatResidentData(row, residentData);
     const residentDataColumns = [
         'name', 'height', 'mass', 'skin_color', 'hair_color', 'eye_color', 'birth_year', 'gender'
@@ -224,6 +224,7 @@ function addDataToResidentsModal(residentData, table, i) {
     for (let i = 0; i < residentDataColumns.length - 1; i++) {
         row.children[i].innerHTML = formattedResidentData[`${residentDataColumns[i]}`];
     }
+
     table.style.display = 'table';
 }
 
@@ -247,7 +248,6 @@ function openModal() {
         dom.createResidentDataRows(table);
         dataHandler.getResidentsData(addDataToResidentsModal, table, residentsURLs, i)
     }
-    // table.style.display = 'table';
 }
 
 
