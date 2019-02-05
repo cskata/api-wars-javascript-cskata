@@ -21,14 +21,15 @@ export default function createPlanetTable(planets, prevButton, nextButton, which
     dom.createPlanetDataTable();
 
     insertPlanetHeadersData();
-    insertPlanetData(planets, whichPage);
+    insertPlanetData(planets);
 
     prevButton.disabled = false;
     nextButton.disabled = false;
+    disablePaginationButtons(whichPage);
 }
 
 
-function insertPlanetData(planets, whichPage) {
+function insertPlanetData(planets) {
     const planetData = [
         'name', 'diameter', 'climate',
         'terrain', 'surface_water', 'population'
@@ -42,8 +43,6 @@ function insertPlanetData(planets, whichPage) {
         addDataToCellsAtMainPage(currentRow, planets[i], planetData);
         addResidentsButton(currentRow, planets[i]);
         addVoteButton(currentRow, planets[i]);
-
-        disablePaginationButtons(whichPage);
     }
 }
 
