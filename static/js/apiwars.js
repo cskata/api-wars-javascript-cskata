@@ -1,4 +1,5 @@
 import {templates} from "./templates.js";
+import {dom} from "./dom.js";
 
 init();
 
@@ -41,7 +42,7 @@ function loadPlanetData() {
 
                 addDataToCellsAtMainPage(newRow, planet, planetData);
 
-                // addResidentsButton(cell7, planet);
+                addResidentsButton(newRow, planet);
                 // addVoteButton(cell8, planet);
 
                 prevButton.disabled = false;
@@ -77,24 +78,12 @@ function disableButtonIfNecessary(whichPage) {
 }
 
 
-function addResidentsButton(cell7, planet) {
+function addResidentsButton(newRow, planet) {
     if (planet['residents'].length === 0) {
-        cell7.innerHTML = 'No known residents';
+        newRow.children[6].innerHTML = 'No known residents';
     } else {
-        const residentBtn = document.createElement('button');
-
-        const noOfResidents = planet['residents'].length.toString();
-        const fullResidentTxt = `${noOfResidents} resident(s)`;
-        const residentBtnTxt = document.createTextNode(fullResidentTxt);
-        residentBtn.appendChild(residentBtnTxt);
-
-        residentBtn.classList.add('btn');
-        residentBtn.classList.add('btn-secondary');
-        cell7.appendChild(residentBtn);
-
-        residentBtn.dataset.planet = planet['name'];
-        residentBtn.dataset.residents = planet['residents'];
-        residentBtn.dataset.numberofresidents = planet['residents'].length;
+        const residentBtn = dom.createResidentButton(planet);
+        newRow.children[6].appendChild(residentBtn);
         residentBtn.addEventListener('click', openModal);
     }
 }
