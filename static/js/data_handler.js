@@ -4,7 +4,7 @@ export let dataHandler = {
     saveVote: function (data) {
         $.ajax({
             type: "POST",
-            url: "/voting",
+            url: "/voting/save",
             contentType: "application/json",
             dataType: "json",
             data: JSON.stringify(data)
@@ -24,7 +24,7 @@ export let dataHandler = {
         $.ajax({
             type: "GET",
             dataType: "json",
-            url: "/voting",
+            url: "/voting/show",
             success: function (response) {
                 listVotedPlanets(response);
             }
