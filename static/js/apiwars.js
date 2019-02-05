@@ -224,6 +224,7 @@ function addDataToResidentsModal(residentData, table, i) {
     for (let i = 0; i < residentDataColumns.length - 1; i++) {
         row.children[i].innerHTML = formattedResidentData[`${residentDataColumns[i]}`];
     }
+    table.style.display = 'table';
 }
 
 function openModal() {
@@ -240,11 +241,13 @@ function openModal() {
     const residentsOrig = event.target.dataset.residents;
     const residentsURLs = residentsOrig.split(',');
     const table = document.querySelector('#residents');
+    table.style.display = 'none';
 
     for (let i = 0; i < residentsURLs.length; i++) {
         dom.createResidentDataRows(table);
         dataHandler.getResidentsData(addDataToResidentsModal, table, residentsURLs, i)
     }
+    // table.style.display = 'table';
 }
 
 
