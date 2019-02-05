@@ -2,6 +2,7 @@ import {templates} from "./templates.js";
 import {dom} from "./dom.js";
 import {dataHandler} from "./data_handler.js";
 
+
 init();
 
 
@@ -13,6 +14,16 @@ function loadPlanetData() {
     prevButton.disabled = true;
     nextButton.disabled = true;
 
+    const headers = [
+        'Name', 'Diameter', 'Climate',
+        'Terrain', 'Surface Waters Percentage',
+        'Population', 'Residents', ''
+    ];
+
+    const planetData = [
+        'name', 'diameter', 'climate',
+        'terrain', 'surface_water', 'population'
+    ];
 
     $.ajax({
         type: "GET",
@@ -20,39 +31,32 @@ function loadPlanetData() {
         url: targetURL,
         success: function (response) {
             const planets = response['results'];
-            const headers = [
-                'Name', 'Diameter', 'Climate',
-                'Terrain', 'Surface Waters Percentage',
-                'Population', 'Residents', ''
-            ];
-
-            let planetData = [
-                'name', 'diameter', 'climate',
-                'terrain', 'surface_water', 'population'
-            ];
-
-            const table = document.querySelector('#planets');
-            const header = templates.createHeaderElement();
-            table.appendChild(header);
-
-            insertPlanetHeaders(table, headers);
-
-            for (const planet of planets) {
-                let newRow = templates.createPlanetRow();
-                table.appendChild(newRow);
-
-                addDataToCellsAtMainPage(newRow, planet, planetData);
-                addResidentsButton(newRow, planet);
-                addVoteButton(newRow, planet);
-
-                prevButton.disabled = false;
-                nextButton.disabled = false;
-                disableButtonIfNecessary(whichPage);
-            }
+            createPlanetTable(planets, headers, planetData, prevButton, nextButton, whichPage);
         }
     });
 }
 
+
+function createPlanetTable(planets, headers, planetData, prevButton, nextButton, whichPage) {
+    const table = document.querySelector('#planets');
+    const header = templates.createHeaderElement();
+    table.appendChild(header);
+
+    insertPlanetHeaders(table, headers);
+
+    for (const planet of planets) {
+        let newRow = templates.createPlanetRow();
+        table.appendChild(newRow);
+
+        addDataToCellsAtMainPage(newRow, planet, planetData);
+        addResidentsButton(newRow, planet);
+        addVoteButton(newRow, planet);
+
+        prevButton.disabled = false;
+        nextButton.disabled = false;
+        disablePaginationButtons(whichPage);
+    }
+}
 
 function insertPlanetHeaders(table, headers) {
     let planetHeaders = document.querySelector('#main-header').children;
@@ -63,7 +67,7 @@ function insertPlanetHeaders(table, headers) {
 }
 
 
-function disableButtonIfNecessary(whichPage) {
+function disablePaginationButtons(whichPage) {
     const prevButton = document.getElementById('prev-button');
     const nextButton = document.getElementById('next-button');
 
