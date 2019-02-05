@@ -303,11 +303,7 @@ function listVotedPlanets(response) {
 
 function closeVoteStatistics() {
     const table = document.getElementById('votes');
-    const elements = parseInt(table.dataset.votes);
-
-    for (let i = 1; i <= elements + 1; i++) {
-        table.childNodes[0].childNodes[0].remove();
-    }
+    table.innerHTML = "";
 
     const modal = document.getElementById('votes-container');
     modal.style.display = 'none';
