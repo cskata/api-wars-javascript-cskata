@@ -1,4 +1,3 @@
-import {templates} from "./templates.js";
 import {dom} from "./dom.js";
 import {dataHandler} from "./data_handler.js";
 
@@ -38,19 +37,18 @@ function loadPlanetData() {
 
 
 function createPlanetTable(planets, headers, planetData, prevButton, nextButton, whichPage) {
+    dom.createPlanetDataTable();
+
+    insertPlanetHeadersData(headers);
+
     const table = document.querySelector('#planets');
-    const header = templates.createHeaderElement();
-    table.appendChild(header);
 
-    insertPlanetHeaders(table, headers);
+    for (let i = 0; i < planets.length; i++) {
+        let currentRow = table.childNodes[i+1];
 
-    for (const planet of planets) {
-        let newRow = templates.createPlanetRow();
-        table.appendChild(newRow);
-
-        addDataToCellsAtMainPage(newRow, planet, planetData);
-        addResidentsButton(newRow, planet);
-        addVoteButton(newRow, planet);
+        addDataToCellsAtMainPage(currentRow, planets[i], planetData);
+        addResidentsButton(currentRow, planets[i]);
+        addVoteButton(currentRow, planets[i]);
 
         prevButton.disabled = false;
         nextButton.disabled = false;
@@ -58,7 +56,7 @@ function createPlanetTable(planets, headers, planetData, prevButton, nextButton,
     }
 }
 
-function insertPlanetHeaders(table, headers) {
+function insertPlanetHeadersData(headers) {
     let planetHeaders = document.querySelector('#main-header').children;
 
     for (let i = 0; i < headers.length; i++) {
@@ -95,7 +93,8 @@ function addResidentsButton(newRow, planet) {
 
 function addVoteButton(newRow, planet) {
     const voteBtn = dom.createVoteButton(planet);
-    newRow.children[7].appendChild(voteBtn);
+    const lastColumn = 7;
+    newRow.children[lastColumn].appendChild(voteBtn);
     voteBtn.addEventListener('click', saveVote);
 
     const datasetContainer = document.getElementById('all-content');
@@ -104,7 +103,7 @@ function addVoteButton(newRow, planet) {
         voteBtn.style.visibility = "hidden";
         voteBtn.parentElement.style.visibility = "hidden";
         let lastHeader = document.getElementsByClassName('planet-header');
-        lastHeader[7].style.visibility = "hidden";
+        lastHeader[lastColumn].style.visibility = "hidden";
     }
 }
 

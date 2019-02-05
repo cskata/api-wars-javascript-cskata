@@ -1,3 +1,5 @@
+import {templates} from "./templates.js";
+
 export let dom = {
     createResidentButton: function (planet) {
         const residentBtn = document.createElement('button');
@@ -29,5 +31,16 @@ export let dom = {
         voteBtn.dataset.planetname = planet['name'];
 
         return voteBtn;
+    },
+    createPlanetDataTable: function () {
+        const table = document.querySelector('#planets');
+        const header = templates.createHeaderElement();
+        table.appendChild(header);
+        const planetsPerPage = 10;
+
+        for (let i = 0; i < planetsPerPage; i++) {
+            let newRow = templates.createPlanetRow();
+            table.appendChild(newRow);
+        }
     }
 };
