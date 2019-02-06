@@ -1,46 +1,49 @@
 import os
 import urllib.parse
-
 import psycopg2
 import psycopg2.extras
 
 
 def get_connection_string():
-    user_name = os.environ.get('PSQL_USER_NAME')
-    password = os.environ.get('PSQL_PASSWORD')
-    host = os.environ.get('PSQL_HOST')
-    database_name = os.environ.get('PSQL_DB_NAME')
+    if os.environ.get('DATABASE_URL') is not None:
+        urllib.parse.uses_netloc.append('postgres')
+        url = urllib.parse.urlparse(os.environ.get('DATABASE_URL'))
 
-    env_variables_defined = user_name and password and host and database_name
+        user_name = url.username
+        password = url.password
+        host = url.hostname
+        database_name = url.path[1:]
+        port = url.port
 
-    if env_variables_defined:
+        return 'postgres://{user_name}:{password}@{host}:{port}/{database_name}'.format(
+            user_name=user_name,
+            password=password,
+            host=host,
+            database_name=database_name,
+            port=port)
+
+    else:
+        user_name = os.environ.get('PSQL_USER_NAME')
+        password = os.environ.get('PSQL_PASSWORD')
+        host = os.environ.get('PSQL_HOST')
+        database_name = os.environ.get('PSQL_DB_NAME')
+
         return 'postgresql://{user_name}:{password}@{host}/{database_name}'.format(
             user_name=user_name,
             password=password,
             host=host,
-            database_name=database_name
-        )
-    else:
-        raise KeyError('Some necessary environment variable(s) are not defined')
+            database_name=database_name)
 
 
 def open_database():
     try:
-        urllib.parse.uses_netloc.append('postgres')
-        url = urllib.parse.urlparse(os.environ.get('DATABASE_URL'))
-        connection = psycopg2.connect(
-            database=url.path[1:],
-            user=url.username,
-            password=url.password,
-            host=url.hostname,
-            port=url.port
-        )
-        # connection_string = get_connection_string()
-        # connection = psycopg2.connect(connection_string)
+        connection_string = get_connection_string()
+        connection = psycopg2.connect(connection_string)
         connection.autocommit = True
     except psycopg2.DatabaseError as exception:
         print('Database connection problem')
         raise exception
+
     return connection
 
 
