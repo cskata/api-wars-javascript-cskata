@@ -6,24 +6,15 @@ import urllib
 
 
 def get_connection_string():
-    # user_name = os.environ.get('PSQL_USER_NAME')
-    # password = os.environ.get('PSQL_PASSWORD')
-    # host = os.environ.get('PSQL_HOST')
-    # database_name = os.environ.get('PSQL_DB_NAME')
-    urllib.parse.uses_netloc.append('postgres')
-    url = urllib.parse.urlparse(os.environ.get('DATABASE_URL'))
-    connection = psycopg2.connect(
-        database=url.path[1:],
-        user=url.username,
-        password=url.password,
-        host=url.hostname,
-        port=url.port
-    )
+    user_name = os.environ.get('PSQL_USER_NAME')
+    password = os.environ.get('PSQL_PASSWORD')
+    host = os.environ.get('PSQL_HOST')
+    database_name = os.environ.get('PSQL_DB_NAME')
 
-    env_variables_defined = connection
+    env_variables_defined = user_name and password and host and database_name
 
     if env_variables_defined:
-        connect_string = f"postgres://{url.username}:{url.password}@{url.hostname}:{url.port}/{url.path[1:]}"
+        connect_string = f"postgresql://{user_name}:{password}@{host}/{database_name}"
         return connect_string
     else:
         raise KeyError('Some necessary environment variable(s) are not defined')
@@ -51,7 +42,3 @@ def connection_handler(function):
         return ret_value
 
     return wrapper
-
-
-asd = get_connection_string()
-print(asd)
