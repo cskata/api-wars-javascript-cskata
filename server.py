@@ -5,7 +5,7 @@ app = Flask(__name__)
 app.secret_key = "titkoskulcs"
 
 
-@app.route('/')
+@app.route('https://swbolygok.herokuapp.com/')
 def index():
     if 'username' not in session:
         return render_template('index.html')
