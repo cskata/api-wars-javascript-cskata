@@ -20,14 +20,13 @@ def get_connection_string():
         port=url.port
     )
 
-    # env_variables_defined = user_name and password and host and database_name
+    env_variables_defined = connection
 
-    # if env_variables_defined:
-    #     connect_string = f"postgresql://{user_name}:{password}@{host}/{database_name}"
-    #     return connect_string
-    # else:
-    #     raise KeyError('Some necessary environment variable(s) are not defined')
-    return connection
+    if env_variables_defined:
+        connect_string = f"postgres://{url.username}:{url.password}@{url.hostname}:{url.port}/{url.path[1:]}"
+        return connect_string
+    else:
+        raise KeyError('Some necessary environment variable(s) are not defined')
 
 
 def open_database():
@@ -52,3 +51,7 @@ def connection_handler(function):
         return ret_value
 
     return wrapper
+
+
+asd = get_connection_string()
+print(asd)
