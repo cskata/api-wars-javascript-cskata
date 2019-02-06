@@ -235,6 +235,7 @@ function addDataToResidentsModal(residentData, table, i) {
         row.children[i].innerHTML = formattedResidentData[`${residentDataColumns[i]}`];
     }
 
+    dom.removeLoadingImage('#resident-table');
     table.style.display = 'table';
 }
 
@@ -247,8 +248,14 @@ function openModal() {
     const title = document.getElementById('which-planet');
     title.innerHTML = 'Residents of ' + planet;
 
+    dom.addLoadingImage('#resident-table');
     createResidentsTable();
+}
 
+
+function createResidentsTable() {
+    dom.createResidentHeader();
+    insertResidentHeaderData();
     const residentsOrig = event.target.dataset.residents;
     const residentsURLs = residentsOrig.split(',');
     const table = document.querySelector('#residents');
@@ -258,12 +265,6 @@ function openModal() {
         dom.createResidentDataRows(table);
         dataHandler.getResidentsData(addDataToResidentsModal, table, residentsURLs, i)
     }
-}
-
-
-function createResidentsTable() {
-    dom.createResidentHeader();
-    insertResidentHeaderData();
 }
 
 

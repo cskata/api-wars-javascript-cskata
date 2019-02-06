@@ -61,17 +61,24 @@ export let dom = {
         table.appendChild(row);
     },
     addLoadingImage: function (tableId) {
-        const planetDataContainer = document.querySelector(tableId);
+        const dataContainer = document.querySelector(tableId);
         const loadingImage = document.createElement('img');
         loadingImage.setAttribute('src',
             'static/images/loading.gif');
         loadingImage.id = 'loading-image';
-        planetDataContainer.appendChild(loadingImage);
-        planetDataContainer.style.textAlign = 'center';
+        dataContainer.appendChild(loadingImage);
+        if (tableId === '#planet-data') {
+            dataContainer.style.textAlign = 'center';
+        }
     },
     removeLoadingImage: function (tableId) {
-        const planetDataContainer = document.querySelector(tableId);
-        planetDataContainer.style.textAlign = 'left';
-        planetDataContainer.removeChild(planetDataContainer.lastElementChild);
+        const dataContainer = document.querySelector(tableId);
+        if (tableId === '#planet-data') {
+            dataContainer.style.textAlign = 'left';
+        }
+
+        if (dataContainer.lastChild.nodeName === 'IMG') {
+            dataContainer.removeChild(dataContainer.lastChild);
+        }
     }
 };
