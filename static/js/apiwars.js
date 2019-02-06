@@ -2,7 +2,7 @@ import {dom} from "./dom.js";
 import {dataHandler} from "./data_handler.js";
 
 
-init();
+window.onload = init;
 
 
 function loadPlanetsData() {
