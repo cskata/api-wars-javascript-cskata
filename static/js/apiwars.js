@@ -14,11 +14,13 @@ function loadPlanetsData() {
     prevButton.disabled = true;
     nextButton.disabled = true;
 
+    dom.addLoadingImage('#planet-data');
     dataHandler.getAllPlanetData(createPlanetTable, targetURL, prevButton, nextButton, whichPage);
 }
 
 
 function createPlanetTable(planets, prevButton, nextButton, whichPage) {
+    dom.removeLoadingImage('#planet-data');
     const planetsPerPage = planets.length;
     dom.createPlanetDataRows(planetsPerPage);
 
@@ -101,6 +103,7 @@ function addVoteButton(newRow, planet) {
     const lastColumn = newRow.children[7];
     const voteBtn = dom.createVoteButton(planet);
     lastColumn.appendChild(voteBtn);
+    voteBtn.parentElement.style.textAlign = 'center';
     voteBtn.addEventListener('click', saveVote);
 
     const datasetContainer = document.getElementById('all-content');

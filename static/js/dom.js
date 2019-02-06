@@ -59,5 +59,19 @@ export let dom = {
     createVotesDataRow: function (table, planet) {
         const row = templates.createVotesRow(planet);
         table.appendChild(row);
+    },
+    addLoadingImage: function (tableId) {
+        const planetDataContainer = document.querySelector(tableId);
+        const loadingImage = document.createElement('img');
+        loadingImage.setAttribute('src',
+            'static/images/loading.gif');
+        loadingImage.id = 'loading-image';
+        planetDataContainer.appendChild(loadingImage);
+        planetDataContainer.style.textAlign = 'center';
+    },
+    removeLoadingImage: function (tableId) {
+        const planetDataContainer = document.querySelector(tableId);
+        planetDataContainer.style.textAlign = 'left';
+        planetDataContainer.removeChild(planetDataContainer.lastElementChild);
     }
 };
