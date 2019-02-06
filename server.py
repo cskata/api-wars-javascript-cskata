@@ -5,7 +5,7 @@ app = Flask(__name__)
 app.secret_key = "titkoskulcs"
 
 
-@app.route('https://swbolygok.herokuapp.com/')
+@app.route('/')
 def index():
     if 'username' not in session:
         return render_template('index.html')
@@ -77,6 +77,6 @@ def save_votes():
     return jsonify(response)
 
 
-if __name__ == '__main__':
-    app.debug = True
-    app.run()
+# if __name__ == '__main__':
+#     app.debug = True
+#     app.run()
