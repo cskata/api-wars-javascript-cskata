@@ -25,7 +25,7 @@ function createPlanetTable(planets, prevButton, nextButton, whichPage) {
     dom.createPlanetDataRows(planetsPerPage);
 
     insertPlanetHeadersData();
-    insertPlanetData(planets);
+    insertPlanetsData(planets);
 
     prevButton.disabled = false;
     nextButton.disabled = false;
@@ -33,7 +33,7 @@ function createPlanetTable(planets, prevButton, nextButton, whichPage) {
 }
 
 
-function insertPlanetData(planets) {
+function insertPlanetsData(planets) {
     const planetDataKeys = [
         'name', 'diameter', 'climate', 'terrain', 'surface_water', 'population'
     ];
@@ -43,7 +43,7 @@ function insertPlanetData(planets) {
     for (let i = 0; i < planets.length; i++) {
         let currentRow = table.childNodes[i + 1];
 
-        addDataToCellsAtMainPage(currentRow, planets[i], planetDataKeys);
+        fillRowWithPlanetData(currentRow, planets[i], planetDataKeys);
         addResidentsButton(currentRow, planets[i]);
         addVoteButton(currentRow, planets[i]);
     }
@@ -94,7 +94,7 @@ function addResidentsButton(newRow, planet) {
     } else {
         const residentBtn = dom.createResidentButton(planet);
         residentsColumn.appendChild(residentBtn);
-        residentBtn.addEventListener('click', openModal);
+        residentBtn.addEventListener('click', openResidentsModal);
     }
 }
 
@@ -137,7 +137,7 @@ function saveVote() {
 }
 
 
-function addDataToCellsAtMainPage(newRow, planet, planetDataKeys) {
+function fillRowWithPlanetData(newRow, planet, planetDataKeys) {
     const formattedPlanetData = formatPlanetData(planet);
 
     for (let i = 0; i < planetDataKeys.length; i++) {
@@ -240,7 +240,7 @@ function addDataToResidentsModal(residentData, table, i) {
     }, 500);
 }
 
-function openModal() {
+function openResidentsModal() {
     const modal = document.querySelector('#resident-container');
     modal.style.display = 'block';
 
@@ -258,10 +258,10 @@ function createResidentsTable() {
     dom.createResidentHeader();
     insertResidentHeaderData();
 
-    const residentsOrig = event.target.dataset.residents;
-    const residentsURLs = residentsOrig.split(',');
     const table = document.querySelector('#residents');
     table.style.display = 'none';
+    const residentsAsString = event.target.dataset.residents;   //list of residents is stored as 1 string in the dataset
+    const residentsURLs = residentsAsString.split(',');    //splitting the string into separate URLs
 
     for (let i = 0; i < residentsURLs.length; i++) {
         dom.createResidentDataRows(table);
@@ -270,7 +270,7 @@ function createResidentsTable() {
 }
 
 
-function closeModal() {
+function closeResidentModal() {
     const table = document.querySelector('#residents');
     table.innerHTML = "";
 
@@ -308,7 +308,7 @@ function closeVoteStatistics() {
 }
 
 
-function addingButtonClickEvents() {
+function addButtonClickEvents() {
     const nextButton = document.querySelector('#next-button');
     nextButton.addEventListener('click', switchPage);
 
@@ -316,14 +316,14 @@ function addingButtonClickEvents() {
     prevButton.addEventListener('click', switchPage);
 
     const residentModalCloseButtonTopRight = document.querySelector('#close-modal');
-    residentModalCloseButtonTopRight.addEventListener('click', closeModal);
+    residentModalCloseButtonTopRight.addEventListener('click', closeResidentModal);
 
     const residentModalCloseButtonTopLeft = document.querySelector('#close-button');
-    residentModalCloseButtonTopLeft.addEventListener('click', closeModal);
+    residentModalCloseButtonTopLeft.addEventListener('click', closeResidentModal);
 }
 
 
-function votingModalCanBeOpenedAndClosed() {
+function addVotingModalEvents() {
     const voteStatistics = document.querySelector('#vote-stats');
     voteStatistics.addEventListener('click', openVoteStatistics);
 
@@ -337,10 +337,10 @@ function votingModalCanBeOpenedAndClosed() {
 
 function init() {
     loadPlanetsData();
-    addingButtonClickEvents();
+    addButtonClickEvents();
 
     const isUserLoggedIn = document.querySelector('#all-content').dataset.login;
     if (isUserLoggedIn === 'True') {
-        votingModalCanBeOpenedAndClosed();
+        addVotingModalEvents();
     }
 }
