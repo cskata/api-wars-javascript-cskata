@@ -234,9 +234,10 @@ function addDataToResidentsModal(residentData, table, i) {
     for (let i = 0; i < residentDataColumns.length - 1; i++) {
         row.children[i].innerHTML = formattedResidentData[`${residentDataColumns[i]}`];
     }
-
-    dom.removeLoadingImage('#resident-table');
-    table.style.display = 'table';
+    setTimeout(function () {
+        dom.removeLoadingImage('#resident-table');
+        table.style.display = 'table';
+    }, 500);
 }
 
 function openModal() {
