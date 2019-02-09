@@ -6,11 +6,11 @@ window.onload = init;
 
 
 function loadPlanetsData() {
-    const whichPage = document.getElementById('planets').dataset.page;
+    const whichPage = document.querySelector('#planets').dataset.page;
     const targetURL = `https://swapi.co/api/planets/?page=${whichPage}`;
 
-    const prevButton = document.getElementById('prev-button');
-    const nextButton = document.getElementById('next-button');
+    const prevButton = document.querySelector('#prev-button');
+    const nextButton = document.querySelector('#next-button');
     prevButton.disabled = true;
     nextButton.disabled = true;
 
@@ -48,7 +48,7 @@ function insertPlanetData(planets) {
         addVoteButton(currentRow, planets[i]);
     }
 
-    const datasetContainer = document.getElementById('all-content');
+    const datasetContainer = document.querySelector('#all-content');
     if (datasetContainer.dataset.login === "") {
         const headers = document.querySelectorAll('.planet-header');
         const lastHeader = headers[7];
@@ -71,8 +71,8 @@ function insertPlanetHeadersData() {
 
 
 function disablePaginationButtons(whichPage) {
-    const prevButton = document.getElementById('prev-button');
-    const nextButton = document.getElementById('next-button');
+    const prevButton = document.querySelector('#prev-button');
+    const nextButton = document.querySelector('#next-button');
 
     if (parseInt(whichPage) === 1) {
         prevButton.disabled = true;
@@ -106,7 +106,7 @@ function addVoteButton(newRow, planet) {
     voteBtn.parentElement.style.textAlign = 'center';
     voteBtn.addEventListener('click', saveVote);
 
-    const datasetContainer = document.getElementById('all-content');
+    const datasetContainer = document.querySelector('#all-content');
 
     if (datasetContainer.dataset.login === "") {
         voteBtn.style.visibility = "hidden";
@@ -118,7 +118,7 @@ function addVoteButton(newRow, planet) {
 function saveVote() {
     const planetId = parseInt(event.target.dataset.planetid);
     const planetName = event.target.dataset.planetname;
-    const userId = parseInt(document.getElementById('all-content').dataset.userid);
+    const userId = parseInt(document.querySelector('#all-content').dataset.userid);
     const currentDate = new Date();
     const submissionTime =
         currentDate.getFullYear() + '-0' + (currentDate.getMonth() + 1) + '-' + currentDate.getDate() + ' ' +
@@ -167,7 +167,7 @@ function formatPlanetData(planet) {
 
 function switchPage() {
     const currentPage = document.querySelector('#planets');
-    const currentPageNo = parseInt(document.getElementById('planets').dataset.page);
+    const currentPageNo = parseInt(document.querySelector('#planets').dataset.page);
     const step = parseInt(event.target.dataset.value);    //direction is stored in button's dataset (1/-1)
     const nextPage = currentPageNo + step;
     currentPage.dataset.page = nextPage.toString();
@@ -241,13 +241,13 @@ function addDataToResidentsModal(residentData, table, i) {
 }
 
 function openModal() {
-    const modal = document.getElementById('resident-container');
+    const modal = document.querySelector('#resident-container');
     modal.style.display = 'block';
 
     const planet = event.target.dataset.planet;
 
-    const title = document.getElementById('which-planet');
-    title.innerHTML = 'Residents of ' + planet;
+    const title = document.querySelector('#which-planet');
+    title.innerHTML = `Residents of ${planet}`;
 
     dom.addLoadingImage('#resident-table');
     createResidentsTable();
@@ -257,6 +257,7 @@ function openModal() {
 function createResidentsTable() {
     dom.createResidentHeader();
     insertResidentHeaderData();
+
     const residentsOrig = event.target.dataset.residents;
     const residentsURLs = residentsOrig.split(',');
     const table = document.querySelector('#residents');
@@ -270,10 +271,10 @@ function createResidentsTable() {
 
 
 function closeModal() {
-    const table = document.getElementById('residents');
+    const table = document.querySelector('#residents');
     table.innerHTML = "";
 
-    const modal = document.getElementById('resident-container');
+    const modal = document.querySelector('#resident-container');
     modal.style.display = 'none';
 }
 
@@ -299,37 +300,37 @@ function listVotedPlanets(response) {
 }
 
 function closeVoteStatistics() {
-    const table = document.getElementById('votes');
+    const table = document.querySelector('#votes');
     table.innerHTML = "";
 
-    const modal = document.getElementById('votes-container');
+    const modal = document.querySelector('#votes-container');
     modal.style.display = 'none';
 }
 
 
 function addingButtonClickEvents() {
-    const nextButton = document.getElementById('next-button');
+    const nextButton = document.querySelector('#next-button');
     nextButton.addEventListener('click', switchPage);
 
-    const prevButton = document.getElementById('prev-button');
+    const prevButton = document.querySelector('#prev-button');
     prevButton.addEventListener('click', switchPage);
 
-    const residentModalCloseButtonTopRight = document.getElementById('close-modal');
+    const residentModalCloseButtonTopRight = document.querySelector('#close-modal');
     residentModalCloseButtonTopRight.addEventListener('click', closeModal);
 
-    const residentModalCloseButtonTopLeft = document.getElementById('close-button');
+    const residentModalCloseButtonTopLeft = document.querySelector('#close-button');
     residentModalCloseButtonTopLeft.addEventListener('click', closeModal);
 }
 
 
 function votingModalCanBeOpenedAndClosed() {
-    const voteStatistics = document.getElementById('vote-stats');
+    const voteStatistics = document.querySelector('#vote-stats');
     voteStatistics.addEventListener('click', openVoteStatistics);
 
-    const votingModalCloseButtonTopRight = document.getElementById('close-votes');
+    const votingModalCloseButtonTopRight = document.querySelector('#close-votes');
     votingModalCloseButtonTopRight.addEventListener('click', closeVoteStatistics);
 
-    const votingModalCloseButtonTopLeft = document.getElementById('close-votes-button');
+    const votingModalCloseButtonTopLeft = document.querySelector('#close-votes-button');
     votingModalCloseButtonTopLeft.addEventListener('click', closeVoteStatistics);
 }
 
@@ -338,7 +339,7 @@ function init() {
     loadPlanetsData();
     addingButtonClickEvents();
 
-    const isUserLoggedIn = document.getElementById('all-content').dataset.login;
+    const isUserLoggedIn = document.querySelector('#all-content').dataset.login;
     if (isUserLoggedIn === 'True') {
         votingModalCanBeOpenedAndClosed();
     }
