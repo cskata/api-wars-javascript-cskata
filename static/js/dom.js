@@ -1,4 +1,5 @@
 import {templates} from "./templates.js";
+import {dataHandler} from "./data_handler.js";
 
 export let dom = {
     createResidentButton: function (planet) {
@@ -130,5 +131,16 @@ export let dom = {
     closeLoginModal: function () {
         const loginModal = document.querySelector('#login-container');
         loginModal.style.display = 'none';
+    },
+    logUserIn: function () {
+        const username = document.querySelector('#username').value;
+        const password = document.querySelector('#password').value;
+
+        const data = {
+            username: username,
+            password: password
+        };
+
+        dataHandler.sendLoginData(data);
     }
 };

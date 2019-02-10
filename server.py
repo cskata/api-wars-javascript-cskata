@@ -19,47 +19,39 @@ def index():
         return render_template('index.html', login_status=login_status, username=username, user_id=user_id)
 
 
-@app.route('/registration', methods=['GET', 'POST'])
+@app.route('/registration', methods=['POST'])
 def new_user_registration():
-    if request.method == 'POST':
-        new_user = {
-            'username': request.form['new_username'],
-            'password': request.form['new_password']
-        }
+    new_user = {
+        'username': request.form['new_username'],
+        'password': request.form['new_password']
+    }
 
-        is_username_taken = data_manager.check_username_in_database(new_user)
+    is_username_taken = data_manager.check_username_in_database(new_user)
 
-        if is_username_taken:
-            flash("Username is already taken, please choose something else.")
-            return redirect(url_for('new_user_registration'))
-        else:
-            data_manager.register_new_user(new_user)
-            flash("Registration was successful!")
-            return redirect(url_for('index'))
+    if is_username_taken:
+        flash("Username is already taken, please choose something else.")
+    else:
+        data_manager.register_new_user(new_user)
+        flash("Registration was successful!")
 
-    return render_template('registration.html')
+    return redirect(url_for('index'))
 
 
 @app.route('/login', methods=['POST'])
 def log_in_user():
-    login_data = {
-        'username': request.form['username'],
-        'password': request.form['password']
-    }
-
+    login_data = request.get_json()
     login_check = data_manager.verify_user(login_data)
 
     if login_check:
         session['username'] = login_data['username']
-        return redirect(url_for('index'))
 
-    flash("Invalid username or password!")
-    return render_template('index.html')
+    return jsonify(login_data)
 
 
 @app.route('/logout')
 def log_user_out():
     session.pop('username', None)
+    session.pop('user_id', None)
     return redirect(url_for('index'))
 
 
