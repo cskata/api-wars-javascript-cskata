@@ -37,17 +37,5 @@ export let dataHandler = {
                 callback(residentData, table, i);
             }
         });
-    },
-    sendLoginData: function (data) {
-        $.ajax({
-            type: "POST",
-            url: "/login",
-            contentType: "application/json",
-            dataType: "json",
-            data: JSON.stringify(data),
-            success: function () {
-                location.reload();
-            }
-        });
     }
 };

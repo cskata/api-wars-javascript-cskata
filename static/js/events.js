@@ -19,9 +19,6 @@ export let events = {
         const loginLink = document.querySelector('#login');
         loginLink.addEventListener('click', dom.openLoginModal);
 
-        const loginBtn = document.querySelector('#logbtn');
-        loginBtn.addEventListener('click', dom.logUserIn);
-
         const loginModalCloseButtonTopRight = document.querySelector('#close-login-modal');
         loginModalCloseButtonTopRight.addEventListener('click', dom.closeLoginModal);
 

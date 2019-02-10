@@ -39,13 +39,19 @@ def new_user_registration():
 
 @app.route('/login', methods=['POST'])
 def log_in_user():
-    login_data = request.get_json()
+    login_data = {
+        'username': request.form['username'],
+        'password': request.form['password']
+    }
+
     login_check = data_manager.verify_user(login_data)
 
     if login_check:
         session['username'] = login_data['username']
+    else:
+        flash('Invalid username or password!')
 
-    return jsonify(login_data)
+    return redirect(url_for('index'))
 
 
 @app.route('/logout')

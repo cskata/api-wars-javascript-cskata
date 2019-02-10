@@ -39,9 +39,7 @@
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     {% for message in messages %}
-                        window.onload = function () {
-                            alert('{{ message }}');
-                        };
+                        alert('{{ message }}');
                     {% endfor %}
                 {% endif %}
             {% endwith %}

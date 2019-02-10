@@ -66,7 +66,7 @@
             <h4 class="modal-title">Login</h4>
             <div id="login-form">
                 <br>
-                <form>
+                <form action="{{ url_for('log_in_user') }}" method=POST>
                     <label id="new_user_reg" class="label">Username</label>
                     <p><input id="username" name="username" type="text"
                            class="input" placeholder="username" required></p>
