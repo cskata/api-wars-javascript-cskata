@@ -23,11 +23,7 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            {% if login_status %}
-                {% include 'logged-in-navbar.html' %}
-            {% else %}
-                {% include 'not-logged-in-navbar.html' %}
-            {% endif %}
+            {% include 'navbar.html' %}
         </nav>
 
         {% block content %} {% endblock %}
