@@ -315,17 +315,17 @@ function addButtonClickEvents() {
     const prevButton = document.querySelector('#prev-button');
     prevButton.addEventListener('click', switchPage);
 
-    const residentModalCloseButtonTopRight = document.querySelector('#close-modal');
+    const residentModalCloseButtonTopRight = document.querySelector('#close-resident-modal');
     residentModalCloseButtonTopRight.addEventListener('click', closeResidentModal);
 
-    const residentModalCloseButtonTopLeft = document.querySelector('#close-button');
+    const residentModalCloseButtonTopLeft = document.querySelector('#close-resident-button');
     residentModalCloseButtonTopLeft.addEventListener('click', closeResidentModal);
 }
 
 
 function addVotingModalEvents() {
-    const voteStatistics = document.querySelector('#vote-stats');
-    voteStatistics.addEventListener('click', openVoteStatistics);
+    const voteStatisticsLink = document.querySelector('#vote-stats');
+    voteStatisticsLink.addEventListener('click', openVoteStatistics);
 
     const votingModalCloseButtonTopRight = document.querySelector('#close-votes');
     votingModalCloseButtonTopRight.addEventListener('click', closeVoteStatistics);
@@ -334,10 +334,55 @@ function addVotingModalEvents() {
     votingModalCloseButtonTopLeft.addEventListener('click', closeVoteStatistics);
 }
 
+function openRegModal() {
+    const registrationModal = document.querySelector('#registration-container');
+    registrationModal.style.display = 'block';
+}
+
+
+function closeRegModal() {
+    const registrationModal = document.querySelector('#registration-container');
+    registrationModal.style.display = 'none';
+}
+
+
+function openLoginModal() {
+    const loginModal = document.querySelector('#login-container');
+    loginModal.style.display = 'block';
+}
+
+
+function closeLoginModal() {
+    const loginModal = document.querySelector('#login-container');
+    loginModal.style.display = 'none';
+}
+
+
+function addNavBarClickEvents() {
+    const registrationLink = document.querySelector('#registration');
+    registrationLink.addEventListener('click', openRegModal);
+
+    const registrationModalCloseButtonTopRight = document.querySelector('#close-reg-modal');
+    registrationModalCloseButtonTopRight.addEventListener('click', closeRegModal);
+
+    const registrationModalCloseButtonTopLeft = document.querySelector('#close-reg-button');
+    registrationModalCloseButtonTopLeft.addEventListener('click', closeRegModal);
+
+    const loginLink = document.querySelector('#login');
+    loginLink.addEventListener('click', openLoginModal);
+
+    const loginModalCloseButtonTopRight = document.querySelector('#close-login-modal');
+    loginModalCloseButtonTopRight.addEventListener('click', closeLoginModal);
+
+    const loginModalCloseButtonTopLeft = document.querySelector('#close-login-button');
+    loginModalCloseButtonTopLeft.addEventListener('click', closeLoginModal);
+}
+
 
 function init() {
     loadPlanetsData();
     addButtonClickEvents();
+    addNavBarClickEvents();
 
     const isUserLoggedIn = document.querySelector('#all-content').dataset.login;
     if (isUserLoggedIn === 'True') {

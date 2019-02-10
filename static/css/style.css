@@ -85,7 +85,7 @@ body {
     position: relative;
     padding-top: 2.5%;
     outline: 0;
-    width: 80%;
+    width: 55%;
 }
 
 .w3-modal-content-votes {
@@ -139,7 +139,7 @@ body {
     text-align: left;
 }
 
-#close-button, #close-votes-button {
+.close-button {
     margin-top: 10px;
     float: right;
 }
@@ -149,7 +149,7 @@ body {
 }
 
 #vote-table, #resident-table {
-    padding: 1vw;
+    padding: 10px;
 }
 
 /* Registration from style */
@@ -216,6 +216,12 @@ body {
     color: black;
 }
 
+/* Navbar style */
+
+.nav-item {
+    cursor: pointer;
+}
+
 .signed-in-user {
     color: #9E9E9E;
     margin-top: 9px;
@@ -233,9 +239,6 @@ body {
     text-align: center;
 }
 
-#vote-stats:hover {
-    cursor: pointer;
-}
 
 /*Main title style with before and after*/
 
