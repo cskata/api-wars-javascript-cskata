@@ -1,5 +1,6 @@
 import {dom} from "./dom.js";
 import {dataHandler} from "./data_handler.js";
+import {events} from "./events.js";
 
 
 window.onload = init;
@@ -334,57 +335,15 @@ function addVotingModalEvents() {
     votingModalCloseButtonTopLeft.addEventListener('click', closeVoteStatistics);
 }
 
-function openRegModal() {
-    const registrationModal = document.querySelector('#registration-container');
-    registrationModal.style.display = 'block';
-}
-
-
-function closeRegModal() {
-    const registrationModal = document.querySelector('#registration-container');
-    registrationModal.style.display = 'none';
-}
-
-
-function openLoginModal() {
-    const loginModal = document.querySelector('#login-container');
-    loginModal.style.display = 'block';
-}
-
-
-function closeLoginModal() {
-    const loginModal = document.querySelector('#login-container');
-    loginModal.style.display = 'none';
-}
-
-
-function addNavBarClickEvents() {
-    const registrationLink = document.querySelector('#registration');
-    registrationLink.addEventListener('click', openRegModal);
-
-    const registrationModalCloseButtonTopRight = document.querySelector('#close-reg-modal');
-    registrationModalCloseButtonTopRight.addEventListener('click', closeRegModal);
-
-    const registrationModalCloseButtonTopLeft = document.querySelector('#close-reg-button');
-    registrationModalCloseButtonTopLeft.addEventListener('click', closeRegModal);
-
-    const loginLink = document.querySelector('#login');
-    loginLink.addEventListener('click', openLoginModal);
-
-    const loginModalCloseButtonTopRight = document.querySelector('#close-login-modal');
-    loginModalCloseButtonTopRight.addEventListener('click', closeLoginModal);
-
-    const loginModalCloseButtonTopLeft = document.querySelector('#close-login-button');
-    loginModalCloseButtonTopLeft.addEventListener('click', closeLoginModal);
-}
-
 
 function init() {
     loadPlanetsData();
     addButtonClickEvents();
-    addNavBarClickEvents();
+    events.addNavBarClickEvents();
 
     const isUserLoggedIn = document.querySelector('#all-content').dataset.login;
+    dom.changeNavBarElements(isUserLoggedIn);
+
     if (isUserLoggedIn === 'True') {
         addVotingModalEvents();
     }

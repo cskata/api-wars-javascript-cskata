@@ -80,5 +80,55 @@ export let dom = {
         if (dataContainer.lastChild.nodeName === 'IMG') {
             dataContainer.removeChild(dataContainer.lastChild);
         }
+    },
+    changeNavBarElements: function (isUserLoggedIn) {
+        if (isUserLoggedIn === 'True') {
+            const registrationLink = document.querySelector('#registration');
+            registrationLink.style.display = 'none';
+
+            const loginLink = document.querySelector('#login');
+            loginLink.style.display = 'none';
+
+            const votesLink = document.querySelector('#vote-stats');
+            votesLink.style.display = 'block';
+
+            const logout = document.querySelector('#logout');
+            logout.style.display = 'block';
+
+            const username = document.querySelector('#shown-username');
+            username.style.display = 'block';
+        }
+        else {
+            const registrationLink = document.querySelector('#registration');
+            registrationLink.style.display = 'block';
+
+            const loginLink = document.querySelector('#login');
+            loginLink.style.display = 'block';
+
+            const votesLink = document.querySelector('#vote-stats');
+            votesLink.style.display = 'none';
+
+            const logout = document.querySelector('#logout');
+            logout.style.display = 'none';
+
+            const username = document.querySelector('#shown-username');
+            username.style.display = 'none';
+        }
+    },
+    openRegModal: function () {
+        const registrationModal = document.querySelector('#registration-container');
+        registrationModal.style.display = 'block';
+    },
+    closeRegModal: function () {
+        const registrationModal = document.querySelector('#registration-container');
+        registrationModal.style.display = 'none';
+    },
+    openLoginModal: function () {
+        const loginModal = document.querySelector('#login-container');
+        loginModal.style.display = 'block';
+    },
+    closeLoginModal: function () {
+        const loginModal = document.querySelector('#login-container');
+        loginModal.style.display = 'none';
     }
 };
