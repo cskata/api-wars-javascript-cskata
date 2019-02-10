@@ -13,12 +13,12 @@
             <a class="nav-link" id="vote-stats">Voting statistics</a>
         </li>
         <li class="nav-item logged-in">
-            <a class="nav-link" href="{{ url_for('log_user_out') }}">Logout</a>
+            <a class="nav-link" id="logout" href="{{ url_for('log_user_out') }}">Logout</a>
         </li>
     </ul>
     <ul class="navbar-nav">
         <li class="signed-in-user logged-in">
-            <p>Signed in as <span id="logged-in-username">{{ username }}</span></p>
+            <span id="shown-username">Signed in as <span id="logged-in-username">{{ username }}</span></span>
         </li>
     </ul>
 </div>

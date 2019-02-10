@@ -19,7 +19,7 @@
     <div class="w3-modal-content-votes">
         <span id="close-votes" class="w3-button w3-display-topright"><i class="far fa-times-times"></i></span>
         <div id="resident-datacontainer" class="w3-container">
-            <h4 id="which-planet">Voting statistics</h4>
+            <h4 class="modal-title">Voting statistics</h4>
             <div id="vote-table">
                 <table id="votes"></table>
             </div>
@@ -36,9 +36,19 @@
     <div class="w3-modal-content">
         <span id="close-reg-modal" class="w3-button w3-display-topright"><i class="fas fa-times"></i></span>
         <div id="regform-container" class="w3-container">
-            <h4 id="which-planet">Registration</h4>
-            <div id="resident-table">
-                <form action=""></form>
+            <h4 class="modal-title">Registration</h4>
+            <div id="reg-form">
+                <br>
+                <form action="{{ url_for('new_user_registration') }}" method=POST>
+                    <label id="new_user_reg" class="label">Username</label>
+                    <p><input id="new_username" name="new_username" type="text"
+                           class="input" placeholder="username" required></p>
+
+                    <label id="new_user_reg" class="label">Password</label>
+                    <p><input id="new_password" name="new_password" type="password"
+                           class="input" placeholder="password" required></p>
+                    <p><button type="submit" class="reg-button">Create new account</button></p>
+                </form>
             </div>
             <div>
                 <button class="btn btn-secondary close-button" type="submit"
@@ -53,12 +63,22 @@
     <div class="w3-modal-content">
         <span id="close-login-modal" class="w3-button w3-display-topright"><i class="fas fa-times"></i></span>
         <div id="loginform-container" class="w3-container">
-            <h4 id="which-planet">Login</h4>
-            <div id="resident-table">
-                <form action=""></form>
+            <h4 class="modal-title">Login</h4>
+            <div id="login-form">
+                <br>
+                <form action="{{ url_for('log_in_user') }}" method=POST>
+                    <label id="new_user_reg" class="label">Username</label>
+                    <p><input id="username" name="username" type="text"
+                           class="input" placeholder="username" required></p>
+
+                    <label id="new_user_reg" class="label">Password</label>
+                    <p><input id="password" name="password" type="password"
+                           class="input" placeholder="password" required></p>
+                    <p><button type="submit" class="login-button">Login</button></p>
+                </form>
             </div>
             <div>
-                <button class="btn btn-secondary" type="submit"
+                <button class="btn btn-secondary close-button" type="submit"
                         id="close-login-button" name="close-button">Close
                 </button>
             </div>
