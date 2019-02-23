@@ -36,7 +36,7 @@ body {
     border: 1px solid gray;
     border-collapse: collapse;
     background: #ffffff;
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 #planets, .planet-header, .resident-header, #residents th, #residents td, #votes th, #votes td {
@@ -54,8 +54,8 @@ body {
 
 .btn-secondary {
     background-color: #03A9F4;
-    color: black;
-    margin: 1px;
+    color: #000000;
+    margin: 2px;
     font-size: 14px;
 }
 
@@ -233,7 +233,7 @@ body {
 }
 
 .navbar {
-    background-color: #000000 !important;
+    background-color: #020307 !important;
 }
 
 .signed-in-user {
