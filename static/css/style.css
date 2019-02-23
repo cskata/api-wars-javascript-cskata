@@ -144,7 +144,7 @@ body {
 .close-button {
     margin-top: 5px;
     margin-bottom: 5px;
-    margin-left: 90%
+    margin-left: 90%;
 }
 
 .col {
@@ -188,11 +188,14 @@ body {
     margin: 10px;
     width: 50%;
     height: 30px;
+    font-weight: 600;
+    font-size: 13px;
 }
 
 .reg-button:hover, .login-button:hover {
     background-color: #6c757d;
     color: white;
+    cursor: pointer;
 }
 
 /* Navbar style */
@@ -279,14 +282,16 @@ body {
     opacity: 1;
 }
 
-#res-header {
+#modal-header {
     padding: 0 10px;
     border-bottom: 1px solid grey;
     display: flex;
 }
 
-#res-footer {
+#modal-footer {
     border-top: 1px solid grey;
     padding: 10px 10px;
     display: flex;
+
 }
+

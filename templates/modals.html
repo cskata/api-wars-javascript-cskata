@@ -1,6 +1,6 @@
 <div id="resident-container" class="w3-modal">
     <div class="w3-modal-content">
-        <header id="res-header">
+        <header id="modal-header">
             <span id="close-resident-modal" class="w3-button w3-display-topright"><i class="fas fa-times"></i></span>
             <h4 id="which-planet"></h4>
         </header>
@@ -9,26 +9,29 @@
                 <table id="residents"></table>
             </div>
         </div>
-        <footer id="res-footer">
+        <footer id="modal-footer">
             <button class="btn btn-secondary close-button" type="submit"
                     id="close-resident-button" name="close-button">Close
             </button>
         </footer>
-
     </div>
 </div>
 
 <div id="votes-container" class="w3-modal">
     <div class="w3-modal-content-votes">
-        <span id="close-votes" class="w3-button w3-display-topright"><i class="fas fa-times"></i></span>
-        <div id="resident-datacontainer" class="w3-container">
+        <header id="modal-header">
+            <span id="close-votes" class="w3-button w3-display-topright"><i class="fas fa-times"></i></span>
             <h4 class="modal-title">Voting statistics</h4>
+        </header>
+        <div id="resident-datacontainer" class="w3-container">
             <div id="vote-table">
                 <table id="votes"></table>
             </div>
-            <button class="btn btn-secondary close-button" type="submit"
-                    id="close-votes-button" name="close-button">Close
-            </button>
+            <footer id="votes-footer">
+                <button class="btn btn-secondary close-button" type="submit"
+                        id="close-votes-button" name="close-button">Close
+                </button>
+            </footer>
         </div>
     </div>
 </div>
@@ -37,9 +40,11 @@
 
 <div id="registration-container" class="w3-modal">
     <div class="w3-modal-content">
-        <span id="close-reg-modal" class="w3-button w3-display-topright"><i class="fas fa-times"></i></span>
-        <div id="regform-container" class="w3-container">
+        <header id="modal-header">
+            <span id="close-reg-modal" class="w3-button w3-display-topright"><i class="fas fa-times"></i></span>
             <h4 class="modal-title">Registration</h4>
+        </header>
+        <div id="regform-container" class="w3-container">
             <div id="reg-form">
                 <br>
                 <form action="{{ url_for('new_user_registration') }}" method=POST>
@@ -55,20 +60,22 @@
                     </p>
                 </form>
             </div>
-            <div>
-                <button class="btn btn-secondary close-button" type="submit"
-                        id="close-reg-button" name="close-button">Close
-                </button>
-            </div>
         </div>
+        <footer id="modal-footer">
+            <button class="btn btn-secondary close-button" type="submit"
+                    id="close-reg-button" name="close-button">Close
+            </button>
+        </footer>
     </div>
 </div>
 
 <div id="login-container" class="w3-modal">
     <div class="w3-modal-content">
-        <span id="close-login-modal" class="w3-button w3-display-topright"><i class="fas fa-times"></i></span>
-        <div id="loginform-container" class="w3-container">
+        <header id="modal-header">
+            <span id="close-login-modal" class="w3-button w3-display-topright"><i class="fas fa-times"></i></span>
             <h4 class="modal-title">Login</h4>
+        </header>
+        <div id="loginform-container" class="w3-container">
             <div id="login-form">
                 <br>
                 <form action="{{ url_for('log_in_user') }}" method=POST>
@@ -84,11 +91,11 @@
                     </p>
                 </form>
             </div>
-            <div>
-                <button class="btn btn-secondary close-button" type="submit"
-                        id="close-login-button" name="close-button">Close
-                </button>
-            </div>
         </div>
+        <footer id="modal-footer">
+            <button class="btn btn-secondary close-button" type="submit"
+                    id="close-login-button" name="close-button">Close
+            </button>
+        </footer>
     </div>
 </div>
