@@ -13,7 +13,6 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
         <link rel="shortcut icon" href="#">
         <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
-        <script type="module" src="{{ url_for('static', filename='js/apiwars.js') }}"></script>
         {% block head %} {% endblock %}
     </head>
     <body>
@@ -23,11 +22,14 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            {% include 'navbar.html' %}
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto" id="main-navbar"></ul>
+                <ul class="navbar-nav" id="username-navbar"></ul>
+            </div>
         </nav>
 
         {% block content %} {% endblock %}
-
+        <script type="module" src="{{ url_for('static', filename='js/apiwars.js') }}" defer></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
                 integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"

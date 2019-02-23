@@ -1,5 +1,5 @@
 import {templates} from "./templates.js";
-import {dataHandler} from "./data_handler.js";
+import {events} from "./events.js";
 
 export let dom = {
     createResidentButton: function (planet) {
@@ -84,36 +84,35 @@ export let dom = {
     },
     changeNavBarElements: function (isUserLoggedIn) {
         if (isUserLoggedIn === 'True') {
-            const registrationLink = document.querySelector('#registration');
-            registrationLink.style.display = 'none';
+            const mainNavBar = document.querySelector('#main-navbar');
+            const mainNavBarContent = templates.loggedInNavBar();
+            mainNavBar.innerHTML = mainNavBarContent;
 
-            const loginLink = document.querySelector('#login');
-            loginLink.style.display = 'none';
+            const logoutButton = document.querySelector('#logout');
+            logoutButton.setAttribute('href', "/logout");
 
-            const votesLink = document.querySelector('#vote-stats');
-            votesLink.style.display = 'block';
+            const userNameNavBar = document.querySelector('#username-navbar');
+            const userNameText = templates.displayUserName();
+            userNameNavBar.innerHTML = userNameText;
 
-            const logout = document.querySelector('#logout');
-            logout.style.display = 'block';
+            const homeButton = document.querySelector('#home');
+            homeButton.setAttribute('href', '/');
 
-            const username = document.querySelector('#shown-username');
-            username.style.display = 'block';
-        }
-        else {
-            const registrationLink = document.querySelector('#registration');
-            registrationLink.style.display = 'block';
+            const userName = document.querySelector('#all-content').dataset.username;
+            const userNameContainer = document.querySelector('#logged-in-username');
+            userNameContainer.innerHTML = userName;
 
-            const loginLink = document.querySelector('#login');
-            loginLink.style.display = 'block';
+        } else {
+            const mainNavBar = document.querySelector('#main-navbar');
+            const mainNavBarContent = templates.notLoggedInNavBar();
+            mainNavBar.innerHTML = mainNavBarContent;
+            events.addNavBarClickEvents();
 
-            const votesLink = document.querySelector('#vote-stats');
-            votesLink.style.display = 'none';
+            const homeButton = document.querySelector('#home');
+            homeButton.setAttribute('href', '/');
 
-            const logout = document.querySelector('#logout');
-            logout.style.display = 'none';
-
-            const username = document.querySelector('#shown-username');
-            username.style.display = 'none';
+            const userNameNavBar = document.querySelector('#username-navbar');
+            userNameNavBar.innerHTML = "";
         }
     },
     openRegModal: function () {

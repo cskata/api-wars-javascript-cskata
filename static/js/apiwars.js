@@ -1,9 +1,8 @@
 import {dom} from "./dom.js";
 import {dataHandler} from "./data_handler.js";
-import {events} from "./events.js";
 
 
-window.onload = init;
+init();
 
 
 function loadPlanetsData() {
@@ -340,7 +339,6 @@ function addVotingModalEvents() {
 function init() {
     loadPlanetsData();
     addButtonClickEvents();
-    events.addNavBarClickEvents();
 
     const isUserLoggedIn = document.querySelector('#all-content').dataset.login;
     dom.changeNavBarElements(isUserLoggedIn);
