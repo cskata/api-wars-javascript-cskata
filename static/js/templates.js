@@ -1,30 +1,37 @@
 export let templates = {
+    planetHeaderNames: [
+        'Name', 'Diameter', 'Climate', 'Terrain', 'Surface Waters Percentage', 'Population', 'Residents', ''
+    ],
+    planetDataKeys: [
+        'name', 'diameter', 'climate', 'terrain', 'surface_water', 'population'
+    ],
+    columnsNumber: 8,
     createPlanetHeaderElement: function () {
-        let header = document.createElement('tr');
+        const header = document.createElement('tr');
         header.id = 'main-header';
-        header.innerHTML = `<th class="planet-header"></th>`.repeat(8);
+        header.innerHTML = `<th class="planet-header"></th>`.repeat(this.columnsNumber);
         return header;
     },
     createPlanetRow: function () {
-        let newRow = document.createElement('tr');
+        const newRow = document.createElement('tr');
         newRow.classList.add('planet-row');
-        newRow.innerHTML = `<td class="planet-data"></td>`.repeat(8);
+        newRow.innerHTML = `<td class="planet-data"></td>`.repeat(this.columnsNumber);
         return newRow;
     },
     createResidentHeaderElement: function () {
-        let header = document.createElement('tr');
+        const header = document.createElement('tr');
         header.id = 'resident-modal-header';
-        header.innerHTML = `<th class="resident-header"></th>`.repeat(8);
+        header.innerHTML = `<th class="resident-header"></th>`.repeat(this.columnsNumber);
         return header;
     },
     createResidentRow: function () {
-        let newRow = document.createElement('tr');
+        const newRow = document.createElement('tr');
         newRow.classList.add('planet-row');
-        newRow.innerHTML = `<td class="resident-data"></td>`.repeat(8);
+        newRow.innerHTML = `<td class="resident-data"></td>`.repeat(this.columnsNumber);
         return newRow;
     },
     createVotesHeaderElement: function () {
-        let header = document.createElement('tr');
+        const header = document.createElement('tr');
         header.id = 'votes-modal-header';
         header.innerHTML =
             `
@@ -36,17 +43,17 @@ export let templates = {
         return header;
     },
     createVotesRow: function (planet) {
-        let newRow = document.createElement('tr');
+        const newRow = document.createElement('tr');
         newRow.innerHTML =
             `
-                <td>${planet['planet_name']}</td>
-                <td>${planet['count']}</td>
+            <td>${planet['planet_name']}</td>
+            <td>${planet['count']}</td>
             `;
 
         return newRow;
     },
     notLoggedInNavBar: function () {
-        let navBar =
+        const navBar =
             `
             <li class="nav-item active">
                 <a class="nav-link" id="home" href="/">Home<span class="sr-only">(current)</span></a>
@@ -62,7 +69,7 @@ export let templates = {
         return navBar;
     },
     loggedInNavBar: function () {
-        let navBar =
+        const navBar =
             `
             <li class="nav-item active">
                 <a class="nav-link" id="home" href="/">Home<span class="sr-only">(current)</span></a>
@@ -78,7 +85,7 @@ export let templates = {
         return navBar;
     },
     displayUserName: function (username) {
-       let userName =
+       const userName =
             `
             <li class="signed-in-user logged-in">
                 <span id="shown-username">Signed in as <span id="logged-in-username">${username}</span></span>

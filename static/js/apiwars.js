@@ -1,5 +1,6 @@
 import {dom} from "./dom.js";
 import {dataHandler} from "./data_handler.js";
+import {templates} from "./templates.js";
 
 
 init();
@@ -34,38 +35,35 @@ function createPlanetTable(planets, prevButton, nextButton, whichPage) {
 
 
 function insertPlanetsData(planets) {
-    const planetDataKeys = [
-        'name', 'diameter', 'climate', 'terrain', 'surface_water', 'population'
-    ];
-
     const table = document.querySelector('#planets');
+    const planetDataKeys = templates.planetDataKeys;
 
     for (let i = 0; i < planets.length; i++) {
-        let currentRow = table.childNodes[i + 1];
-
+        let currentRow = table.children[i + 1];
         fillRowWithPlanetData(currentRow, planets[i], planetDataKeys);
         addResidentsButton(currentRow, planets[i]);
         addVoteButton(currentRow, planets[i]);
     }
+    hidePlanetVotingHeader();
+}
 
+
+function hidePlanetVotingHeader() {
     const datasetContainer = document.querySelector('#all-content');
     if (datasetContainer.dataset.login === "") {
         const headers = document.querySelectorAll('.planet-header');
-        const lastHeader = headers[7];
+        const lastHeader = headers[templates.planetHeaderNames.length - 1];
         lastHeader.style.visibility = "hidden";
     }
 }
 
 
 function insertPlanetHeadersData() {
-    const headerNames = [
-        'Name', 'Diameter', 'Climate', 'Terrain', 'Surface Waters Percentage', 'Population', 'Residents', ''
-    ];
-
     const planetHeaderCells = document.querySelector('#main-header').children;
+    const planetHeaderNames = templates.planetHeaderNames;
 
-    for (let i = 0; i < headerNames.length; i++) {
-        planetHeaderCells[i].innerHTML = headerNames[i];
+    for (let i = 0; i < planetHeaderNames.length; i++) {
+        planetHeaderCells[i].innerHTML = planetHeaderNames[i];
     }
 }
 
