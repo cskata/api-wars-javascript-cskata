@@ -149,7 +149,8 @@ function fillRowWithPlanetData(newRow, planet, planetDataKeys) {
 
 function formatPlanetData(planet) {
     if (planet['diameter'] !== 'unknown') {
-        planet['diameter'] = planet['diameter'].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        // planet['diameter'] = planet['diameter'].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        planet['diameter'] = parseInt(planet['diameter']).toLocaleString('en-US');
         planet['diameter'] = `${planet['diameter']} km`;
     }
 
