@@ -62,12 +62,15 @@ export let dom = {
         const row = templates.createVotesRow(planet);
         table.appendChild(row);
     },
-    addLoadingImage: function (tableId) {
+    addLoadingImage: function (tableId, gifName) {
         const dataContainer = document.querySelector(tableId);
         const loadingImage = document.createElement('img');
         loadingImage.setAttribute('src',
-            'static/images/loading.gif');
+            `static/images/${gifName}.gif`);
         loadingImage.id = 'loading-image';
+
+        this.swapBackgroundsToBlack();
+
         dataContainer.appendChild(loadingImage);
         if (tableId === '#planet-data') {
             dataContainer.style.textAlign = 'center';
@@ -80,6 +83,7 @@ export let dom = {
         }
 
         if (dataContainer.lastChild.nodeName === 'IMG') {
+            this.swapBackgroundsToNormal();
             dataContainer.removeChild(dataContainer.lastChild);
         }
     },
@@ -119,5 +123,19 @@ export let dom = {
     closeLoginModal: function () {
         const loginModal = document.querySelector('#login-container');
         loginModal.style.display = 'none';
+    },
+    swapBackgroundsToBlack: function () {
+        const body = document.querySelector('#main');
+        body.style.backgroundImage = "url(/static/images/black.jpg)";
+
+        const title = document.querySelector('#title');
+        title.style.backgroundImage = "url(/static/images/black.jpg)";
+    },
+    swapBackgroundsToNormal: function () {
+        const body = document.querySelector('#main');
+        body.style.backgroundImage = "url(/static/images/universe.jpg)";
+
+        const title = document.querySelector('#title');
+        title.style.backgroundImage = "url(/static/images/universe.jpg)";
     }
 };

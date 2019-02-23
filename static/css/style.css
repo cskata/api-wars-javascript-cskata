@@ -36,6 +36,9 @@ body {
     border: 1px solid gray;
     border-collapse: collapse;
     background: #ffffff;
+}
+
+#planets th, #planets td {
     opacity: 0.8;
 }
 
@@ -157,6 +160,7 @@ body {
 .close-button, .vote-close-button {
     margin-top: 5px;
     margin-bottom: 5px;
+    background-color: #03A9F4;
 }
 
 .close-button {
@@ -182,6 +186,10 @@ body {
     display: inline-block;
     min-width: 200px;
     height: 250px;
+}
+
+#logbtn {
+    background-color: #06a9f4;
 }
 
 .input {
@@ -255,12 +263,15 @@ body {
 
 /*Main title style with before and after*/
 
+#title {
+    background-image: url("/static/images/universe.jpg");
+}
+
 .title-content {
     width: 100%;
     text-align: center;
     display: inline-block;
     color: #ffffff;
-    background-image: url("/static/images/universe.jpg");
 }
 
 #main-title {

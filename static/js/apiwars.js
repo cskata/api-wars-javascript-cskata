@@ -15,7 +15,7 @@ function loadPlanetsData() {
     prevButton.disabled = true;
     nextButton.disabled = true;
 
-    dom.addLoadingImage('#planet-data');
+    dom.addLoadingImage('#planet-data', 'loading3');
     dataHandler.getAllPlanetData(createPlanetTable, targetURL, prevButton, nextButton, whichPage);
 }
 
@@ -249,7 +249,7 @@ function openResidentsModal() {
     const title = document.querySelector('#which-planet');
     title.innerHTML = `Residents of ${planet}`;
 
-    dom.addLoadingImage('#resident-table');
+    dom.addLoadingImage('#resident-table', 'loading2');
     createResidentsTable();
 }
 
