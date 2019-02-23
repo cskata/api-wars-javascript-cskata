@@ -235,7 +235,7 @@ function addDataToResidentsModal(residentData, table, i) {
         row.children[i].innerHTML = formattedResidentData[`${residentDataColumns[i]}`];
     }
     setTimeout(function () {
-        dom.removeLoadingImage('#resident-table');
+        dom.removeLoadingImage('#resident-table', 'residents');
         table.style.display = 'table';
     }, 500);
 }
@@ -249,7 +249,7 @@ function openResidentsModal() {
     const title = document.querySelector('#which-planet');
     title.innerHTML = `Residents of ${planet}`;
 
-    dom.addLoadingImage('#resident-table', 'loading3');
+    dom.addLoadingImage('#resident-table', 'loading3', 'residents');
     createResidentsTable();
 }
 

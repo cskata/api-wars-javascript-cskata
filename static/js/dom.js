@@ -62,28 +62,36 @@ export let dom = {
         const row = templates.createVotesRow(planet);
         table.appendChild(row);
     },
-    addLoadingImage: function (tableId, gifName) {
+    addLoadingImage: function (tableId, gifName, location = 'main') {
         const dataContainer = document.querySelector(tableId);
         const loadingImage = document.createElement('img');
         loadingImage.setAttribute('src',
             `static/images/${gifName}.gif`);
         loadingImage.id = 'loading-image';
 
-        this.swapBackgroundsToBlack();
+        if (location === 'residents') {
+            this.swapResidentModalBlack();
+        } else {
+            this.swapMainBackgroundsToBlack();
+        }
 
         dataContainer.appendChild(loadingImage);
         if (tableId === '#planet-data') {
             dataContainer.style.textAlign = 'center';
         }
     },
-    removeLoadingImage: function (tableId) {
+    removeLoadingImage: function (tableId, location = 'main') {
         const dataContainer = document.querySelector(tableId);
         if (tableId === '#planet-data') {
             dataContainer.style.textAlign = 'left';
         }
 
         if (dataContainer.lastChild.nodeName === 'IMG') {
-            this.swapBackgroundsToNormal();
+            if (location === 'residents') {
+                this.swapResidentModalToNormal();
+            } else {
+                this.swapMainBackgroundsToNormal();
+            }
             dataContainer.removeChild(dataContainer.lastChild);
         }
     },
@@ -124,24 +132,25 @@ export let dom = {
         const loginModal = document.querySelector('#login-container');
         loginModal.style.display = 'none';
     },
-    swapBackgroundsToBlack: function () {
+    swapMainBackgroundsToBlack: function () {
         const body = document.querySelector('#main');
         body.style.backgroundImage = "url(/static/images/black.jpg)";
 
         const title = document.querySelector('#title');
         title.style.backgroundImage = "url(/static/images/black.jpg)";
-
-        const resident = document.querySelector('#residents-inner-container');
-        resident.classList.add('hide-res-bg');
-
     },
-    swapBackgroundsToNormal: function () {
+    swapMainBackgroundsToNormal: function () {
         const body = document.querySelector('#main');
         body.style.backgroundImage = "url(/static/images/universe.jpg)";
 
         const title = document.querySelector('#title');
         title.style.backgroundImage = "url(/static/images/universe.jpg)";
-
+    },
+    swapResidentModalBlack: function () {
+        const resident = document.querySelector('#residents-inner-container');
+        resident.classList.add('hide-res-bg');
+    },
+    swapResidentModalToNormal: function () {
         const resident = document.querySelector('#residents-inner-container');
         resident.classList.remove('hide-res-bg');
     }
