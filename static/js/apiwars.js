@@ -249,7 +249,7 @@ function openResidentsModal() {
     const title = document.querySelector('#which-planet');
     title.innerHTML = `Residents of ${planet}`;
 
-    dom.addLoadingImage('#resident-table', 'loading2');
+    dom.addLoadingImage('#resident-table', 'loading3');
     createResidentsTable();
 }
 

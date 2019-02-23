@@ -130,6 +130,10 @@ export let dom = {
 
         const title = document.querySelector('#title');
         title.style.backgroundImage = "url(/static/images/black.jpg)";
+
+        const resident = document.querySelector('#residents-inner-container');
+        resident.classList.add('hide-res-bg');
+
     },
     swapBackgroundsToNormal: function () {
         const body = document.querySelector('#main');
@@ -137,5 +141,8 @@ export let dom = {
 
         const title = document.querySelector('#title');
         title.style.backgroundImage = "url(/static/images/universe.jpg)";
+
+        const resident = document.querySelector('#residents-inner-container');
+        resident.classList.remove('hide-res-bg');
     }
 };
