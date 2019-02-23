@@ -6,6 +6,9 @@ body {
     margin: 0;
     padding: 0;
     color: black;
+    background-image: url("/static/images/universe.jpg");
+    background-size: cover;
+    background-position-y: 95px;
 }
 
 .planet-data, .resident-data {
@@ -31,8 +34,9 @@ body {
 
 #planets th, #planets td, #residents, #residents th, #residents td, #votes, #votes th, #votes td {
     border: 1px solid gray;
-    border-radius: 3px;
     border-collapse: collapse;
+    background: #ffffff;
+    opacity: 0.7;
 }
 
 #planets, .planet-header, .resident-header, #residents th, #residents td, #votes th, #votes td {
@@ -45,14 +49,19 @@ body {
 }
 
 .btn-primary {
-    background-color: #296294;
+    background-color: #0d4373;
 }
 
 .btn-secondary {
-    background-color: #ebebeb;
+    background-color: #03A9F4;
     color: black;
     margin: 1px;
-    font-size: 13px;
+    font-size: 14px;
+}
+
+.btn-resident {
+    width: 120px;
+    margin: 5px 2px;
 }
 
 .residents {
@@ -88,6 +97,8 @@ body {
     padding-top: 2.5%;
     outline: 0;
     width: 55%;
+    border-radius: 5px;
+    box-shadow: -1px 2px 50px 10px #000000;
 }
 
 .w3-modal-content-votes {
@@ -97,6 +108,8 @@ body {
     padding-top: 2.5%;
     outline: 0;
     width: 25%;
+    border-radius: 5px;
+    box-shadow: -1px 2px 50px 10px #000000;
 }
 
 .w3-container {
@@ -211,6 +224,18 @@ body {
     cursor: pointer;
 }
 
+.nav-link {
+    color: #ffffff !important;
+}
+
+.nav-link:hover {
+    color: #296294 !important;
+}
+
+.navbar {
+    background-color: #000000 !important;
+}
+
 .signed-in-user {
     color: #9E9E9E;
 }
@@ -234,7 +259,8 @@ body {
     width: 100%;
     text-align: center;
     display: inline-block;
-    margin-top: 0.5em
+    color: #ffffff;
+    background-image: url("/static/images/universe.jpg");
 }
 
 #main-title {

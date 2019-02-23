@@ -12,6 +12,7 @@ export let dom = {
 
         residentBtn.classList.add('btn');
         residentBtn.classList.add('btn-secondary');
+        residentBtn.classList.add('btn-resident');
 
         residentBtn.dataset.planet = planet['name'];
         residentBtn.dataset.residents = planet['residents'];

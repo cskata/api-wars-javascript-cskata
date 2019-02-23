@@ -92,13 +92,14 @@ function addResidentsButton(newRow, planet) {
     } else {
         const residentBtn = dom.createResidentButton(planet);
         residentsColumn.appendChild(residentBtn);
+        residentBtn.parentElement.style.textAlign = 'center';
         residentBtn.addEventListener('click', openResidentsModal);
     }
 }
 
 
 function addVoteButton(newRow, planet) {
-    const lastColumn = newRow.children[7];
+    const lastColumn = newRow.children[templates.planetHeaderNames.length - 1];
     const voteBtn = dom.createVoteButton(planet);
     lastColumn.appendChild(voteBtn);
     voteBtn.parentElement.style.textAlign = 'center';
