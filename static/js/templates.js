@@ -2,69 +2,25 @@ export let templates = {
     createPlanetHeaderElement: function () {
         let header = document.createElement('tr');
         header.id = 'main-header';
-        header.innerHTML =
-            `
-                <th class="planet-header"></th>
-                <th class="planet-header"></th>
-                <th class="planet-header"></th>
-                <th class="planet-header"></th>
-                <th class="planet-header"></th>
-                <th class="planet-header"></th>
-                <th class="planet-header"></th>
-                <th class="planet-header"></th>
-            `;
-
+        header.innerHTML = `<th class="planet-header"></th>`.repeat(8);
         return header;
     },
     createPlanetRow: function () {
         let newRow = document.createElement('tr');
         newRow.classList.add('planet-row');
-        newRow.innerHTML =
-            `
-                <td class="planet-data"></td>
-                <td class="planet-data"></td>
-                <td class="planet-data"></td>
-                <td class="planet-data"></td>
-                <td class="planet-data"></td>
-                <td class="planet-data"></td>
-                <td class="planet-data"></td>
-                <td class="planet-data"></td>
-            `;
-
+        newRow.innerHTML = `<td class="planet-data"></td>`.repeat(8);
         return newRow;
     },
     createResidentHeaderElement: function () {
         let header = document.createElement('tr');
         header.id = 'resident-modal-header';
-        header.innerHTML =
-            `
-                <th class="resident-header"></th>
-                <th class="resident-header"></th>
-                <th class="resident-header"></th>
-                <th class="resident-header"></th>
-                <th class="resident-header"></th>
-                <th class="resident-header"></th>
-                <th class="resident-header"></th>
-                <th class="resident-header"></th>
-            `;
-
+        header.innerHTML = `<th class="resident-header"></th>`.repeat(8);
         return header;
     },
     createResidentRow: function () {
         let newRow = document.createElement('tr');
         newRow.classList.add('planet-row');
-        newRow.innerHTML =
-            `
-                <td class="resident-data"></td>
-                <td class="resident-data"></td>
-                <td class="resident-data"></td>
-                <td class="resident-data"></td>
-                <td class="resident-data"></td>
-                <td class="resident-data"></td>
-                <td class="resident-data"></td>
-                <td class="resident-data"></td>
-            `;
-
+        newRow.innerHTML = `<td class="resident-data"></td>`.repeat(8);
         return newRow;
     },
     createVotesHeaderElement: function () {
@@ -93,7 +49,7 @@ export let templates = {
         let navBar =
             `
             <li class="nav-item active">
-                <a class="nav-link" id="home" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" id="home">Home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item not-logged-in">
                 <a class="nav-link" id="registration">Registration</a>
@@ -108,7 +64,7 @@ export let templates = {
         let navBar =
             `
             <li class="nav-item active">
-                <a class="nav-link" id="home">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" id="home">Home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item logged-in">
                 <a class="nav-link" id="vote-stats">Voting statistics</a>
