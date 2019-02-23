@@ -49,7 +49,7 @@ export let templates = {
         let navBar =
             `
             <li class="nav-item active">
-                <a class="nav-link" id="home">Home<span class="sr-only">(current)</span></a>
+                <a class="nav-link" id="home" href="/">Home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item not-logged-in">
                 <a class="nav-link" id="registration">Registration</a>
@@ -58,30 +58,33 @@ export let templates = {
                 <a class="nav-link" id="login">Login</a>
             </li>
             `;
+
         return navBar;
     },
     loggedInNavBar: function () {
         let navBar =
             `
             <li class="nav-item active">
-                <a class="nav-link" id="home">Home<span class="sr-only">(current)</span></a>
+                <a class="nav-link" id="home" href="/">Home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item logged-in">
                 <a class="nav-link" id="vote-stats">Voting statistics</a>
             </li>
             <li class="nav-item logged-in">
-                <a class="nav-link" id="logout">Logout</a>
+                <a class="nav-link" id="logout" href="/logout">Logout</a>
             </li>
             `;
+
         return navBar;
     },
-    displayUserName: function () {
+    displayUserName: function (username) {
        let userName =
             `
             <li class="signed-in-user logged-in">
-                <span id="shown-username">Signed in as <span id="logged-in-username"></span></span>
+                <span id="shown-username">Signed in as <span id="logged-in-username">${username}</span></span>
             </li>
             `;
-        return userName;
+
+       return userName;
     }
 };

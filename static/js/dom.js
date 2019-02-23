@@ -88,28 +88,16 @@ export let dom = {
             const mainNavBarContent = templates.loggedInNavBar();
             mainNavBar.innerHTML = mainNavBarContent;
 
-            const logoutButton = document.querySelector('#logout');
-            logoutButton.setAttribute('href', "/logout");
+            const username = document.querySelector('#all-content').dataset.username;
+            const userNameText = templates.displayUserName(username);
 
             const userNameNavBar = document.querySelector('#username-navbar');
-            const userNameText = templates.displayUserName();
             userNameNavBar.innerHTML = userNameText;
-
-            const homeButton = document.querySelector('#home');
-            homeButton.setAttribute('href', '/');
-
-            const userName = document.querySelector('#all-content').dataset.username;
-            const userNameContainer = document.querySelector('#logged-in-username');
-            userNameContainer.innerHTML = userName;
-
         } else {
             const mainNavBar = document.querySelector('#main-navbar');
             const mainNavBarContent = templates.notLoggedInNavBar();
             mainNavBar.innerHTML = mainNavBarContent;
             events.addNavBarClickEvents();
-
-            const homeButton = document.querySelector('#home');
-            homeButton.setAttribute('href', '/');
 
             const userNameNavBar = document.querySelector('#username-navbar');
             userNameNavBar.innerHTML = "";
