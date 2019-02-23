@@ -141,10 +141,17 @@ body {
     text-align: left;
 }
 
-.close-button {
+.close-button, .vote-close-button {
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.close-button {
     margin-left: 90%;
+}
+
+.vote-close-button {
+    margin-left: 80%;
 }
 
 .col {
@@ -282,16 +289,20 @@ body {
     opacity: 1;
 }
 
-#modal-header {
+.modal-header {
     padding: 0 10px;
     border-bottom: 1px solid grey;
     display: flex;
 }
 
-#modal-footer {
+.modal-footer {
     border-top: 1px solid grey;
     padding: 10px 10px;
     display: flex;
-
 }
 
+.votes-footer {
+    border-top: 1px solid grey;
+    padding: 10px 10px;
+    display: flex;
+}
