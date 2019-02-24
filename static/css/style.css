@@ -18,6 +18,18 @@ body {
     width: 100%;
 }
 
+.planet-container {
+    padding-top: 1vw;
+    text-align: left;
+    display: inline-block;
+    overflow: hidden;
+}
+
+#planet-data {
+    width: 90vw;
+    display: inline-block;
+}
+
 
 /* Table styles - planets, residents, votes */
 
@@ -26,49 +38,38 @@ body {
     width: 100%;
 }
 
-.residents {
-    font-size: 13px;
-    padding: 20px 10px;
-    width: 75%;
-}
-
-.planet-container {
-    padding-top: 1vw;
-    text-align: left;
-    display: inline-block;
-    overflow: hidden;
-}
-
-.planet-data, .resident-data {
-    padding: 2px;
-}
-
-#planet-data {
-    width: 90vw;
-    display: inline-block;
-}
-
-#planets th, #planets td, #residents, #residents th, #residents td, #votes, #votes th, #votes td {
-    border: 1px solid gray;
+#planets, #residents, #votes {
+    border: 1px double #ffffff;
     border-collapse: collapse;
     background: #ffffff;
 }
 
-#planets th, #planets td, #residents th, #residents td, #votes th, #votes {
-    opacity: 0.8;
-}
-
-#planets td {
-    font-size: 14px;
-}
-
-.planet-header, .resident-header, #residents th, #residents td, #votes th, #votes td {
+#planets th, #residents th, #votes th {
+    text-align: center;
+    background-color: #0c5788;
+    opacity: 0.9;
+    border-top: 1px double #ffffff;
+    border-bottom: 1px double #ffffff;
     font-size: 14px;
     padding: 3px;
 }
 
-.planet-header, .resident-header, .vote-header {
-    font-weight: bold;
+#planets th:nth-child(0), #residents th:nth-child(0), #votes tr:nth-child(0) {
+    border-left: 1px double #ffffff;
+}
+
+#planets th:nth-child(last), #residents th:nth-child(last), #votes tr:nth-child(last) {
+    border-right: 1px double #ffffff;
+}
+
+#planets tr:nth-child(even), #residents tr:nth-child(even), #votes tr:nth-child(even) {
+    background-color: #e1e7eb;
+}
+
+#planets td, #residents td, #votes td {
+    padding: 2px;
+    font-size: 14px;
+    opacity: 0.8;
 }
 
 
