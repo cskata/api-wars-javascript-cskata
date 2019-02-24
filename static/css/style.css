@@ -287,19 +287,19 @@ body {
 
 .modal-header {
     padding: 0 10px;
-    border-bottom: 1px double #5f5f5f;
+    border-bottom: 1px double #ffffff;
     display: flex;
     width: 100%;
 }
 
 .modal-footer {
-    border-top: 1px double #5f5f5f;
+    border-top: 1px double #ffffff;
     padding: 10px 10px;
     display: flex;
 }
 
 .votes-footer {
-    border-top: 1px double #5f5f5f;
+    border-top: 1px double #ffffff;
     padding: 10px 10px;
     display: flex;
 }
@@ -343,14 +343,14 @@ body {
     transition: 0.3s;
     cursor: pointer;
     opacity: 0.7;
-    color: #ffffff;
+    color: #020307;
 }
 
 .fa-times:hover {
     cursor: pointer;
     transform: rotate(180deg);
     opacity: 1;
-    color: #020307;
+    color: #03aefa;
 }
 
 
