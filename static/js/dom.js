@@ -139,6 +139,9 @@ export let dom = {
         const title = document.querySelector('#title');
         title.style.backgroundImage = "url(/static/images/black.jpg)";
 
+        const mainTitle = document.querySelector('#main-title');
+        mainTitle.style.backgroundImage = "url(/static/images/black.jpg)";
+
         this.hidePageNumber();
     },
     swapMainBackgroundsToNormal: function () {
@@ -147,6 +150,9 @@ export let dom = {
 
         const title = document.querySelector('#title');
         title.style.backgroundImage = "url(/static/images/universe.jpg)";
+
+        const mainTitle = document.querySelector('#main-title');
+        mainTitle.style.backgroundImage = "url(/static/images/universe.jpg)";
 
         this.showPageNumber();
     },
