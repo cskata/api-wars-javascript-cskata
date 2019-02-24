@@ -122,7 +122,7 @@ function addVoteButton(newRow, planet) {
 }
 
 
-function saveVote() {
+function saveVote(event) {
     const planetId = parseInt(event.target.dataset.planetid);
     const planetName = event.target.dataset.planetname;
     const userId = parseInt(document.querySelector('#all-content').dataset.userid);
@@ -174,7 +174,7 @@ function formatPlanetData(planet) {
 }
 
 
-function switchPage() {
+function switchPage(event) {
     const currentPage = document.querySelector('#planets');
     const currentPageNo = parseInt(document.querySelector('#planets').dataset.page);
     const step = parseInt(event.target.dataset.value);    //direction is stored in button's dataset (1/-1)
@@ -249,7 +249,7 @@ function addDataToResidentsModal(residentData, table, i) {
     }, 500);
 }
 
-function openResidentsModal() {
+function openResidentsModal(event) {
     const modal = document.querySelector('#resident-container');
     modal.style.display = 'block';
 
@@ -263,7 +263,7 @@ function openResidentsModal() {
 }
 
 
-function createResidentsTable() {
+function createResidentsTable(event) {
     dom.createResidentHeader();
     insertResidentHeaderData();
 
