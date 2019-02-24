@@ -352,5 +352,6 @@ function init() {
 
     if (isUserLoggedIn === 'True') {
         addVotingModalEvents();
+        dom.increasePaginationDivSize();
     }
 }

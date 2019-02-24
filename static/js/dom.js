@@ -157,5 +157,9 @@ export let dom = {
     swapResidentModalToNormal: function () {
         const resident = document.querySelector('#residents-inner-container');
         resident.classList.remove('hide-res-bg');
+    },
+    increasePaginationDivSize: function () {
+        const paginationContainer = document.querySelector('#button-box');
+        paginationContainer.style.width = '90vw';
     }
 };
