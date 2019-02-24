@@ -139,9 +139,7 @@ export let dom = {
         const title = document.querySelector('#title');
         title.style.backgroundImage = "url(/static/images/black.jpg)";
 
-        const pageNumContainer = document.querySelector('#page-container');
-        pageNumContainer.innerHTML = "";
-        pageNumContainer.style.opacity = '0';
+        this.hidePageNumber();
     },
     swapMainBackgroundsToNormal: function () {
         const body = document.querySelector('#main');
@@ -150,8 +148,7 @@ export let dom = {
         const title = document.querySelector('#title');
         title.style.backgroundImage = "url(/static/images/universe.jpg)";
 
-        const pageNumContainer = document.querySelector('#page-container');
-        pageNumContainer.style.opacity = '0.9';
+        this.showPageNumber();
     },
     swapResidentModalBlack: function () {
         const resident = document.querySelector('#residents-inner-container');
@@ -164,5 +161,14 @@ export let dom = {
     increasePaginationDivSize: function () {
         const paginationContainer = document.querySelector('#button-box');
         paginationContainer.style.width = '90vw';
+    },
+    showPageNumber: function () {
+        const pageNumContainer = document.querySelector('#page-container');
+        pageNumContainer.style.opacity = '0.9';
+    },
+    hidePageNumber: function () {
+        const pageNumContainer = document.querySelector('#page-container');
+        pageNumContainer.innerHTML = "";
+        pageNumContainer.style.opacity = '0';
     }
 };

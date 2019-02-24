@@ -23,6 +23,7 @@ function loadPlanetsData() {
 
 function createPlanetTable(planets, prevButton, nextButton, whichPage) {
     dom.removeLoadingImage('#planet-data');
+    dom.showPageNumber();
     const planetsPerPage = planets.length;
     dom.createPlanetDataRows(planetsPerPage);
 
