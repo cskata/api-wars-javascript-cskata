@@ -60,7 +60,7 @@ function hidePlanetVotingHeader() {
     if (datasetContainer.dataset.login === "") {
         const headers = document.querySelectorAll('.planet-header');
         const lastHeader = headers[templates.planetHeaderNames.length - 1];
-        lastHeader.style.visibility = "hidden";
+        lastHeader.style.display = 'none';
     }
 }
 
@@ -116,8 +116,8 @@ function addVoteButton(newRow, planet) {
     const datasetContainer = document.querySelector('#all-content');
 
     if (datasetContainer.dataset.login === "") {
-        voteBtn.style.visibility = "hidden";
-        voteBtn.parentElement.style.visibility = "hidden";
+        voteBtn.style.display = 'none';
+        voteBtn.parentElement.style.display = 'none';
     }
 }
 
@@ -353,6 +353,5 @@ function init() {
 
     if (isUserLoggedIn === 'True') {
         addVotingModalEvents();
-        dom.increasePaginationDivSize();
     }
 }

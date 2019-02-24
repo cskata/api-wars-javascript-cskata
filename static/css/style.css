@@ -417,7 +417,7 @@ body {
 
 #button-box {
     padding-bottom: 1em;
-    width: 85vw;
+    width: 100%;
 }
 
 
@@ -425,7 +425,7 @@ body {
 
 #page-container {
     display: inline;
-    padding: 4px 5px;
+    padding: 4px 7px;
     color: #020307;
     text-align: center;
     font-size: 13px;

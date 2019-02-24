@@ -32,6 +32,11 @@ export let dom = {
         voteBtn.dataset.planetid = planetId;
         voteBtn.dataset.planetname = planet['name'];
 
+        const datasetContainer = document.querySelector('#all-content');
+        if (datasetContainer.dataset.login === "") {
+            voteBtn.style.display = 'none';
+        }
+
         return voteBtn;
     },
     createPlanetDataRows: function (planetsPerPage) {
@@ -163,10 +168,6 @@ export let dom = {
     swapResidentModalToNormal: function () {
         const resident = document.querySelector('#residents-inner-container');
         resident.classList.remove('hide-res-bg');
-    },
-    increasePaginationDivSize: function () {
-        const paginationContainer = document.querySelector('#button-box');
-        paginationContainer.style.width = '90vw';
     },
     showPageNumber: function () {
         const pageNumContainer = document.querySelector('#page-container');
