@@ -25,19 +25,36 @@ export let events = {
         const loginModalCloseButtonTopLeft = document.querySelector('#close-login-button');
         loginModalCloseButtonTopLeft.addEventListener('click', dom.closeLoginModal);
     },
-    addAudioSound: function () {
+    addLaserSaberSound: function () {
         const navItems = document.querySelectorAll('.nav-link');
 
         for (const item of navItems) {
-            item.addEventListener('mouseover', this.playAudio);
-            item.addEventListener('mouseleave', this.pauseAudio);
+            item.addEventListener('mouseover', this.playLaserSaberAudio);
+            item.addEventListener('mouseleave', this.pauseLaserSaberAudio);
         }
-    }, playAudio: function () {
+    }, playLaserSaberAudio: function () {
         const audio = document.querySelector('#laser-saber');
         audio.play();
-    }, pauseAudio: function () {
+    }, pauseLaserSaberAudio: function () {
         const audio = document.querySelector('#laser-saber');
         audio.pause();
         audio.currentTime = 0;
+    },
+    addMainThemeSong: function () {
+        const pageNumber = document.querySelector('#page-container');
+        pageNumber.addEventListener('mouseover', this.playMainTheme);
+        pageNumber.addEventListener('mouseleave', this.pauseMainTheme);
+    }, playMainTheme: function () {
+        const audio = document.querySelector('#theme-song');
+        audio.currentTime = 8;
+        audio.play();
+    }, pauseMainTheme: function () {
+        const audio = document.querySelector('#theme-song');
+        audio.pause();
+        audio.currentTime = 0;
+    },
+    addSounds: function () {
+        this.addLaserSaberSound();
+        this.addMainThemeSong();
     }
 };

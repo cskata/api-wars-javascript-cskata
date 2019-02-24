@@ -351,7 +351,7 @@ function init() {
 
     const isUserLoggedIn = document.querySelector('#all-content').dataset.login;
     dom.changeNavBarElements(isUserLoggedIn);
-    events.addAudioSound();
+    events.addSounds();
 
     if (isUserLoggedIn === 'True') {
         addVotingModalEvents();
