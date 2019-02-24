@@ -397,11 +397,9 @@ body {
 
 #page-container {
     display: block;
-    padding: 10px;
-    bottom: 10px;
+    padding: 30px 0;
     color: #ffffff;
     text-align: center;
     font-size: 20px;
     font-weight: 800;
-    z-index: 1;
 }
