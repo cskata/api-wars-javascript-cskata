@@ -371,24 +371,44 @@ body {
     text-shadow: 2px 2px #0d5587;
 }
 
-.nav-link::before {
+#home::before, #registration::before, #login::before, #vote-stats::before, #logout::before {
     content: "";
     width: 100%;
     position: absolute;
-    border-bottom: 4px solid #03aefa;
+    height: 6px;
     bottom: 0;
     right: 400px;
     transition: 0.5s ease;
 }
 
-.nav-link:hover::before {
+#registration::before, #vote-stats::before {
+    background: linear-gradient(#32ff72, #218c74, #32ff72);
+}
+
+#home::before {
+    background: linear-gradient(#00a8ff, #1752bd, #00a8ff);
+}
+
+#login::before, #logout::before {
+    background: linear-gradient(#f8a5c2, #ff3f34, #f8a5c2);
+}
+
+#home:hover::before, #registration:hover::before, #login:hover::before,
+#vote-stats:hover::before, #logout:hover::before {
     right: 0;
     border-radius: 5px;
 }
 
-.nav-link:hover {
-    color: #03aefa !important;
-    border-color: #03aefa transparent;
+#registration:hover, #vote-stats:hover {
+    color: #32ff72 !important;
+}
+
+#home:hover {
+    color: #00a8ff !important;
+}
+
+#login:hover, #logout:hover {
+    color: #f8a5c2 !important;
 }
 
 .navbar {

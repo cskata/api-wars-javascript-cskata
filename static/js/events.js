@@ -51,7 +51,6 @@ export let events = {
     }, pauseMainTheme: function () {
         const audio = document.querySelector('#theme-song');
         audio.pause();
-        audio.currentTime = 0;
     },
     addSounds: function () {
         this.addLaserSaberSound();
