@@ -67,11 +67,19 @@ body {
 }
 
 #planets td, #residents td, #votes td {
-    padding: 2px;
+    padding: 0 3px;
     font-size: 14px;
     opacity: 0.8;
+    overflow: hidden;
 }
 
+#planets td {
+    height: 50px;
+}
+
+#residents td, #votes td {
+    height: 30px;
+}
 
 /* Button styles */
 
