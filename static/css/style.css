@@ -274,19 +274,19 @@ body {
 
 .modal-header {
     padding: 0 10px;
-    border-bottom: 1px double grey;
+    border-bottom: 1px double #5f5f5f;
     display: flex;
     width: 100%;
 }
 
 .modal-footer {
-    border-top: 1px double grey;
+    border-top: 1px double #5f5f5f;
     padding: 10px 10px;
     display: flex;
 }
 
 .votes-footer {
-    border-top: 1px double grey;
+    border-top: 1px double #5f5f5f;
     padding: 10px 10px;
     display: flex;
 }
@@ -416,10 +416,11 @@ body {
     font-size: 13px;
     font-weight: 600;
     float: right;
-    background: linear-gradient(90deg, #03aefa, #0d5587);
-    border: 1px double #ffffff;
+    background-color: #ffffff;
+    border: 1px double #0d5587;
     border-radius: 4px;
     margin-top: 6px;
+    margin-right: 2px;
     opacity: 0;
 }
 
@@ -428,7 +429,7 @@ body {
 
 ::-webkit-scrollbar {
     width: 12px;
-    background: #dddddd;
+    background: linear-gradient(to bottom right, #5f5f5f, #ffffff);
 }
 
 ::-webkit-scrollbar-track {

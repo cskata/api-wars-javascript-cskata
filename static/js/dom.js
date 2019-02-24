@@ -164,7 +164,7 @@ export let dom = {
     },
     showPageNumber: function () {
         const pageNumContainer = document.querySelector('#page-container');
-        pageNumContainer.style.opacity = '0.9';
+        pageNumContainer.style.opacity = '0.8';
     },
     hidePageNumber: function () {
         const pageNumContainer = document.querySelector('#page-container');
