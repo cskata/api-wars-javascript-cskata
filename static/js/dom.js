@@ -135,11 +135,13 @@ export let dom = {
     swapMainBackgroundsToBlack: function () {
         const body = document.querySelector('#main');
         body.style.backgroundImage = "url(/static/images/black.jpg)";
-        const pageNumContainer = document.querySelector('#page-container');
-        pageNumContainer.innerHTML = "";
 
         const title = document.querySelector('#title');
         title.style.backgroundImage = "url(/static/images/black.jpg)";
+
+        const pageNumContainer = document.querySelector('#page-container');
+        pageNumContainer.innerHTML = "";
+        pageNumContainer.style.opacity = '0';
     },
     swapMainBackgroundsToNormal: function () {
         const body = document.querySelector('#main');
@@ -147,12 +149,13 @@ export let dom = {
 
         const title = document.querySelector('#title');
         title.style.backgroundImage = "url(/static/images/universe.jpg)";
+
+        const pageNumContainer = document.querySelector('#page-container');
+        pageNumContainer.style.opacity = '0.9';
     },
     swapResidentModalBlack: function () {
         const resident = document.querySelector('#residents-inner-container');
         resident.classList.add('hide-res-bg');
-        const pageNumContainer = document.querySelector('#page-container');
-        pageNumContainer.innerHTML = "";
     },
     swapResidentModalToNormal: function () {
         const resident = document.querySelector('#residents-inner-container');

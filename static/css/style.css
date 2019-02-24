@@ -410,12 +410,17 @@ body {
 
 #page-container {
     display: inline;
-    padding: 10px 0;
-    color: #ffffff;
+    padding: 4px 5px;
+    color: #020307;
     text-align: center;
-    font-size: 16px;
-    font-weight: 800;
+    font-size: 13px;
+    font-weight: 600;
     float: right;
+    background: linear-gradient(90deg, #03aefa, #0d5587);
+    border: 1px double #ffffff;
+    border-radius: 4px;
+    margin-top: 6px;
+    opacity: 0.9;
 }
 
 
