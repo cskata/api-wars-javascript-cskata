@@ -148,7 +148,7 @@ body {
 
 /* MODAL general style */
 
-.w3-modal {
+.total-modal-display {
     z-index: 3;
     display: none;
     padding-top: 100px;
@@ -162,7 +162,7 @@ body {
     background-color: rgba(2, 3, 7, 0.8);
 }
 
-.w3-modal-content {
+.total-modal-content {
     margin: auto;
     height: auto;
     background-color: #ffffff;
@@ -177,7 +177,7 @@ body {
     opacity: 0.99;
 }
 
-.w3-modal-content::before {
+.total-modal-content::before {
     content: "";
     background-image: url("/static/images/universe.jpg");
     background-size: cover;
@@ -189,7 +189,7 @@ body {
     top: 0;
 }
 
-.w3-modal-content-votes {
+.total-modal-content-votes {
     margin: auto;
     height: auto;
     background-color: #ffffff;
@@ -202,7 +202,7 @@ body {
     z-index: 1;
 }
 
-.w3-modal-content-votes::before {
+.total-modal-content-votes::before {
     content: "";
     background-image: url("/static/images/universe.jpg");
     background-size: cover;
@@ -219,18 +219,18 @@ body {
     opacity: 1;
 }
 
-.w3-container {
+.inner-data-container {
     padding: 10px;
     text-align: -webkit-center;
 }
 
-.w3-container:after, .w3-container:before {
+.inner-data-container::after, .inner-data-container::before {
     content: "";
     display: table;
     clear: both;
 }
 
-.w3-button {
+.x-close-button {
     border: none;
     display: inline-block;
     padding: 3px 12px;
@@ -245,11 +245,11 @@ body {
     transition: 0.5s;
 }
 
-.w3-button:hover {
+.x-close-button:hover {
     background-color: #ffffff;
 }
 
-.w3-display-top-right {
+.button-display-top-right {
     position: absolute;
     right: 0;
     top: 0;
