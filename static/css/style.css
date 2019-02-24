@@ -409,8 +409,8 @@ body {
 /* Current page number */
 
 #page-container {
-    display: inline-block;
-    padding: 10px;
+    display: inline;
+    padding: 10px 0;
     color: #ffffff;
     text-align: center;
     font-size: 16px;
