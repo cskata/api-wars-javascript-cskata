@@ -85,13 +85,17 @@ export let templates = {
         return navBar;
     },
     displayUserName: function (username) {
-       const userName =
+        const userName =
             `
             <li class="signed-in-user logged-in">
                 <span id="shown-username">Signed in as <span id="logged-in-username">${username}</span></span>
             </li>
             `;
 
-       return userName;
+        return userName;
+    },
+    createPageNumber: function (whichPage) {
+        const pageNumContainer = document.querySelector('#page-container');
+        pageNumContainer.innerHTML = `- ${whichPage} -`;
     }
 };

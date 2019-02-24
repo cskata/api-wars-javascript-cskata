@@ -29,7 +29,7 @@ body {
 
 #planets {
     display: table;
-    width: 90vw;
+    width: 100%;
 }
 
 #planets th, #planets td, #residents, #residents th, #residents td, #votes, #votes th, #votes td {
@@ -42,7 +42,11 @@ body {
     opacity: 0.8;
 }
 
-#planets, .planet-header, .resident-header, #residents th, #residents td, #votes th, #votes td {
+#planets td {
+    font-size: 14px;
+}
+
+.planet-header, .resident-header, #residents th, #residents td, #votes th, #votes td {
     font-size: 14px;
     padding: 3px;
 }
@@ -75,6 +79,7 @@ body {
 .residents {
     font-size: 13px;
     padding: 20px 10px;
+    width: 75%;
 }
 
 .bold {
@@ -388,4 +393,14 @@ body {
     border-top: 1px solid grey;
     padding: 10px 10px;
     display: flex;
+}
+
+#page-container {
+    display: block;
+    padding: 20px;
+    color: #ffffff;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    z-index: 1;
 }

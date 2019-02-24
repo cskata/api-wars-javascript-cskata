@@ -7,7 +7,8 @@ init();
 
 
 function loadPlanetsData() {
-    const whichPage = document.querySelector('#planets').dataset.page;
+    const mainPage = document.querySelector('#planets');
+    const whichPage = mainPage.dataset.page;
     const targetURL = `https://swapi.co/api/planets/?page=${whichPage}`;
 
     const prevButton = document.querySelector('#prev-button');
@@ -31,6 +32,11 @@ function createPlanetTable(planets, prevButton, nextButton, whichPage) {
     prevButton.disabled = false;
     nextButton.disabled = false;
     disablePaginationButtons(whichPage);
+
+    const pageNumContainer = document.querySelector('#page-container');
+    pageNumContainer.innerHTML = "";
+    templates.createPageNumber(whichPage);
+
 }
 
 
@@ -95,6 +101,7 @@ function addResidentsButton(newRow, planet) {
         residentBtn.parentElement.style.textAlign = 'center';
         residentBtn.addEventListener('click', openResidentsModal);
     }
+    residentsColumn.style.textAlign = 'center';
 }
 
 
@@ -141,6 +148,12 @@ function fillRowWithPlanetData(newRow, planet, planetDataKeys) {
 
     for (let i = 0; i < planetDataKeys.length; i++) {
         newRow.children[i].innerHTML = formattedPlanetData[`${planetDataKeys[i]}`];
+        newRow.children[i].style.padding = '0 5px';
+        newRow.children[0].style.width = '120px';
+        newRow.children[1].style.width = '120px';
+        newRow.children[2].style.width = '150px';
+        newRow.children[3].style.width = '200px';
+        newRow.children[5].style.width = '200px';
     }
 }
 
