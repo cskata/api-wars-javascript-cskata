@@ -409,13 +409,13 @@ body {
 /* Current page number */
 
 #page-container {
-    display: block;
-    padding: 5px 0;
+    display: inline-block;
+    padding: 10px;
     color: #ffffff;
     text-align: center;
     font-size: 16px;
     font-weight: 800;
-    width: 100%;
+    float: right;
 }
 
 
