@@ -46,7 +46,7 @@ export let events = {
         pageNumber.addEventListener('mouseleave', this.pauseMainTheme);
     }, playMainTheme: function () {
         const audio = document.querySelector('#theme-song');
-        audio.currentTime = 8;
+        audio.currentTime = 9;
         audio.play();
     }, pauseMainTheme: function () {
         const audio = document.querySelector('#theme-song');

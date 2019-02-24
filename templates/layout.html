@@ -27,10 +27,12 @@
                 <ul class="navbar-nav" id="username-navbar"></ul>
             </div>
         </nav>
-        <audio src="http://soundbible.com/mp3/Lightsaber%20Turn%20On-SoundBible.com-1637663395.mp3" id="laser-saber"
-               preload="auto" hidden></audio>
-        <audio src="https://starwarsintrocreator.kassellabs.io/tfa.e8a4bf9d.ogg" id="theme-song" preload="auto"
-               hidden></audio>
+        <audio controls preload="auto" id="laser-saber" hidden>
+            <source src="static/audio/lasersaber.mp3" type="audio/mp3">
+        </audio>
+        <audio controls preload="auto" id="theme-song" hidden>
+            <source src="static/audio/main.mp3" type="audio/mp3">
+        </audio>
 
         {% block content %} {% endblock %}
         <script type="module" src="{{ url_for('static', filename='js/apiwars.js') }}" defer></script>
