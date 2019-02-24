@@ -368,6 +368,7 @@ body {
     overflow: hidden;
     transition: 0.5s all;
     width: 100%;
+    text-shadow: 2px 2px #0d5587;
 }
 
 .nav-link::before {
@@ -428,6 +429,7 @@ body {
     font-family: 'Russo One', sans-serif;
     z-index: 2;
     color: #ffffff;
+    text-shadow: 2px 2px #0d5587;
     background: url('/static/images/universe.jpg');
     background-position-y: -7px;
     padding: 0 20px;
