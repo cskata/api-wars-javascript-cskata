@@ -135,6 +135,8 @@ export let dom = {
     swapMainBackgroundsToBlack: function () {
         const body = document.querySelector('#main');
         body.style.backgroundImage = "url(/static/images/black.jpg)";
+        const pageNumContainer = document.querySelector('#page-container');
+        pageNumContainer.innerHTML = "";
 
         const title = document.querySelector('#title');
         title.style.backgroundImage = "url(/static/images/black.jpg)";
@@ -149,6 +151,8 @@ export let dom = {
     swapResidentModalBlack: function () {
         const resident = document.querySelector('#residents-inner-container');
         resident.classList.add('hide-res-bg');
+        const pageNumContainer = document.querySelector('#page-container');
+        pageNumContainer.innerHTML = "";
     },
     swapResidentModalToNormal: function () {
         const resident = document.querySelector('#residents-inner-container');

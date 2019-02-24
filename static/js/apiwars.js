@@ -149,11 +149,6 @@ function fillRowWithPlanetData(newRow, planet, planetDataKeys) {
     for (let i = 0; i < planetDataKeys.length; i++) {
         newRow.children[i].innerHTML = formattedPlanetData[`${planetDataKeys[i]}`];
         newRow.children[i].style.padding = '0 5px';
-        newRow.children[0].style.width = '120px';
-        newRow.children[1].style.width = '120px';
-        newRow.children[2].style.width = '150px';
-        newRow.children[3].style.width = '200px';
-        newRow.children[5].style.width = '200px';
     }
 }
 
