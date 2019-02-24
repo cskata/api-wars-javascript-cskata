@@ -375,18 +375,20 @@ body {
     content: "";
     width: 100%;
     position: absolute;
-    border-bottom: 3px solid #03aefa;
+    border-bottom: 4px solid #03aefa;
     bottom: 0;
     right: 400px;
-    transition: 0.5s all;
+    transition: 0.5s ease;
 }
 
 .nav-link:hover::before {
     right: 0;
+    border-radius: 5px;
 }
 
 .nav-link:hover {
     color: #03aefa !important;
+    border-color: #03aefa transparent;
 }
 
 .navbar {

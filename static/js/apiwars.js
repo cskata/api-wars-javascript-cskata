@@ -1,6 +1,7 @@
 import {dom} from "./dom.js";
 import {dataHandler} from "./data_handler.js";
 import {templates} from "./templates.js";
+import {events} from "./events.js";
 
 
 init();
@@ -350,6 +351,7 @@ function init() {
 
     const isUserLoggedIn = document.querySelector('#all-content').dataset.login;
     dom.changeNavBarElements(isUserLoggedIn);
+    events.addAudioSound();
 
     if (isUserLoggedIn === 'True') {
         addVotingModalEvents();

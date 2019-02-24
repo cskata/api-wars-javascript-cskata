@@ -24,5 +24,20 @@ export let events = {
 
         const loginModalCloseButtonTopLeft = document.querySelector('#close-login-button');
         loginModalCloseButtonTopLeft.addEventListener('click', dom.closeLoginModal);
+    },
+    addAudioSound: function () {
+        const navItems = document.querySelectorAll('.nav-link');
+
+        for (const item of navItems) {
+            item.addEventListener('mouseover', this.playAudio);
+            item.addEventListener('mouseleave', this.pauseAudio);
+        }
+    }, playAudio: function () {
+        const audio = document.querySelector('#laser-saber');
+        audio.play();
+    }, pauseAudio: function () {
+        const audio = document.querySelector('#laser-saber');
+        audio.pause();
+        audio.currentTime = 0;
     }
 };
