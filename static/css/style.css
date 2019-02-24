@@ -5,7 +5,7 @@ html {
 body {
     margin: 0;
     padding: 0;
-    color: black;
+    color: #020307;
     background-image: url("/static/images/universe.jpg");
     background-size: cover;
     background-position-y: 95px;
@@ -72,25 +72,73 @@ body {
 
 /* Button styles */
 
+.btn-primary, .btn-secondary, .reg-button, .login-button, .close-button, .vote-close-button {
+    font-size: 13px;
+    font-weight: 600;
+    background-image: linear-gradient(90deg, #03aefa, #0d5587);
+    color: #020307;
+}
+
+.btn-primary, .btn-primary:disabled, .reg-button, .login-button, .close-button, .vote-close-button {
+    border: 1px solid #ffffff !important;
+}
+
+.btn-primary:hover, .reg-button:hover, .login-button:hover, .close-button:hover, .vote-close-button:hover {
+    background-image: linear-gradient(#0d4373, #0d4373);
+    border: 1px double #ffffff !important;
+}
+
 .btn-primary {
-    background-color: #03A9F4;
     opacity: 0.9;
 }
 
-.btn-primary:hover, .btn-primary:disabled, .btn-primary:disabled, .btn-secondary:hover {
-    background-color: #0d4373;
+.btn-primary:disabled, .btn-primary:disabled {
+    background-image: linear-gradient(#5f5f5f, #5f5f5f);
 }
 
 .btn-secondary {
-    background-color: #03A9F4;
-    color: #000000;
+    color: #020307;
     margin: 2px;
-    font-size: 14px;
+    border: 1px solid #0d5587;
+}
+
+.btn-secondary:hover {
+    border: 1px double #03aefa;
+    background-image: linear-gradient(#0d4373, #0d4373);
 }
 
 .btn-resident {
     width: 120px;
     margin: 5px 2px;
+}
+
+.reg-button, .login-button {
+    color: #020307;
+    border-radius: 4px;
+    margin: 10px;
+    width: 50%;
+    height: 30px;
+    padding-bottom: 3px;
+    opacity: 0.9;
+}
+
+.reg-button:hover, .login-button:hover {
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.close-button, .vote-close-button {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    opacity: 0.9;
+}
+
+.close-button {
+    margin-left: 90%;
+}
+
+.vote-close-button {
+    margin-left: 80%;
 }
 
 .centered-icon {
@@ -110,20 +158,20 @@ body {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgb(2, 3, 7);
+    background-color: rgba(2, 3, 7, 0.8);
 }
 
 .w3-modal-content {
     margin: auto;
     height: auto;
-    background-color: #fff;
+    background-color: #ffffff;
     position: relative;
     padding-top: 2.5%;
     outline: 0;
     width: 55%;
     border-radius: 5px;
-    box-shadow: -1px 2px 50px 10px #000000;
+    box-shadow: -1px 2px 50px 10px #020307;
     display: block;
     z-index: 1;
     opacity: 0.99;
@@ -144,13 +192,13 @@ body {
 .w3-modal-content-votes {
     margin: auto;
     height: auto;
-    background-color: #fff;
+    background-color: #ffffff;
     position: relative;
     padding-top: 2.5%;
     outline: 0;
     width: 25%;
     border-radius: 5px;
-    box-shadow: -1px 2px 50px 10px #000000;
+    box-shadow: -1px 2px 50px 10px #020307;
     z-index: 1;
 }
 
@@ -198,10 +246,10 @@ body {
 }
 
 .w3-button:hover {
-    background-color: #cccccc;
+    background-color: #ffffff;
 }
 
-.w3-display-topright {
+.w3-display-top-right {
     position: absolute;
     right: 0;
     top: 0;
@@ -214,8 +262,6 @@ body {
     font-weight: bold;
 }
 
-
-
 .col {
     width: 300px;
 }
@@ -226,25 +272,25 @@ body {
 
 .modal-header {
     padding: 0 10px;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px double grey;
     display: flex;
     width: 100%;
 }
 
 .modal-footer {
-    border-top: 1px solid grey;
+    border-top: 1px double grey;
     padding: 10px 10px;
     display: flex;
 }
 
 .votes-footer {
-    border-top: 1px solid grey;
+    border-top: 1px double grey;
     padding: 10px 10px;
     display: flex;
 }
 
 
-/* Registration and login from style and also closing buttons */
+/* Registration and login from style */
 
 #reg-form, #login-form {
     width: 60%;
@@ -258,8 +304,18 @@ body {
     height: 30px;
     border-radius: 4px;
     box-shadow: none;
-    border: 1px solid #6c757d;
+    border: 1px double #0d4373;
     text-indent: 5px;
+}
+
+input::placeholder {
+    font-size: 13px;
+    padding-bottom: 4px;
+    color: #0d4373;
+}
+
+input:focus::placeholder {
+    opacity: 0;
 }
 
 .label {
@@ -267,26 +323,6 @@ body {
     font-size: 16px;
     font-weight: 600;
     color: #ffffff;
-}
-
-.reg-button, .login-button {
-    color: black;
-    border-radius: 4px;
-    border: 1px solid #6c757d;
-    margin: 10px;
-    width: 50%;
-    height: 30px;
-    font-weight: 600;
-    font-size: 13px;
-    background-color: #03A9F4;
-    padding-bottom: 3px;
-    opacity: 0.9;
-}
-
-.reg-button:hover, .login-button:hover {
-    background-color: #0d4373;
-    color: white;
-    cursor: pointer;
 }
 
 .fa-times {
@@ -300,30 +336,11 @@ body {
     cursor: pointer;
     transform: rotate(180deg);
     opacity: 1;
-    color: #000000;
-}
-
-.close-button, .vote-close-button {
-    margin-top: 3px;
-    margin-bottom: 3px;
-    background-color: #03A9F4;
-    opacity: 0.9;
-}
-
-.close-button:hover, .vote-close-button:hover {
-    background-color: #0d4373;
-}
-
-.close-button {
-    margin-left: 90%;
-}
-
-.vote-close-button {
-    margin-left: 80%;
+    color: #020307;
 }
 
 
-/* Navbar style */
+/* Navigation bar style */
 
 .nav-item {
     cursor: pointer;
@@ -334,7 +351,7 @@ body {
 }
 
 .nav-link:hover {
-    color: #296294 !important;
+    color: #03aefa !important;
 }
 
 .navbar {
@@ -342,11 +359,11 @@ body {
 }
 
 .signed-in-user {
-    color: #9E9E9E;
+    color: #ffffff;
 }
 
 #logged-in-username {
-    color: white;
+    color: #03aefa;
     font-weight: bold;
 }
 
@@ -378,24 +395,6 @@ body {
     content: '';
     display: block;
     position: absolute;
-}
-
-#main-title::before {
-    background: white;
-    z-index: -1;
-    height: 101%;
-    left: -20px;
-    right: -20px;
-}
-
-#main-title::after {
-    background: black;
-    width: 99vw;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 13px;
-    z-index: -2;
-    height: 50%;
 }
 
 /* Pagination buttons */
