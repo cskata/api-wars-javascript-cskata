@@ -10,7 +10,7 @@ body {
     background-size: cover;
     background-position-y: 95px;
     background-repeat: repeat;
-    height: 100vw;
+    height: 100vh;
 }
 
 .main-content {
@@ -415,10 +415,7 @@ body {
     text-align: center;
     font-size: 16px;
     font-weight: 800;
-    bottom: 0;
-    left: 0;
     width: 100%;
-    margin-top: 50px;
 }
 
 
@@ -434,7 +431,6 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #03aefa, #020307);
+    background: linear-gradient(0deg, #0d5587, #03aefa);
     border-radius: 10px;
-
 }
