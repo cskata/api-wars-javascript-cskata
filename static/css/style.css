@@ -305,16 +305,15 @@ body {
     border-radius: 4px;
     box-shadow: none;
     border: 1px double #0d4373;
-    text-indent: 5px;
 }
 
-input::placeholder {
+.input::placeholder {
+    text-indent: 5px;
     font-size: 13px;
-    padding-bottom: 4px;
     color: #0d4373;
 }
 
-input:focus::placeholder {
+.input:focus::placeholder {
     opacity: 0;
 }
 
