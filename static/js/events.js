@@ -33,10 +33,12 @@ export let events = {
             item.addEventListener('mouseover', this.playLaserSaberAudio);
             item.addEventListener('mouseleave', this.pauseLaserSaberAudio);
         }
-    }, playLaserSaberAudio: function () {
+    },
+    playLaserSaberAudio: function () {
         const audio = document.querySelector('#laser-saber');
         audio.play();
-    }, pauseLaserSaberAudio: function () {
+    },
+    pauseLaserSaberAudio: function () {
         const audio = document.querySelector('#laser-saber');
         audio.pause();
         audio.currentTime = 0;

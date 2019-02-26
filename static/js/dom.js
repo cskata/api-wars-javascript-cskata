@@ -94,9 +94,9 @@ export let dom = {
 
         if (dataContainer.lastChild.nodeName === 'IMG') {
             if (location === 'residents') {
-                this.swapResidentModalToNormal();
+                this.swapResidentModalToDefault();
             } else {
-                this.swapMainBackgroundsToNormal();
+                this.swapMainBackgroundsToDefault();
             }
             dataContainer.removeChild(dataContainer.lastChild);
         }
@@ -136,6 +136,7 @@ export let dom = {
         userNameNavBar.innerHTML = userNameText;
 
         events.addVotingModalEvents();
+        events.addLaserSaberSound();
     },
     openRegModal: function () {
         const registrationModal = document.querySelector('#registration-container');
@@ -167,7 +168,7 @@ export let dom = {
 
         this.hidePageNumber();
     },
-    swapMainBackgroundsToNormal: function () {
+    swapMainBackgroundsToDefault: function () {
         const body = document.querySelector('#main');
         body.style.backgroundImage = "url(/static/images/universe.jpg)";
 
@@ -183,7 +184,7 @@ export let dom = {
         const resident = document.querySelector('#residents-inner-container');
         resident.classList.add('hide-res-bg');
     },
-    swapResidentModalToNormal: function () {
+    swapResidentModalToDefault: function () {
         const resident = document.querySelector('#residents-inner-container');
         resident.classList.remove('hide-res-bg');
     },
