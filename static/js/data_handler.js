@@ -51,6 +51,7 @@ export let dataHandler = {
                     events.addUserToDatabase();
                 } else {
                     alert('Username is already taken, please choose something else.');
+                    dom.emptyRegFormFields();
                 }
             }
         });
@@ -77,6 +78,7 @@ export let dataHandler = {
             success: function (response) {
                 if (response === false) {
                     alert('Invalid username or password!');
+                    dom.emptyLoginFormFields();
                 } else {
                     dom.showLoggedInElements('True', data['username']);
                     dom.closeLoginModal();

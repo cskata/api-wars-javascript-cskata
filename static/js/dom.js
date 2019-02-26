@@ -224,5 +224,13 @@ export let dom = {
         dom.changeNavBarAfterLogin(loginStatus, username);
         dom.displayVotingColumn();
         dom.displayVoteButtons();
+    },
+    emptyLoginFormFields: function () {
+        document.querySelector('#username').value = "";
+        document.querySelector('#password').value = "";
+    },
+    emptyRegFormFields: function () {
+        document.querySelector('#new_username').value = "";
+        document.querySelector('#new_password').value = "";
     }
 };
