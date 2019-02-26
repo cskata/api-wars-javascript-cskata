@@ -48,7 +48,7 @@ export let dataHandler = {
             url: `/registration`,
             success: function (response) {
                 if (response === false) {
-                    events.addUserToDataBase();
+                    events.addUserToDatabase();
                 } else {
                     alert('Username is already taken, please choose something else.');
                 }
@@ -67,18 +67,18 @@ export let dataHandler = {
             }
         });
     },
-    verifyUserAtLogin: function (username) {
+    verifyUserAtLogin: function (data) {
         $.ajax({
-            type: "GET",
-            dataType: "json",
+            type: "POST",
             url: "/login",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(data),
             success: function (response) {
                 if (response === false) {
                     alert('Invalid username or password!');
                 } else {
-                    dom.changeNavBarAfterLogin('True', username);
-                    dom.displayVotingColumn();
-                    dom.displayVoteButtons();
+                    dom.showLoggedInElements('True', data['username']);
                     dom.closeLoginModal();
                 }
             }

@@ -66,14 +66,13 @@ export let events = {
         document.cookie = `username=${username}`;
         dataHandler.checkIfUsernameIsTaken(username);
     },
-    addUserToDataBase: function () {
+    addUserToDatabase: function () {
         const username = document.querySelector('#new_username').value;
         const password = document.querySelector('#new_password').value;
         const newUserData = {
             username: username,
             password: password
         };
-        console.log(newUserData);
         dataHandler.registerNewUser(newUserData);
     },
     allowLogin: function () {
@@ -83,9 +82,11 @@ export let events = {
     checkLoginUserName: function () {
         const username = document.querySelector('#username').value;
         const password = document.querySelector('#password').value;
-        document.cookie = `username=${username}`;
-        document.cookie = `password=${password}`;
-        dataHandler.verifyUserAtLogin(username);
+        const userData = {
+            username: username,
+            password: password
+        };
+        dataHandler.verifyUserAtLogin(userData);
     },
     addVotingModalEvents: function () {
         const voteStatisticsLink = document.querySelector('#vote-stats');

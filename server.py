@@ -17,8 +17,8 @@ def index():
 
 @app.route('/registration', methods=['GET'])
 def check_username_availability():
-    new_user = request.cookies['username']
-    result = data_manager.check_username_in_database(new_user)
+    new_username = request.cookies['username']
+    result = data_manager.check_username_in_database(new_username)
     return jsonify(result)
 
 
@@ -29,9 +29,9 @@ def new_user_registration():
     return jsonify(new_user)
 
 
-@app.route('/login', methods=['GET'])
+@app.route('/login', methods=['POST'])
 def check_login_data():
-    login_data = request.cookies
+    login_data = request.get_json()
     is_user_verified = data_manager.verify_user(login_data)
     if is_user_verified is True:
         session['username'] = login_data['username']

@@ -219,5 +219,10 @@ export let dom = {
         for (const button of voteButtons) {
             button.style.display = 'block';
         }
+    },
+    showLoggedInElements: function (loginStatus, username) {
+        dom.changeNavBarAfterLogin(loginStatus, username);
+        dom.displayVotingColumn();
+        dom.displayVoteButtons();
     }
 };
