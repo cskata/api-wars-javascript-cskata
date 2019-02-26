@@ -113,5 +113,25 @@ export let events = {
 
         const modal = document.querySelector('#votes-container');
         modal.style.display = 'none';
+    },
+    saveVote: function (event) {
+        const planetId = parseInt(event.target.dataset.planetid);
+        const planetName = event.target.dataset.planetname;
+        const username = document.querySelector('#all-content').dataset.username;
+        const currentDate = new Date();
+        const submissionTime =
+            currentDate.getFullYear() + '-0' + (currentDate.getMonth() + 1) + '-' + currentDate.getDate() + ' ' +
+            currentDate.getHours() + ':' + currentDate.getMinutes() + ':' + currentDate.getSeconds();
+
+        const data = {
+            planet_id: planetId,
+            planet_name: planetName,
+            username: username,
+            submission_time: submissionTime
+        };
+
+        dataHandler.saveVote(data);
+
+        alert(`Your vote for planet ${planetName} is saved.`);
     }
 };

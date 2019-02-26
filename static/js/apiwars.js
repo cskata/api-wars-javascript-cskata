@@ -25,6 +25,7 @@ function loadPlanetsData() {
 function createPlanetTable(planets, prevButton, nextButton, whichPage) {
     dom.removeLoadingImage('#planet-data');
     dom.showPageNumber();
+
     const planetsPerPage = planets.length;
     dom.createPlanetDataRows(planetsPerPage);
 
@@ -33,12 +34,9 @@ function createPlanetTable(planets, prevButton, nextButton, whichPage) {
 
     prevButton.disabled = false;
     nextButton.disabled = false;
-    disablePaginationButtons(whichPage);
+    dom.whichPaginationIsDisabled(whichPage);
 
-    const pageNumContainer = document.querySelector('#page-container');
-    pageNumContainer.innerHTML = "";
     templates.createPageNumber(whichPage);
-
 }
 
 
@@ -50,19 +48,9 @@ function insertPlanetsData(planets) {
         let currentRow = table.children[i + 1];
         fillRowWithPlanetData(currentRow, planets[i], planetDataKeys);
         addResidentsButton(currentRow, planets[i]);
-        addVoteButton(currentRow, planets[i]);
+        dom.addVoteButton(currentRow, planets[i]);
     }
-    hidePlanetVotingHeader();
-}
-
-
-function hidePlanetVotingHeader() {
-    const datasetContainer = document.querySelector('#all-content');
-    if (datasetContainer.dataset.login === "") {
-        const headers = document.querySelectorAll('.planet-header');
-        const lastHeader = headers[templates.planetHeaderNames.length - 1];
-        lastHeader.style.display = 'none';
-    }
+    dom.hidePlanetVotingHeader();
 }
 
 
@@ -72,21 +60,6 @@ function insertPlanetHeadersData() {
 
     for (let i = 0; i < planetHeaderNames.length; i++) {
         planetHeaderCells[i].innerHTML = planetHeaderNames[i];
-    }
-}
-
-
-function disablePaginationButtons(whichPage) {
-    const prevButton = document.querySelector('#prev-button');
-    const nextButton = document.querySelector('#next-button');
-
-    if (parseInt(whichPage) === 1) {
-        prevButton.disabled = true;
-    } else if (parseInt(whichPage) > 1 && parseInt(whichPage) < 7) {
-        prevButton.disabled = false;
-        nextButton.disabled = false;
-    } else if (parseInt(whichPage) === 7) {
-        nextButton.disabled = true;
     }
 }
 
@@ -104,44 +77,6 @@ function addResidentsButton(newRow, planet) {
         residentBtn.addEventListener('click', openResidentsModal);
     }
     residentsColumn.style.textAlign = 'center';
-}
-
-
-function addVoteButton(newRow, planet) {
-    const lastColumn = newRow.children[templates.planetHeaderNames.length - 1];
-    const voteBtn = dom.createVoteButton(planet);
-    lastColumn.appendChild(voteBtn);
-    voteBtn.parentElement.style.textAlign = 'center';
-    voteBtn.addEventListener('click', saveVote);
-
-    const datasetContainer = document.querySelector('#all-content');
-
-    if (datasetContainer.dataset.login === "") {
-        voteBtn.style.display = 'none';
-        voteBtn.parentElement.style.display = 'none';
-    }
-}
-
-
-function saveVote(event) {
-    const planetId = parseInt(event.target.dataset.planetid);
-    const planetName = event.target.dataset.planetname;
-    const username = document.querySelector('#all-content').dataset.username;
-    const currentDate = new Date();
-    const submissionTime =
-        currentDate.getFullYear() + '-0' + (currentDate.getMonth() + 1) + '-' + currentDate.getDate() + ' ' +
-        currentDate.getHours() + ':' + currentDate.getMinutes() + ':' + currentDate.getSeconds();
-
-    const data = {
-        planet_id: planetId,
-        planet_name: planetName,
-        username: username,
-        submission_time: submissionTime
-    };
-
-    dataHandler.saveVote(data);
-
-    alert(`Your vote for planet ${planetName} is saved.`);
 }
 
 
@@ -307,10 +242,10 @@ function addButtonClickEvents() {
 function init() {
     loadPlanetsData();
     addButtonClickEvents();
+    events.addSounds();
 
     const isUserLoggedIn = document.querySelector('#all-content').dataset.login;
     dom.changeNavBarElements(isUserLoggedIn);
-    events.addSounds();
 
     if (isUserLoggedIn === 'True') {
         events.addVotingModalEvents();

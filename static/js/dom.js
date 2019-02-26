@@ -192,10 +192,32 @@ export let dom = {
         const pageNumContainer = document.querySelector('#page-container');
         pageNumContainer.style.opacity = '0.8';
     },
+    hidePlanetVotingHeader: function () {
+        const datasetContainer = document.querySelector('#all-content');
+        if (datasetContainer.dataset.login === "") {
+            const headers = document.querySelectorAll('.planet-header');
+            const lastHeader = headers[templates.planetHeaderNames.length - 1];
+            lastHeader.style.display = 'none';
+        }
+    },
     hidePageNumber: function () {
         const pageNumContainer = document.querySelector('#page-container');
         pageNumContainer.innerHTML = "";
         pageNumContainer.style.opacity = '0';
+    },
+    addVoteButton: function (row, planet) {
+        const lastColumn = row.children[templates.planetHeaderNames.length - 1];
+        const voteBtn = dom.createVoteButton(planet);
+        lastColumn.appendChild(voteBtn);
+        voteBtn.parentElement.style.textAlign = 'center';
+        voteBtn.addEventListener('click', events.saveVote);
+
+        const datasetContainer = document.querySelector('#all-content');
+
+        if (datasetContainer.dataset.login === "") {
+            voteBtn.style.display = 'none';
+            voteBtn.parentElement.style.display = 'none';
+        }
     },
     listVotedPlanets: function (response) {
         const table = document.querySelector('#votes');
@@ -221,6 +243,19 @@ export let dom = {
 
         for (const button of voteButtons) {
             button.style.display = 'block';
+        }
+    },
+    whichPaginationIsDisabled: function (whichPage) {
+        const prevButton = document.querySelector('#prev-button');
+        const nextButton = document.querySelector('#next-button');
+
+        if (parseInt(whichPage) === 1) {
+            prevButton.disabled = true;
+        } else if (parseInt(whichPage) > 1 && parseInt(whichPage) < 7) {
+            prevButton.disabled = false;
+            nextButton.disabled = false;
+        } else if (parseInt(whichPage) === 7) {
+            nextButton.disabled = true;
         }
     },
     showLoggedInElements: function (loginStatus, username) {

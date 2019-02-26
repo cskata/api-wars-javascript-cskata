@@ -96,6 +96,7 @@ export let templates = {
     },
     createPageNumber: function (whichPage) {
         const pageNumContainer = document.querySelector('#page-container');
+        pageNumContainer.innerHTML = "";
         pageNumContainer.innerHTML = `${whichPage} / 7`;
     }
 };
