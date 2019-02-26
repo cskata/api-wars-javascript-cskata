@@ -2,6 +2,18 @@ import {templates} from "./templates.js";
 import {events} from "./events.js";
 
 export let dom = {
+    datasetContainer: document.querySelector('#all-content'),
+    registrationModal:document.querySelector('#registration-container'),
+    loginModal: document.querySelector('#login-container'),
+    mainPlanetTable: document.querySelector('#planets'),
+    residentTable: document.querySelector('#residents'),
+    residentTotalModal: document.querySelector('#resident-container'),
+    prevButton: document.querySelector('#prev-button'),
+    nextButton: document.querySelector('#next-button'),
+    residentInnerModal: document.querySelector('#residents-inner-container'),
+    mainNavBar: document.querySelector('#main-navbar'),
+    userNameNavBar: document.querySelector('#username-navbar'),
+    pageNumber: document.querySelector('#page-container'),
     createResidentButton: function (planet) {
         const residentBtn = document.createElement('button');
 
@@ -33,15 +45,14 @@ export let dom = {
         voteBtn.dataset.planetid = planetId;
         voteBtn.dataset.planetname = planet['name'];
 
-        const datasetContainer = document.querySelector('#all-content');
-        if (datasetContainer.dataset.login === "") {
+        if (dom.datasetContainer.dataset.login === "") {
             voteBtn.style.display = 'none';
         }
 
         return voteBtn;
     },
     createPlanetDataRows: function (planetsPerPage) {
-        const table = document.querySelector('#planets');
+        const table = dom.mainPlanetTable;
         const header = templates.createPlanetHeaderElement();
         table.appendChild(header);
 
@@ -51,7 +62,7 @@ export let dom = {
         }
     },
     createResidentHeader: function () {
-        const table = document.querySelector('#residents');
+        const table = dom.residentTable;
         const header = templates.createResidentHeaderElement();
         table.appendChild(header);
     },
@@ -76,9 +87,10 @@ export let dom = {
         loadingImage.id = 'loading-image';
 
         if (location === 'residents') {
-            this.swapResidentModalBlack();
+            dom.residentInnerModal.classList.add('hide-res-bg');
         } else {
-            this.swapMainBackgroundsToBlack();
+            dom.swapMainBackgrounds("url(/static/images/black.jpg)");
+            dom.hidePageNumber();
         }
 
         dataContainer.appendChild(loadingImage);
@@ -94,116 +106,72 @@ export let dom = {
 
         if (dataContainer.lastChild.nodeName === 'IMG') {
             if (location === 'residents') {
-                this.swapResidentModalToDefault();
+                dom.residentInnerModal.classList.remove('hide-res-bg');
             } else {
-                this.swapMainBackgroundsToDefault();
+                dom.swapMainBackgrounds("url(/static/images/universe.jpg)");
+                dom.showPageNumber();
             }
             dataContainer.removeChild(dataContainer.lastChild);
         }
     },
     changeNavBarElements: function (isUserLoggedIn) {
         if (isUserLoggedIn === 'True') {
-            const mainNavBar = document.querySelector('#main-navbar');
-            const mainNavBarContent = templates.loggedInNavBar();
-            mainNavBar.innerHTML = mainNavBarContent;
-
-            const username = document.querySelector('#all-content').dataset.username;
-            const userNameText = templates.displayUserName(username);
-
-            const userNameNavBar = document.querySelector('#username-navbar');
-            userNameNavBar.innerHTML = userNameText;
+            const username = dom.datasetContainer.dataset.username;
+            dom.mainNavBar.innerHTML = templates.loggedInNavBar();
+            dom.userNameNavBar.innerHTML = templates.displayUserName(username);
         } else {
-            const mainNavBar = document.querySelector('#main-navbar');
-            const mainNavBarContent = templates.notLoggedInNavBar();
-            mainNavBar.innerHTML = mainNavBarContent;
+            dom.mainNavBar.innerHTML = templates.notLoggedInNavBar();
+            dom.userNameNavBar.innerHTML = "";
             events.addNavBarClickEvents();
-
-            const userNameNavBar = document.querySelector('#username-navbar');
-            userNameNavBar.innerHTML = "";
         }
     },
     changeNavBarAfterLogin: function (isUserLoggedIn, username) {
         document.querySelector('#all-content').dataset.username = username;
         document.querySelector('#all-content').dataset.login = 'True';
 
-        const mainNavBar = document.querySelector('#main-navbar');
-        const mainNavBarContent = templates.loggedInNavBar();
-        mainNavBar.innerHTML = mainNavBarContent;
-
-        const userNameText = templates.displayUserName(username);
-
-        const userNameNavBar = document.querySelector('#username-navbar');
-        userNameNavBar.innerHTML = userNameText;
+        dom.mainNavBar.innerHTML = templates.loggedInNavBar();
+        dom.userNameNavBar.innerHTML = templates.displayUserName(username);
 
         events.addVotingModalEvents();
         events.addSounds();
     },
     openRegModal: function () {
-        const registrationModal = document.querySelector('#registration-container');
-        registrationModal.style.display = 'block';
+        dom.registrationModal.style.display = 'block';
     },
     closeRegModal: function () {
-        const registrationModal = document.querySelector('#registration-container');
         dom.emptyRegFormFields();
-        registrationModal.style.display = 'none';
+        dom.registrationModal.style.display = 'none';
     },
     openLoginModal: function () {
-        const loginModal = document.querySelector('#login-container');
-        loginModal.style.display = 'block';
+        dom.loginModal.style.display = 'block';
     },
     closeLoginModal: function () {
-        const loginModal = document.querySelector('#login-container');
         dom.emptyLoginFormFields();
-        loginModal.style.display = 'none';
+        dom.loginModal.style.display = 'none';
     },
-    swapMainBackgroundsToBlack: function () {
+    swapMainBackgrounds: function (backgroundImage) {
         const body = document.querySelector('#main');
-        body.style.backgroundImage = "url(/static/images/black.jpg)";
+        body.style.backgroundImage = backgroundImage;
 
         const title = document.querySelector('#title');
-        title.style.backgroundImage = "url(/static/images/black.jpg)";
+        title.style.backgroundImage = backgroundImage;
 
         const mainTitle = document.querySelector('#main-title');
-        mainTitle.style.backgroundImage = "url(/static/images/black.jpg)";
-
-        this.hidePageNumber();
-    },
-    swapMainBackgroundsToDefault: function () {
-        const body = document.querySelector('#main');
-        body.style.backgroundImage = "url(/static/images/universe.jpg)";
-
-        const title = document.querySelector('#title');
-        title.style.backgroundImage = "url(/static/images/universe.jpg)";
-
-        const mainTitle = document.querySelector('#main-title');
-        mainTitle.style.backgroundImage = "url(/static/images/universe.jpg)";
-
-        this.showPageNumber();
-    },
-    swapResidentModalBlack: function () {
-        const resident = document.querySelector('#residents-inner-container');
-        resident.classList.add('hide-res-bg');
-    },
-    swapResidentModalToDefault: function () {
-        const resident = document.querySelector('#residents-inner-container');
-        resident.classList.remove('hide-res-bg');
+        mainTitle.style.backgroundImage = backgroundImage;
     },
     showPageNumber: function () {
-        const pageNumContainer = document.querySelector('#page-container');
-        pageNumContainer.style.opacity = '0.8';
+        dom.pageNumber.style.opacity = '0.8';
     },
     hidePlanetVotingHeader: function () {
-        const datasetContainer = document.querySelector('#all-content');
-        if (datasetContainer.dataset.login === "") {
+        if (dom.datasetContainer.dataset.login === "") {
             const headers = document.querySelectorAll('.planet-header');
             const lastHeader = headers[templates.planetHeaderNames.length - 1];
             lastHeader.style.display = 'none';
         }
     },
     hidePageNumber: function () {
-        const pageNumContainer = document.querySelector('#page-container');
-        pageNumContainer.innerHTML = "";
-        pageNumContainer.style.opacity = '0';
+        dom.pageNumber.innerHTML = "";
+        dom.pageNumber.style.opacity = '0';
     },
     addVoteButton: function (row, planet) {
         const lastColumn = row.children[templates.planetHeaderNames.length - 1];
@@ -212,9 +180,7 @@ export let dom = {
         voteBtn.parentElement.style.textAlign = 'center';
         voteBtn.addEventListener('click', events.saveVote);
 
-        const datasetContainer = document.querySelector('#all-content');
-
-        if (datasetContainer.dataset.login === "") {
+        if (dom.datasetContainer.dataset.login === "") {
             voteBtn.style.display = 'none';
             voteBtn.parentElement.style.display = 'none';
         }
@@ -231,7 +197,7 @@ export let dom = {
         }
     },
     displayVotingColumn: function () {
-        const planetTableRows = document.querySelector('#planets').rows;
+        const planetTableRows = dom.mainPlanetTable.rows;
 
         for (const row of planetTableRows) {
             const lasCell = row.children[7];
@@ -246,16 +212,13 @@ export let dom = {
         }
     },
     whichPaginationIsDisabled: function (whichPage) {
-        const prevButton = document.querySelector('#prev-button');
-        const nextButton = document.querySelector('#next-button');
-
         if (parseInt(whichPage) === 1) {
-            prevButton.disabled = true;
+            dom.prevButton.disabled = true;
         } else if (parseInt(whichPage) > 1 && parseInt(whichPage) < 7) {
-            prevButton.disabled = false;
-            nextButton.disabled = false;
+            dom.prevButton.disabled = false;
+            dom.nextButton.disabled = false;
         } else if (parseInt(whichPage) === 7) {
-            nextButton.disabled = true;
+            dom.nextButton.disabled = true;
         }
     },
     showLoggedInElements: function (loginStatus, username) {
@@ -270,5 +233,55 @@ export let dom = {
     emptyRegFormFields: function () {
         document.querySelector('#new_username').value = "";
         document.querySelector('#new_password').value = "";
+    },
+    formatPlanetData: function (planet) {
+        if (planet['diameter'] !== 'unknown') {
+            // planet['diameter'] = planet['diameter'].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            planet['diameter'] = parseInt(planet['diameter']).toLocaleString('en-US');
+            planet['diameter'] = `${planet['diameter']} km`;
+        }
+
+        if (planet['surface_water'] !== 'unknown') {
+            planet['surface_water'] = `${planet['surface_water']}%`;
+        }
+
+        if (planet['population'] !== 'unknown') {
+            planet['population'] = planet['population'].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            planet['population'] = `${planet['population']} people`;
+        }
+
+        return planet;
+    },
+    formatResidentData: function (row, residentData) {
+        if (residentData['height'] !== 'unknown') {
+            const height = parseInt(residentData['height']) / 100;
+            residentData['height'] = height.toString() + ' m';
+        }
+
+        if (residentData['mass'] !== 'unknown') {
+            residentData['mass'] = residentData['mass'] + ' kg';
+        }
+
+        const icon = document.createElement('i');
+        icon.classList.add('fas');
+        icon.classList.add('fa-lg');
+        icon.classList.add('centered-icon');
+
+        const lastResidentCell = 7;
+
+        if (residentData['gender'] === 'female') {
+            icon.classList.add('fa-venus');
+            icon.title = 'female';
+            row.children[lastResidentCell].appendChild(icon);
+        } else if (residentData['gender'] === 'male') {
+            icon.classList.add('fa-mars');
+            icon.title = 'male';
+            row.children[lastResidentCell].appendChild(icon);
+        } else {
+            row.children[lastResidentCell].innerHTML = residentData['gender'];
+            row.children[lastResidentCell].classList.add('centered-text');
+        }
+
+        return residentData;
     }
 };

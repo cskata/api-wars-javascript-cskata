@@ -8,21 +8,18 @@ init();
 
 
 function loadPlanetsData() {
-    const mainPage = document.querySelector('#planets');
-    const whichPage = mainPage.dataset.page;
+    const whichPage = dom.mainPlanetTable.dataset.page;
     const targetURL = `https://swapi.co/api/planets/?page=${whichPage}`;
 
-    const prevButton = document.querySelector('#prev-button');
-    const nextButton = document.querySelector('#next-button');
-    prevButton.disabled = true;
-    nextButton.disabled = true;
+    dom.prevButton.disabled = true;
+    dom.nextButton.disabled = true;
 
     dom.addLoadingImage('#planet-data', 'loading3');
-    dataHandler.getAllPlanetData(createPlanetTable, targetURL, prevButton, nextButton, whichPage);
+    dataHandler.getAllPlanetData(createPlanetTable, targetURL, whichPage);
 }
 
 
-function createPlanetTable(planets, prevButton, nextButton, whichPage) {
+function createPlanetTable(planets, whichPage) {
     dom.removeLoadingImage('#planet-data');
     dom.showPageNumber();
 
@@ -32,8 +29,8 @@ function createPlanetTable(planets, prevButton, nextButton, whichPage) {
     insertPlanetHeadersData();
     insertPlanetsData(planets);
 
-    prevButton.disabled = false;
-    nextButton.disabled = false;
+    dom.prevButton.disabled = false;
+    dom.nextButton.disabled = false;
     dom.whichPaginationIsDisabled(whichPage);
 
     templates.createPageNumber(whichPage);
@@ -41,7 +38,7 @@ function createPlanetTable(planets, prevButton, nextButton, whichPage) {
 
 
 function insertPlanetsData(planets) {
-    const table = document.querySelector('#planets');
+    const table = dom.mainPlanetTable;
     const planetDataKeys = templates.planetDataKeys;
 
     for (let i = 0; i < planets.length; i++) {
@@ -81,7 +78,7 @@ function addResidentsButton(newRow, planet) {
 
 
 function fillRowWithPlanetData(newRow, planet, planetDataKeys) {
-    const formattedPlanetData = formatPlanetData(planet);
+    const formattedPlanetData = dom.formatPlanetData(planet);
 
     for (let i = 0; i < planetDataKeys.length; i++) {
         newRow.children[i].innerHTML = formattedPlanetData[`${planetDataKeys[i]}`];
@@ -90,29 +87,9 @@ function fillRowWithPlanetData(newRow, planet, planetDataKeys) {
 }
 
 
-function formatPlanetData(planet) {
-    if (planet['diameter'] !== 'unknown') {
-        // planet['diameter'] = planet['diameter'].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        planet['diameter'] = parseInt(planet['diameter']).toLocaleString('en-US');
-        planet['diameter'] = `${planet['diameter']} km`;
-    }
-
-    if (planet['surface_water'] !== 'unknown') {
-        planet['surface_water'] = `${planet['surface_water']}%`;
-    }
-
-    if (planet['population'] !== 'unknown') {
-        planet['population'] = planet['population'].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        planet['population'] = `${planet['population']} people`;
-    }
-
-    return planet;
-}
-
-
 function switchPage(event) {
-    const currentPage = document.querySelector('#planets');
-    const currentPageNo = parseInt(document.querySelector('#planets').dataset.page);
+    const currentPage = dom.mainPlanetTable;
+    const currentPageNo = parseInt(dom.mainPlanetTable.dataset.page);
     const step = parseInt(event.target.dataset.value);    //direction is stored in button's dataset (1/-1)
     const nextPage = currentPageNo + step;
     currentPage.dataset.page = nextPage.toString();
@@ -123,61 +100,20 @@ function switchPage(event) {
 
 
 function insertResidentHeaderData() {
-    const headers = [
-        'Name', 'Height', 'Mass', 'Skin color', 'Hair color', 'Eye color', 'Birth year', 'Gender'
-    ];
-
     let residentHeaders = document.querySelector('#resident-modal-header').children;
 
-    for (let i = 0; i < headers.length; i++) {
-        residentHeaders[i].innerHTML = headers[i];
+    for (let i = 0; i < templates.residentHeaders.length; i++) {
+        residentHeaders[i].innerHTML = templates.residentHeaders[i];
     }
-}
-
-
-function formatResidentData(row, residentData) {
-    if (residentData['height'] !== 'unknown') {
-        const height = parseInt(residentData['height']) / 100;
-        residentData['height'] = height.toString() + ' m';
-    }
-
-    if (residentData['mass'] !== 'unknown') {
-        residentData['mass'] = residentData['mass'] + ' kg';
-    }
-
-    const icon = document.createElement('i');
-    icon.classList.add('fas');
-    icon.classList.add('fa-lg');
-    icon.classList.add('centered-icon');
-
-    const lastResidentCell = 7;
-
-    if (residentData['gender'] === 'female') {
-        icon.classList.add('fa-venus');
-        icon.title = 'female';
-        row.children[lastResidentCell].appendChild(icon);
-    } else if (residentData['gender'] === 'male') {
-        icon.classList.add('fa-mars');
-        icon.title = 'male';
-        row.children[lastResidentCell].appendChild(icon);
-    } else {
-        row.children[lastResidentCell].innerHTML = residentData['gender'];
-        row.children[lastResidentCell].classList.add('centered-text');
-    }
-
-    return residentData;
 }
 
 
 function addDataToResidentsModal(residentData, table, i) {
     const row = table.childNodes[i + 1];
-    const formattedResidentData = formatResidentData(row, residentData);
-    const residentDataColumns = [
-        'name', 'height', 'mass', 'skin_color', 'hair_color', 'eye_color', 'birth_year', 'gender'
-    ];
+    const formattedResidentData = dom.formatResidentData(row, residentData);
 
-    for (let i = 0; i < residentDataColumns.length - 1; i++) {
-        row.children[i].innerHTML = formattedResidentData[`${residentDataColumns[i]}`];
+    for (let i = 0; i < templates.residentDataKeys.length - 1; i++) {
+        row.children[i].innerHTML = formattedResidentData[`${templates.residentDataKeys[i]}`];
     }
     setTimeout(function () {
         dom.removeLoadingImage('#resident-table', 'residents');
@@ -186,8 +122,7 @@ function addDataToResidentsModal(residentData, table, i) {
 }
 
 function openResidentsModal(event) {
-    const modal = document.querySelector('#resident-container');
-    modal.style.display = 'block';
+    dom.residentTotalModal.style.display = 'block';
 
     const planet = event.target.dataset.planet;
 
@@ -203,33 +138,26 @@ function createResidentsTable(event) {
     dom.createResidentHeader();
     insertResidentHeaderData();
 
-    const table = document.querySelector('#residents');
-    table.style.display = 'none';
+    dom.residentTable.style.display = 'none';
     const residentsAsString = event.target.dataset.residents;   //list of residents is stored as 1 string in the dataset
     const residentsURLs = residentsAsString.split(',');    //splitting the string into separate URLs
 
     for (let i = 0; i < residentsURLs.length; i++) {
-        dom.createResidentDataRows(table);
-        dataHandler.getResidentsData(addDataToResidentsModal, table, residentsURLs, i)
+        dom.createResidentDataRows(dom.residentTable);
+        dataHandler.getResidentsData(addDataToResidentsModal, dom.residentTable, residentsURLs, i);
     }
 }
 
 
 function closeResidentModal() {
-    const table = document.querySelector('#residents');
-    table.innerHTML = "";
-
-    const modal = document.querySelector('#resident-container');
-    modal.style.display = 'none';
+    dom.residentTable.innerHTML = "";
+    dom.residentTotalModal.style.display = 'none';
 }
 
 
 function addButtonClickEvents() {
-    const nextButton = document.querySelector('#next-button');
-    nextButton.addEventListener('click', switchPage);
-
-    const prevButton = document.querySelector('#prev-button');
-    prevButton.addEventListener('click', switchPage);
+    dom.nextButton.addEventListener('click', switchPage);
+    dom.prevButton.addEventListener('click', switchPage);
 
     const residentModalCloseButtonTopRight = document.querySelector('#close-resident-modal');
     residentModalCloseButtonTopRight.addEventListener('click', closeResidentModal);
@@ -243,14 +171,13 @@ function init() {
     loadPlanetsData();
     addButtonClickEvents();
 
-    const isUserLoggedIn = document.querySelector('#all-content').dataset.login;
+    const isUserLoggedIn = dom.datasetContainer.dataset.login;
     dom.changeNavBarElements(isUserLoggedIn);
     events.addSounds();
 
     if (isUserLoggedIn === 'True') {
         events.addVotingModalEvents();
-    }
-    if (isUserLoggedIn === '') {
+    } else {
         events.allowRegistration();
         events.allowLogin();
     }

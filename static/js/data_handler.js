@@ -21,13 +21,13 @@ export let dataHandler = {
             }
         });
     },
-    getAllPlanetData: function (callback, targetURL, prevButton, nextButton, whichPage) {
+    getAllPlanetData: function (callback, targetURL, whichPage) {
         $.ajax({
             type: "GET",
             dataType: "json",
             url: targetURL,
             success: function (response) {
-                callback(response['results'], prevButton, nextButton, whichPage);
+                callback(response['results'], whichPage);
             }
         });
     },

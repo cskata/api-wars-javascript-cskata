@@ -1,9 +1,17 @@
+import {dom} from "./dom.js";
+
 export let templates = {
     planetHeaderNames: [
         'Name', 'Diameter', 'Climate', 'Terrain', 'Surface Waters Percentage', 'Population', 'Residents', ''
     ],
     planetDataKeys: [
         'name', 'diameter', 'climate', 'terrain', 'surface_water', 'population'
+    ],
+    residentHeaders: [
+        'Name', 'Height', 'Mass', 'Skin color', 'Hair color', 'Eye color', 'Birth year', 'Gender'
+    ],
+    residentDataKeys: [
+        'name', 'height', 'mass', 'skin_color', 'hair_color', 'eye_color', 'birth_year', 'gender'
     ],
     columnsNumber: 8,
     createPlanetHeaderElement: function () {
@@ -95,8 +103,6 @@ export let templates = {
         return userName;
     },
     createPageNumber: function (whichPage) {
-        const pageNumContainer = document.querySelector('#page-container');
-        pageNumContainer.innerHTML = "";
-        pageNumContainer.innerHTML = `${whichPage} / 7`;
+        dom.pageNumber.innerHTML = `${whichPage} / 7`;
     }
 };
