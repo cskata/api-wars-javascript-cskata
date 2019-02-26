@@ -47,17 +47,37 @@ export let events = {
         const pageNumber = document.querySelector('#page-container');
         pageNumber.addEventListener('mouseover', this.playMainTheme);
         pageNumber.addEventListener('mouseleave', this.pauseMainTheme);
-    }, playMainTheme: function () {
+    },
+    playMainTheme: function () {
         const audio = document.querySelector('#theme-song');
         audio.currentTime = 9;
         audio.play();
-    }, pauseMainTheme: function () {
+    },
+    pauseMainTheme: function () {
         const audio = document.querySelector('#theme-song');
         audio.pause();
+    },
+    addWoof: function () {
+        const userName = document.querySelector('#logged-in-username');
+        userName.addEventListener('mouseover', this.playBarking);
+        userName.addEventListener('mouseleave', this.pauseBarking);
+    },
+    playBarking: function () {
+        const audio = document.querySelector('#woof');
+        audio.play();
+    },
+    pauseBarking: function () {
+        const audio = document.querySelector('#woof');
+        audio.pause();
+        audio.currentTime = 0;
     },
     addSounds: function () {
         this.addLaserSaberSound();
         this.addMainThemeSong();
+        const userName = document.querySelector('#logged-in-username');
+        if (userName && userName.innerHTML === 'menta') {
+            this.addWoof();
+        }
     },
     allowRegistration: function () {
         const submitRegButton = document.querySelector('#reg-button');

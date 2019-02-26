@@ -33,6 +33,9 @@
         <audio controls preload="auto" id="theme-song" hidden>
             <source src="static/audio/main.mp3" type="audio/mp3">
         </audio>
+        <audio controls preload="auto" id="woof" hidden>
+            <source src="static/audio/woof.mp3" type="audio/mp3">
+        </audio>
 
         {% block content %} {% endblock %}
         <script type="module" src="{{ url_for('static', filename='js/apiwars.js') }}" defer></script>
