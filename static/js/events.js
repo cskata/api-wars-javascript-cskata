@@ -1,4 +1,5 @@
 import {dom} from "./dom.js";
+import {dataHandler} from "./data_handler.js";
 
 export let events = {
     addNavBarClickEvents: function () {
@@ -55,5 +56,27 @@ export let events = {
     addSounds: function () {
         this.addLaserSaberSound();
         this.addMainThemeSong();
+    },
+    allowRegistration: function () {
+        const submitButton = document.querySelector('#reg-button');
+        submitButton.addEventListener('click', this.checkUserName);
+    },
+    checkUserName: function () {
+        const username = document.querySelector('#new_username');
+        dataHandler.checkIfUsernameIsTaken(username.value);
+    },
+    addUserToDataBase: function () {
+        const username = document.querySelector('#new_username');
+        const password = document.querySelector('#new_password');
+        const newUserData = {
+            username: username.value,
+            password: password.value
+        };
+        dataHandler.registerNewUser(newUserData);
+    },
+    allowLogin: function () {
+        const username = document.querySelector('#username');
+        const password = document.querySelector('#password');
+        const submitButton = document.querySelector('#logbtn');
     }
 };

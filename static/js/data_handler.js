@@ -1,3 +1,6 @@
+import {dom} from "./dom.js";
+import {events} from "./events.js";
+
 export let dataHandler = {
     saveVote: function (data) {
         $.ajax({
@@ -35,6 +38,32 @@ export let dataHandler = {
             url: residentsURLs[i],
             success: function (residentData) {
                 callback(residentData, table, i);
+            }
+        });
+    },
+    checkIfUsernameIsTaken: function (username) {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: `/username/${username}`,
+            success: function (response) {
+                if (response === false) {
+                    events.addUserToDataBase();
+                } else {
+                    alert('Username is already taken, please choose something else.');
+                }
+            }
+        });
+    },
+    registerNewUser: function (data) {
+        $.ajax({
+            type: "POST",
+            url: "/registration",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(data),
+            success: function () {
+                dom.closeRegModal();
             }
         });
     }

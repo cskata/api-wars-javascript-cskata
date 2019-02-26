@@ -356,4 +356,8 @@ function init() {
     if (isUserLoggedIn === 'True') {
         addVotingModalEvents();
     }
+    if (isUserLoggedIn === '') {
+        events.allowRegistration();
+        events.allowLogin();
+    }
 }

@@ -19,22 +19,17 @@ def index():
         return render_template('index.html', login_status=login_status, username=username, user_id=user_id)
 
 
+@app.route('/username/<new_user>', methods=['GET'])
+def check_username_availability(new_user):
+    result = data_manager.check_username_in_database(new_user)
+    return jsonify(result)
+
+
 @app.route('/registration', methods=['POST'])
 def new_user_registration():
-    new_user = {
-        'username': request.form['new_username'],
-        'password': request.form['new_password']
-    }
-
-    is_username_taken = data_manager.check_username_in_database(new_user)
-
-    if is_username_taken:
-        flash("Username is already taken, please choose something else.")
-    else:
-        data_manager.register_new_user(new_user)
-        flash("Registration was successful!")
-
-    return redirect(url_for('index'))
+    new_user = request.get_json()
+    data_manager.register_new_user(new_user)
+    return jsonify(new_user)
 
 
 @app.route('/login', methods=['POST'])

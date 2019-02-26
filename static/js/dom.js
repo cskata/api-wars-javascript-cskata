@@ -45,7 +45,7 @@ export let dom = {
         table.appendChild(header);
 
         for (let i = 0; i < planetsPerPage; i++) {
-            let newRow = templates.createPlanetRow();
+            const newRow = templates.createPlanetRow();
             table.appendChild(newRow);
         }
     },
