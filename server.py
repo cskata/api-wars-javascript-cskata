@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, session, request, url_for, jsonify, flash
+from flask import Flask, render_template, redirect, session, request, url_for, jsonify
 import data_manager
 
 app = Flask(__name__)
@@ -11,12 +11,8 @@ def index():
         return render_template('index.html')
     else:
         login_status = True
-
         username = session['username']
-        user_id = data_manager.get_user_id_by_username(username)
-        session['user_id'] = user_id
-
-        return render_template('index.html', login_status=login_status, username=username, user_id=user_id)
+        return render_template('index.html', login_status=login_status, username=username)
 
 
 @app.route('/registration/<new_user>', methods=['GET'])
@@ -32,33 +28,23 @@ def new_user_registration():
     return jsonify(new_user)
 
 
-@app.route('/login', methods=['POST'])
-def log_in_user():
-    login_data = {
-        'username': request.form['username'],
-        'password': request.form['password']
-    }
-
-    login_check = data_manager.verify_user(login_data)
-
-    if login_check:
-        session['username'] = login_data['username']
-    else:
-        flash('Invalid username or password!')
-
-    return redirect(url_for('index'))
+@app.route('/login/<username>/<password>', methods=['GET'])
+def check_login_data(username, password):
+    result = data_manager.verify_user(username, password)
+    if result is True:
+        session['username'] = username
+    return jsonify(result)
 
 
 @app.route('/logout')
 def log_user_out():
     session.pop('username', None)
-    session.pop('user_id', None)
     return redirect(url_for('index'))
 
 
-@app.route('/voting', methods=['GET'])
-def show_votes():
-    user_id = session['user_id']
+@app.route('/voting/<username>', methods=['GET'])
+def show_votes(username):
+    user_id = data_manager.get_user_id_by_username(username)
     votes = data_manager.get_votes_by_user_id(user_id)
     return jsonify(votes)
 

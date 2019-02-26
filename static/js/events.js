@@ -58,25 +58,52 @@ export let events = {
         this.addMainThemeSong();
     },
     allowRegistration: function () {
-        const submitButton = document.querySelector('#reg-button');
-        submitButton.addEventListener('click', this.checkUserName);
+        const submitRegButton = document.querySelector('#reg-button');
+        submitRegButton.addEventListener('click', this.checkUserName);
     },
     checkUserName: function () {
-        const username = document.querySelector('#new_username');
-        dataHandler.checkIfUsernameIsTaken(username.value);
+        const username = document.querySelector('#new_username').value;
+        dataHandler.checkIfUsernameIsTaken(username);
     },
     addUserToDataBase: function () {
         const username = document.querySelector('#new_username');
         const password = document.querySelector('#new_password');
         const newUserData = {
-            username: username.value,
-            password: password.value
+            username: username,
+            password: password
         };
         dataHandler.registerNewUser(newUserData);
     },
     allowLogin: function () {
-        const username = document.querySelector('#username');
-        const password = document.querySelector('#password');
-        const submitButton = document.querySelector('#logbtn');
+        const submitLoginButton = document.querySelector('#logbtn');
+        submitLoginButton.addEventListener('click', this.checkLoginUserName);
+    },
+    checkLoginUserName: function () {
+        const username = document.querySelector('#username').value;
+        const password = document.querySelector('#password').value;
+        dataHandler.verifyUserAtLogin(username, password);
+    },
+    addVotingModalEvents: function () {
+        const voteStatisticsLink = document.querySelector('#vote-stats');
+        voteStatisticsLink.addEventListener('click', this.openVoteStatistics);
+
+        const votingModalCloseButtonTopRight = document.querySelector('#close-votes');
+        votingModalCloseButtonTopRight.addEventListener('click', this.closeVoteStatistics);
+
+        const votingModalCloseButtonTopLeft = document.querySelector('#close-votes-button');
+        votingModalCloseButtonTopLeft.addEventListener('click', this.closeVoteStatistics);
+    },
+    openVoteStatistics: function () {
+        const modal = document.querySelector('#votes-container');
+        modal.style.display = 'block';
+        const username = document.querySelector('#all-content').dataset.username;
+        dataHandler.getVotes(dom.listVotedPlanets, username);
+    },
+    closeVoteStatistics: function () {
+        const table = document.querySelector('#votes');
+        table.innerHTML = "";
+
+        const modal = document.querySelector('#votes-container');
+        modal.style.display = 'none';
     }
 };

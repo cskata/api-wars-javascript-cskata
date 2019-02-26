@@ -121,6 +121,21 @@ export let dom = {
             userNameNavBar.innerHTML = "";
         }
     },
+    changeNavBarAfterLogin: function (isUserLoggedIn, username) {
+        document.querySelector('#all-content').dataset.username = username;
+        document.querySelector('#all-content').dataset.login = 'True';
+
+        const mainNavBar = document.querySelector('#main-navbar');
+        const mainNavBarContent = templates.loggedInNavBar();
+        mainNavBar.innerHTML = mainNavBarContent;
+
+        const userNameText = templates.displayUserName(username);
+
+        const userNameNavBar = document.querySelector('#username-navbar');
+        userNameNavBar.innerHTML = userNameText;
+
+        events.addVotingModalEvents();
+    },
     openRegModal: function () {
         const registrationModal = document.querySelector('#registration-container');
         registrationModal.style.display = 'block';
@@ -177,5 +192,16 @@ export let dom = {
         const pageNumContainer = document.querySelector('#page-container');
         pageNumContainer.innerHTML = "";
         pageNumContainer.style.opacity = '0';
+    },
+    listVotedPlanets: function (response) {
+        const table = document.querySelector('#votes');
+        const voted_planets = response;
+        table.dataset.votes = voted_planets.length;
+
+        dom.createVotesHeader();
+
+        for (const planet of voted_planets) {
+            dom.createVotesDataRow(table, planet);
+        }
     }
 };

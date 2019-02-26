@@ -18,7 +18,6 @@ def check_username_in_database(cursor, username):
 
 
 def hash_password(plain_text_password):
-    # By using bcrypt, the salt is saved into the hash itself
     hashed_bytes = bcrypt.hashpw(plain_text_password.encode('utf-8'), bcrypt.gensalt())
     return hashed_bytes.decode('utf-8')
 
@@ -37,18 +36,17 @@ def register_new_user(cursor, new_user):
 
 
 @connection_handler
-def verify_user(cursor, login_data):
+def verify_user(cursor, username, password):
     cursor.execute("""
         SELECT * FROM registered_users
         WHERE username=%(username)s;
-        """, login_data)
+        """, {'username': username, 'password': password})
 
     stored_hash_password = cursor.fetchall()
 
     if len(stored_hash_password) == 0:
         return False
     else:
-        password = login_data['password']
         stored_hash_password_from_db = stored_hash_password[0]['hashed_pw']
         pw_check = verify_password(password, stored_hash_password_from_db)
         return pw_check

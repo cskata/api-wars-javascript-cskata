@@ -11,11 +11,11 @@ export let dataHandler = {
             data: JSON.stringify(data)
         });
     },
-    getVotes: function (callback) {
+    getVotes: function (callback, username) {
         $.ajax({
             type: "GET",
             dataType: "json",
-            url: "/voting",
+            url: `/voting/${username}`,
             success: function (response) {
                 callback(response);
             }
@@ -67,10 +67,19 @@ export let dataHandler = {
             }
         });
     },
-    verifyUserAtLogin: function (username) {
-
-    },
-    loginUser: function () {
-
+    verifyUserAtLogin: function (username, password) {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: `/login/${username}/${password}`,
+            success: function (response) {
+                if (response === false) {
+                    alert('Invalid username or password!');
+                } else {
+                    dom.changeNavBarAfterLogin('True', username);
+                    dom.closeLoginModal();
+                }
+            }
+        });
     }
 };
