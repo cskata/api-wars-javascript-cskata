@@ -19,7 +19,7 @@ def index():
         return render_template('index.html', login_status=login_status, username=username, user_id=user_id)
 
 
-@app.route('/username/<new_user>', methods=['GET'])
+@app.route('/registration/<new_user>', methods=['GET'])
 def check_username_availability(new_user):
     result = data_manager.check_username_in_database(new_user)
     return jsonify(result)

@@ -45,7 +45,7 @@ export let dataHandler = {
         $.ajax({
             type: "GET",
             dataType: "json",
-            url: `/username/${username}`,
+            url: `/registration/${username}`,
             success: function (response) {
                 if (response === false) {
                     events.addUserToDataBase();
@@ -66,5 +66,11 @@ export let dataHandler = {
                 dom.closeRegModal();
             }
         });
+    },
+    verifyUserAtLogin: function (username) {
+
+    },
+    loginUser: function () {
+
     }
 };
