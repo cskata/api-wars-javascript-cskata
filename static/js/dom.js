@@ -143,6 +143,7 @@ export let dom = {
     },
     closeRegModal: function () {
         const registrationModal = document.querySelector('#registration-container');
+        dom.emptyRegFormFields();
         registrationModal.style.display = 'none';
     },
     openLoginModal: function () {
@@ -151,6 +152,7 @@ export let dom = {
     },
     closeLoginModal: function () {
         const loginModal = document.querySelector('#login-container');
+        dom.emptyLoginFormFields();
         loginModal.style.display = 'none';
     },
     swapMainBackgroundsToBlack: function () {
