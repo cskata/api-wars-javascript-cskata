@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS registered_users;
 CREATE TABLE registered_users (
     id SERIAL,
     username character varying(255) NOT NULL,
-    hashed_pw character varying(255) NOT NULL,
+    password character varying(255) NOT NULL,
     reg_date timestamp without time zone
 );
 

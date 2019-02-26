@@ -24,32 +24,33 @@ def hash_password(plain_text_password):
 
 @connection_handler
 def register_new_user(cursor, new_user):
-    new_user['hashed_pw'] = hash_password(new_user['password'])
+    new_user['password'] = hash_password(new_user['password'])
 
     reg_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     new_user['reg_date'] = str(reg_date)
 
     cursor.execute("""
-        INSERT INTO registered_users (username, hashed_pw, reg_date)
-        VALUES (%(username)s, %(hashed_pw)s, %(reg_date)s);
+        INSERT INTO registered_users (username, password, reg_date)
+        VALUES (%(username)s, %(password)s, %(reg_date)s);
         """, new_user)
 
 
 @connection_handler
-def verify_user(cursor, username, password):
+def verify_user(cursor, login_data):
     cursor.execute("""
         SELECT * FROM registered_users
         WHERE username=%(username)s;
-        """, {'username': username, 'password': password})
+        """, login_data)
 
-    stored_hash_password = cursor.fetchall()
+    stored_password = cursor.fetchall()
 
-    if len(stored_hash_password) == 0:
+    if len(stored_password) == 0:
         return False
     else:
-        stored_hash_password_from_db = stored_hash_password[0]['hashed_pw']
-        pw_check = verify_password(password, stored_hash_password_from_db)
-        return pw_check
+        password = login_data['password']
+        stored_hash_password_from_db = stored_password[0]['password']
+        can_user_log_in = verify_password(password, stored_hash_password_from_db)
+        return can_user_log_in
 
 
 def verify_password(plain_text_password, hashed_password):
@@ -73,6 +74,7 @@ def get_user_id_by_username(cursor, username):
 
 @connection_handler
 def save_planet_vote(cursor, vote_data):
+    vote_data['user_id'] = get_user_id_by_username(vote_data['username'])
     cursor.execute("""
     INSERT INTO planet_votes
         (planet_id, planet_name, user_id, submission_time)

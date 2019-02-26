@@ -11,11 +11,11 @@ export let dataHandler = {
             data: JSON.stringify(data)
         });
     },
-    getVotes: function (callback, username) {
+    getVotes: function (callback) {
         $.ajax({
             type: "GET",
             dataType: "json",
-            url: `/voting/${username}`,
+            url: `/voting`,
             success: function (response) {
                 callback(response);
             }
@@ -41,11 +41,11 @@ export let dataHandler = {
             }
         });
     },
-    checkIfUsernameIsTaken: function (username) {
+    checkIfUsernameIsTaken: function () {
         $.ajax({
             type: "GET",
             dataType: "json",
-            url: `/registration/${username}`,
+            url: `/registration`,
             success: function (response) {
                 if (response === false) {
                     events.addUserToDataBase();
@@ -67,11 +67,11 @@ export let dataHandler = {
             }
         });
     },
-    verifyUserAtLogin: function (username, password) {
+    verifyUserAtLogin: function (username) {
         $.ajax({
             type: "GET",
             dataType: "json",
-            url: `/login/${username}/${password}`,
+            url: "/login",
             success: function (response) {
                 if (response === false) {
                     alert('Invalid username or password!');

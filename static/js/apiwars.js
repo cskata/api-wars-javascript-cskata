@@ -126,7 +126,7 @@ function addVoteButton(newRow, planet) {
 function saveVote(event) {
     const planetId = parseInt(event.target.dataset.planetid);
     const planetName = event.target.dataset.planetname;
-    const userId = parseInt(document.querySelector('#all-content').dataset.userid);
+    const username = document.querySelector('#all-content').dataset.username;
     const currentDate = new Date();
     const submissionTime =
         currentDate.getFullYear() + '-0' + (currentDate.getMonth() + 1) + '-' + currentDate.getDate() + ' ' +
@@ -135,7 +135,7 @@ function saveVote(event) {
     const data = {
         planet_id: planetId,
         planet_name: planetName,
-        user_id: userId,
+        username: username,
         submission_time: submissionTime
     };
 

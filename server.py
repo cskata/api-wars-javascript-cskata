@@ -15,8 +15,9 @@ def index():
         return render_template('index.html', login_status=login_status, username=username)
 
 
-@app.route('/registration/<new_user>', methods=['GET'])
-def check_username_availability(new_user):
+@app.route('/registration', methods=['GET'])
+def check_username_availability():
+    new_user = request.cookies['username']
     result = data_manager.check_username_in_database(new_user)
     return jsonify(result)
 
@@ -28,12 +29,13 @@ def new_user_registration():
     return jsonify(new_user)
 
 
-@app.route('/login/<username>/<password>', methods=['GET'])
-def check_login_data(username, password):
-    result = data_manager.verify_user(username, password)
-    if result is True:
-        session['username'] = username
-    return jsonify(result)
+@app.route('/login', methods=['GET'])
+def check_login_data():
+    login_data = request.cookies
+    is_user_verified = data_manager.verify_user(login_data)
+    if is_user_verified is True:
+        session['username'] = login_data['username']
+    return jsonify(is_user_verified)
 
 
 @app.route('/logout')
@@ -42,8 +44,9 @@ def log_user_out():
     return redirect(url_for('index'))
 
 
-@app.route('/voting/<username>', methods=['GET'])
-def show_votes(username):
+@app.route('/voting', methods=['GET'])
+def show_votes():
+    username = request.cookies['username']
     user_id = data_manager.get_user_id_by_username(username)
     votes = data_manager.get_votes_by_user_id(user_id)
     return jsonify(votes)

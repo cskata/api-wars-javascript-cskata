@@ -63,15 +63,17 @@ export let events = {
     },
     checkUserName: function () {
         const username = document.querySelector('#new_username').value;
+        document.cookie = `username=${username}`;
         dataHandler.checkIfUsernameIsTaken(username);
     },
     addUserToDataBase: function () {
-        const username = document.querySelector('#new_username');
-        const password = document.querySelector('#new_password');
+        const username = document.querySelector('#new_username').value;
+        const password = document.querySelector('#new_password').value;
         const newUserData = {
             username: username,
             password: password
         };
+        console.log(newUserData);
         dataHandler.registerNewUser(newUserData);
     },
     allowLogin: function () {
@@ -81,7 +83,9 @@ export let events = {
     checkLoginUserName: function () {
         const username = document.querySelector('#username').value;
         const password = document.querySelector('#password').value;
-        dataHandler.verifyUserAtLogin(username, password);
+        document.cookie = `username=${username}`;
+        document.cookie = `password=${password}`;
+        dataHandler.verifyUserAtLogin(username);
     },
     addVotingModalEvents: function () {
         const voteStatisticsLink = document.querySelector('#vote-stats');
@@ -97,7 +101,8 @@ export let events = {
         const modal = document.querySelector('#votes-container');
         modal.style.display = 'block';
         const username = document.querySelector('#all-content').dataset.username;
-        dataHandler.getVotes(dom.listVotedPlanets, username);
+        document.cookie = `username=${username}`;
+        dataHandler.getVotes(dom.listVotedPlanets);
     },
     closeVoteStatistics: function () {
         const table = document.querySelector('#votes');
