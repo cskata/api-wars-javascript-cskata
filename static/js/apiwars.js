@@ -242,10 +242,10 @@ function addButtonClickEvents() {
 function init() {
     loadPlanetsData();
     addButtonClickEvents();
-    events.addSounds();
 
     const isUserLoggedIn = document.querySelector('#all-content').dataset.login;
     dom.changeNavBarElements(isUserLoggedIn);
+    events.addSounds();
 
     if (isUserLoggedIn === 'True') {
         events.addVotingModalEvents();
