@@ -136,7 +136,7 @@ export let dom = {
         userNameNavBar.innerHTML = userNameText;
 
         events.addVotingModalEvents();
-        events.addLaserSaberSound();
+        events.addSounds();
     },
     openRegModal: function () {
         const registrationModal = document.querySelector('#registration-container');
