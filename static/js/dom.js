@@ -22,6 +22,7 @@ export let dom = {
     },
     createVoteButton: function (planet) {
         const voteBtn = document.createElement('button');
+        voteBtn.classList.add('vote-btn');
         voteBtn.classList.add('btn');
         voteBtn.classList.add('btn-secondary');
 
@@ -202,6 +203,21 @@ export let dom = {
 
         for (const planet of voted_planets) {
             dom.createVotesDataRow(table, planet);
+        }
+    },
+    displayVotingColumn: function () {
+        const planetTableRows = document.querySelector('#planets').rows;
+
+        for (const row of planetTableRows) {
+            const lasCell = row.children[7];
+            lasCell.style.display = 'table-cell';
+        }
+    },
+    displayVoteButtons: function () {
+        const voteButtons = document.querySelectorAll('.vote-btn');
+
+        for (const button of voteButtons) {
+            button.style.display = 'block';
         }
     }
 };

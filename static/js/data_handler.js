@@ -77,6 +77,8 @@ export let dataHandler = {
                     alert('Invalid username or password!');
                 } else {
                     dom.changeNavBarAfterLogin('True', username);
+                    dom.displayVotingColumn();
+                    dom.displayVoteButtons();
                     dom.closeLoginModal();
                 }
             }
