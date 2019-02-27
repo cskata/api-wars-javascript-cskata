@@ -377,8 +377,9 @@ body {
     position: absolute;
     height: 6px;
     bottom: 0;
-    right: 400px;
+    right: 300px;
     transition: 0.5s ease;
+    z-index: -1;
 }
 
 #registration::before, #vote-stats::before {
@@ -397,6 +398,7 @@ body {
 #vote-stats:hover::before, #logout:hover::before {
     right: 0;
     border-radius: 5px;
+    z-index: 0;
 }
 
 #registration:hover, #vote-stats:hover {
