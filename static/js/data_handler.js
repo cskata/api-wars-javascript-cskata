@@ -94,7 +94,7 @@ export let dataHandler = {
             dataType: "json",
             url: '/logout',
             success: function () {
-                dom.changeNavBarAfterLogOut();
+                dom.showLoggedOutElements();
             }
         });
     }

@@ -152,7 +152,15 @@ export let dom = {
         events.addSounds();
     },
     changeNavBarAfterLogOut: function () {
-        console.log('kileptel')
+        delete dom.elements.datasetContainer.dataset.username;
+        dom.elements.datasetContainer.dataset.login = "";
+
+        dom.elements.mainNavBar.innerHTML = templates.notLoggedInNavBar();
+        dom.elements.userNameNavBar.innerHTML = "";
+
+        events.regNavClickEvents();
+        events.loginNavClickEvents();
+        events.addSounds();
     },
     swapMainBackgrounds: function (backgroundImage) {
         const body = document.querySelector('#main');
@@ -228,6 +236,10 @@ export let dom = {
         dom.changeNavBarAfterLogin(loginStatus, username);
         dom.displayVotingColumn();
         dom.displayVoteButtons();
+    },
+    showLoggedOutElements: function () {
+        dom.changeNavBarAfterLogOut();
+        // TODO hide vote column and buttons
     },
     emptyLoginFormFields: function () {
         document.querySelector('#username').value = "";
