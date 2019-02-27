@@ -50,6 +50,9 @@ export let events = {
             dom.emptyRegFormFields();
             dom.registrationModal.style.display = 'none';
         }
+        if (event.target.id === "reg-button") {
+           dom.registrationModal.style.display = 'none';
+        }
     },
     loginNavClickEvents: function () {
         const loginLink = document.querySelector('#login');
@@ -66,6 +69,9 @@ export let events = {
             event.target.id === "log-x") {
             dom.emptyLoginFormFields();
             dom.loginModal.style.display = 'none';
+        }
+        if (event.target.id === "logbtn") {
+           dom.loginModal.style.display = 'none';
         }
     },
     addLaserSaberSound: function () {
