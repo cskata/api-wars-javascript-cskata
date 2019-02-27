@@ -86,7 +86,7 @@ export let templates = {
                 <a class="nav-link" id="vote-stats">Voting statistics</a>
             </li>
             <li class="nav-item logged-in">
-                <a class="nav-link" id="logout" href="/logout">Logout</a>
+                <a class="nav-link" id="logout">Logout</a>
             </li>
             `;
 

@@ -32,7 +32,8 @@ export let events = {
     },
     addNavBarClickEvents: function (isUserLoggedIn) {
         if (isUserLoggedIn === 'True') {
-            // TODO ide is kell a logoutos event
+            events.addVotingModalEvents();
+            events.addLogOutEvent();
         } else {
             events.regNavClickEvents();
             events.loginNavClickEvents();
@@ -41,6 +42,10 @@ export let events = {
     regNavClickEvents: function () {
         const registrationLink = document.querySelector('#registration');
         registrationLink.addEventListener('click', events.openRegModal);
+    },
+    loginNavClickEvents: function () {
+        const loginLink = document.querySelector('#login');
+        loginLink.addEventListener('click', events.openLoginModal);
     },
     openRegModal: function () {
         dom.elements.registrationModal.style.display = 'block';
@@ -57,10 +62,6 @@ export let events = {
         if (event.target.id === "reg-button") {
             dom.elements.registrationModal.style.display = 'none';
         }
-    },
-    loginNavClickEvents: function () {
-        const loginLink = document.querySelector('#login');
-        loginLink.addEventListener('click', events.openLoginModal);
     },
     openLoginModal: function () {
         dom.elements.loginModal.style.display = 'block';
@@ -203,5 +204,14 @@ export let events = {
         dataHandler.saveVote(data);
 
         alert(`Your vote for planet ${planetName} is saved.`);
-    }
+    },
+    addLogOutEvent: function () {
+        const logOutButton = document.querySelector('#logout');
+        logOutButton.addEventListener('click', events.logUserOut);
+    },
+    logUserOut: function () {
+        // dataHandler.logUserOut();
+        dom.changeNavBarAfterLogOut();
+    },
+
 };

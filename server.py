@@ -41,7 +41,7 @@ def check_login_data():
 @app.route('/logout')
 def log_user_out():
     session.pop('username', None)
-    return redirect(url_for('index'))
+    return "", 200
 
 
 @app.route('/voting', methods=['GET'])

@@ -87,5 +87,12 @@ export let dataHandler = {
                 }
             }
         });
+    },
+    logUserOut: function () {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '/logout'
+        });
     }
 };

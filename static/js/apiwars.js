@@ -109,10 +109,7 @@ function init() {
     const isUserLoggedIn = dom.elements.datasetContainer.dataset.login;
     dom.changeNavBarElements(isUserLoggedIn);
 
-    if (isUserLoggedIn === 'True') {
-        events.addVotingModalEvents();
-        // TODO ide jöjjön a logout eventje
-    } else {
+    if (isUserLoggedIn !== 'True') {
         events.allowRegistration();
         events.allowLogin();
     }

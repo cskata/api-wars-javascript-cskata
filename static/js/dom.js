@@ -150,6 +150,9 @@ export let dom = {
         events.addVotingModalEvents();
         events.addSounds();
     },
+    changeNavBarAfterLogOut: function () {
+        console.log('kileptel')
+    },
     swapMainBackgrounds: function (backgroundImage) {
         const body = document.querySelector('#main');
         body.style.backgroundImage = backgroundImage;
