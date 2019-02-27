@@ -111,7 +111,6 @@ function init() {
 
     const isUserLoggedIn = dom.datasetContainer.dataset.login;
     dom.changeNavBarElements(isUserLoggedIn);
-    events.addSounds();
 
     if (isUserLoggedIn === 'True') {
         events.addVotingModalEvents();

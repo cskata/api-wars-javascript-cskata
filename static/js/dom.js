@@ -152,6 +152,7 @@ export let dom = {
             dom.userNameNavBar.innerHTML = "";
             events.addNavBarClickEvents();
         }
+        events.addSounds();
     },
     changeNavBarAfterLogin: function (isUserLoggedIn, username) {
         dom.datasetContainer.dataset.username = username;
