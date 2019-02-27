@@ -1,9 +1,10 @@
 import {templates} from "./templates.js";
 import {events} from "./events.js";
+import {dataHandler} from "./data_handler.js";
 
 export let dom = {
     datasetContainer: document.querySelector('#all-content'),
-    registrationModal:document.querySelector('#registration-container'),
+    registrationModal: document.querySelector('#registration-container'),
     loginModal: document.querySelector('#login-container'),
     mainPlanetTable: document.querySelector('#planets'),
     residentTable: document.querySelector('#residents'),
@@ -69,6 +70,38 @@ export let dom = {
     createResidentDataRows: function (table) {
         const row = templates.createResidentRow();
         table.appendChild(row);
+    },
+    insertResidentHeaderData: function () {
+        let residentHeaders = document.querySelector('#resident-modal-header').children;
+
+        for (let i = 0; i < templates.residentHeaders.length; i++) {
+            residentHeaders[i].innerHTML = templates.residentHeaders[i];
+        }
+    },
+    createResidentsTable: function (event) {
+        dom.createResidentHeader();
+        dom.insertResidentHeaderData();
+
+        dom.residentTable.style.display = 'none';
+        const residentsAsString = event.target.dataset.residents;   //list of residents is stored as 1 string in the dataset
+        const residentsURLs = residentsAsString.split(',');    //splitting the string into separate URLs
+
+        for (let i = 0; i < residentsURLs.length; i++) {
+            dom.createResidentDataRows(dom.residentTable);
+            dataHandler.getResidentsData(dom.addDataToResidentsModal, dom.residentTable, residentsURLs, i);
+        }
+    },
+    addDataToResidentsModal: function (residentData, table, i) {
+        const row = table.childNodes[i + 1];
+        const formattedResidentData = dom.formatResidentData(row, residentData);
+
+        for (let i = 0; i < templates.residentDataKeys.length - 1; i++) {
+            row.children[i].innerHTML = formattedResidentData[`${templates.residentDataKeys[i]}`];
+        }
+        setTimeout(function () {
+            dom.removeLoadingImage('#resident-table', 'residents');
+            table.style.display = 'table';
+        }, 500);
     },
     createVotesHeader: function () {
         const table = document.querySelector('#votes');

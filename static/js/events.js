@@ -2,6 +2,24 @@ import {dom} from "./dom.js";
 import {dataHandler} from "./data_handler.js";
 
 export let events = {
+    addPlanetTableClickEvents: function () {
+        const planetTable = dom.mainPlanetTable;
+        planetTable.addEventListener('click', events.planetTableClickEvents);
+    },
+    planetTableClickEvents: function (event) {
+        if (event.target.className === "vote-btn btn btn-secondary") {
+
+        }
+        if (event.target.className === "btn btn-secondary btn-resident") {
+            dom.residentTotalModal.style.display = 'block';
+            const planet = event.target.dataset.planet;
+            const title = document.querySelector('#which-planet');
+            title.innerHTML = `Residents of ${planet}`;
+
+            dom.addLoadingImage('#resident-table', 'loading3', 'residents');
+            dom.createResidentsTable(event);
+        }
+    },
     addNavBarClickEvents: function () {
         events.regNavClickEvents();
         events.loginNavClickEvents();

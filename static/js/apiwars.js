@@ -34,6 +34,7 @@ function createPlanetTable(planets, whichPage) {
     dom.whichPaginationIsDisabled(whichPage);
 
     templates.createPageNumber(whichPage);
+    events.addPlanetTableClickEvents();
 }
 
 
@@ -71,7 +72,6 @@ function addResidentsButton(newRow, planet) {
         const residentBtn = dom.createResidentButton(planet);
         residentsColumn.appendChild(residentBtn);
         residentBtn.parentElement.style.textAlign = 'center';
-        residentBtn.addEventListener('click', openResidentsModal);
     }
     residentsColumn.style.textAlign = 'center';
 }
@@ -97,57 +97,6 @@ function switchPage(event) {
     currentPage.innerHTML = "";
     loadPlanetsData();
 }
-
-
-function insertResidentHeaderData() {
-    let residentHeaders = document.querySelector('#resident-modal-header').children;
-
-    for (let i = 0; i < templates.residentHeaders.length; i++) {
-        residentHeaders[i].innerHTML = templates.residentHeaders[i];
-    }
-}
-
-
-function addDataToResidentsModal(residentData, table, i) {
-    const row = table.childNodes[i + 1];
-    const formattedResidentData = dom.formatResidentData(row, residentData);
-
-    for (let i = 0; i < templates.residentDataKeys.length - 1; i++) {
-        row.children[i].innerHTML = formattedResidentData[`${templates.residentDataKeys[i]}`];
-    }
-    setTimeout(function () {
-        dom.removeLoadingImage('#resident-table', 'residents');
-        table.style.display = 'table';
-    }, 500);
-}
-
-function openResidentsModal(event) {
-    dom.residentTotalModal.style.display = 'block';
-
-    const planet = event.target.dataset.planet;
-
-    const title = document.querySelector('#which-planet');
-    title.innerHTML = `Residents of ${planet}`;
-
-    dom.addLoadingImage('#resident-table', 'loading3', 'residents');
-    createResidentsTable(event);
-}
-
-
-function createResidentsTable(event) {
-    dom.createResidentHeader();
-    insertResidentHeaderData();
-
-    dom.residentTable.style.display = 'none';
-    const residentsAsString = event.target.dataset.residents;   //list of residents is stored as 1 string in the dataset
-    const residentsURLs = residentsAsString.split(',');    //splitting the string into separate URLs
-
-    for (let i = 0; i < residentsURLs.length; i++) {
-        dom.createResidentDataRows(dom.residentTable);
-        dataHandler.getResidentsData(addDataToResidentsModal, dom.residentTable, residentsURLs, i);
-    }
-}
-
 
 function closeResidentModal() {
     dom.residentTable.innerHTML = "";
