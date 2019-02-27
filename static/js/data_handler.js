@@ -49,7 +49,7 @@ export let dataHandler = {
             success: function (response) {
                 if (response === false) {
                     events.addUserToDatabase();
-                    events.closeRegModal();
+
                 } else {
                     alert('Username is already taken, please choose something else.');
                     dom.emptyRegFormFields();
@@ -66,7 +66,7 @@ export let dataHandler = {
             dataType: "json",
             data: JSON.stringify(data),
             success: function () {
-                dom.closeRegModal();
+                dom.emptyRegFormFields();
             }
         });
     },
