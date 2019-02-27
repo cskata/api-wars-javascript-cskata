@@ -35,9 +35,9 @@ export let dom = {
     },
     createVoteButton: function (planet) {
         const voteBtn = document.createElement('button');
-        voteBtn.classList.add('vote-btn');
         voteBtn.classList.add('btn');
         voteBtn.classList.add('btn-secondary');
+        voteBtn.classList.add('vote-btn');
 
         const text = document.createTextNode('Vote');
         voteBtn.appendChild(text);
@@ -211,7 +211,6 @@ export let dom = {
         const voteBtn = dom.createVoteButton(planet);
         lastColumn.appendChild(voteBtn);
         voteBtn.parentElement.style.textAlign = 'center';
-        voteBtn.addEventListener('click', events.saveVote);
 
         if (dom.datasetContainer.dataset.login === "") {
             voteBtn.style.display = 'none';
