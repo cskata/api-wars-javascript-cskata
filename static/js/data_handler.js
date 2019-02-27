@@ -92,7 +92,10 @@ export let dataHandler = {
         $.ajax({
             type: "GET",
             dataType: "json",
-            url: '/logout'
+            url: '/logout',
+            success: function () {
+                dom.changeNavBarAfterLogOut();
+            }
         });
     }
 };

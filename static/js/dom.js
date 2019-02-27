@@ -148,6 +148,7 @@ export let dom = {
         dom.elements.userNameNavBar.innerHTML = templates.displayUserName(username);
 
         events.addVotingModalEvents();
+        events.addLogOutEvent();
         events.addSounds();
     },
     changeNavBarAfterLogOut: function () {

@@ -41,7 +41,7 @@ def check_login_data():
 @app.route('/logout')
 def log_user_out():
     session.pop('username', None)
-    return "", 200
+    return jsonify("")
 
 
 @app.route('/voting', methods=['GET'])

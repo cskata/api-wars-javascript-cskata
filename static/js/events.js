@@ -210,8 +210,8 @@ export let events = {
         logOutButton.addEventListener('click', events.logUserOut);
     },
     logUserOut: function () {
-        // dataHandler.logUserOut();
-        dom.changeNavBarAfterLogOut();
+        dataHandler.logUserOut();
+        // dom.changeNavBarAfterLogOut();
     },
 
 };
