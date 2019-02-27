@@ -16,6 +16,7 @@ export let dom = {
     userNameNavBar: document.querySelector('#username-navbar'),
     pageNumber: document.querySelector('#page-container'),
     votesTable: document.querySelector('#votes'),
+    votesModal: document.querySelector('#votes-container'),
     createResidentButton: function (planet) {
         const residentBtn = document.createElement('button');
 
@@ -162,13 +163,6 @@ export let dom = {
         events.addVotingModalEvents();
         events.addSounds();
     },
-    // openLoginModal: function () {
-    //     dom.loginModal.style.display = 'block';
-    // },
-    // closeLoginModal: function () {
-    //     dom.emptyLoginFormFields();
-    //     dom.loginModal.style.display = 'none';
-    // },
     swapMainBackgrounds: function (backgroundImage) {
         const body = document.querySelector('#main');
         body.style.backgroundImage = backgroundImage;

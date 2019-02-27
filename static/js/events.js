@@ -40,8 +40,8 @@ export let events = {
     },
     openRegModal: function () {
         dom.registrationModal.style.display = 'block';
-        const totalRegModal = document.querySelector('#inner-reg-modal');
-        totalRegModal.addEventListener('click', events.closeRegModal);
+        const innerRegModal = document.querySelector('#inner-reg-modal');
+        innerRegModal.addEventListener('click', events.closeRegModal);
     },
     closeRegModal: function (event) {
         if (event.target.id === "close-reg-modal" ||
@@ -57,8 +57,8 @@ export let events = {
     },
     openLoginModal: function () {
         dom.loginModal.style.display = 'block';
-        const totalLoginModal = document.querySelector('#inner-login-modal');
-        totalLoginModal.addEventListener('click', events.closeLoginModal);
+        const innerLoginModal = document.querySelector('#inner-login-modal');
+        innerLoginModal.addEventListener('click', events.closeLoginModal);
     },
     closeLoginModal: function (event) {
         if (event.target.id === "close-login-modal" ||
@@ -155,26 +155,24 @@ export let events = {
     addVotingModalEvents: function () {
         const voteStatisticsLink = document.querySelector('#vote-stats');
         voteStatisticsLink.addEventListener('click', this.openVoteStatistics);
-
-        const votingModalCloseButtonTopRight = document.querySelector('#close-votes');
-        votingModalCloseButtonTopRight.addEventListener('click', this.closeVoteStatistics);
-
-        const votingModalCloseButtonTopLeft = document.querySelector('#close-votes-button');
-        votingModalCloseButtonTopLeft.addEventListener('click', this.closeVoteStatistics);
     },
     openVoteStatistics: function () {
-        const modal = document.querySelector('#votes-container');
-        modal.style.display = 'block';
+        dom.votesModal.style.display = 'block';
 
         const username = dom.datasetContainer.dataset.username;
         document.cookie = `username=${username}`;
         dataHandler.getVotes(dom.listVotedPlanets);
-    },
-    closeVoteStatistics: function () {
-        dom.votesTable.innerHTML = "";
 
-        const modal = document.querySelector('#votes-container');
-        modal.style.display = 'none';
+        const innerVotesModal = document.querySelector('#inner-vote-modal');
+        innerVotesModal.addEventListener('click', events.closeVoteStatistics);
+    },
+    closeVoteStatistics: function (event) {
+        if (event.target.id === "close-votes-modal" ||
+            event.target.id === "close-votes-button" ||
+            event.target.id === "vote-x") {
+            dom.votesTable.innerHTML = "";
+            dom.votesModal.style.display = 'none';
+        }
     },
     saveVote: function (event) {
         const planetId = parseInt(event.target.dataset.planetid);
