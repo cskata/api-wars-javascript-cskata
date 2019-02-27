@@ -15,6 +15,7 @@ export let dom = {
     mainNavBar: document.querySelector('#main-navbar'),
     userNameNavBar: document.querySelector('#username-navbar'),
     pageNumber: document.querySelector('#page-container'),
+    votesTable: document.querySelector('#votes'),
     createResidentButton: function (planet) {
         const residentBtn = document.createElement('button');
 
@@ -23,9 +24,7 @@ export let dom = {
         const residentBtnTxt = document.createTextNode(fullResidentTxt);
         residentBtn.appendChild(residentBtnTxt);
 
-        residentBtn.classList.add('btn');
-        residentBtn.classList.add('btn-secondary');
-        residentBtn.classList.add('btn-resident');
+        residentBtn.classList.add('btn', 'btn-secondary', 'btn-resident');
 
         residentBtn.dataset.planet = planet['name'];
         residentBtn.dataset.residents = planet['residents'];
@@ -35,9 +34,7 @@ export let dom = {
     },
     createVoteButton: function (planet) {
         const voteBtn = document.createElement('button');
-        voteBtn.classList.add('btn');
-        voteBtn.classList.add('btn-secondary');
-        voteBtn.classList.add('vote-btn');
+        voteBtn.classList.add('btn', 'btn-secondary', 'vote-btn');
 
         const text = document.createTextNode('Vote');
         voteBtn.appendChild(text);
@@ -53,19 +50,17 @@ export let dom = {
         return voteBtn;
     },
     createPlanetDataRows: function (planetsPerPage) {
-        const table = dom.mainPlanetTable;
         const header = templates.createPlanetHeaderElement();
-        table.appendChild(header);
+        dom.mainPlanetTable.appendChild(header);
 
         for (let i = 0; i < planetsPerPage; i++) {
             const newRow = templates.createPlanetRow();
-            table.appendChild(newRow);
+            dom.mainPlanetTable.appendChild(newRow);
         }
     },
     createResidentHeader: function () {
-        const table = dom.residentTable;
         const header = templates.createResidentHeaderElement();
-        table.appendChild(header);
+        dom.residentTable.appendChild(header);
     },
     createResidentDataRows: function (table) {
         const row = templates.createResidentRow();
@@ -104,9 +99,8 @@ export let dom = {
         }, 500);
     },
     createVotesHeader: function () {
-        const table = document.querySelector('#votes');
         const header = templates.createVotesHeaderElement();
-        table.appendChild(header);
+        dom.votesTable.appendChild(header);
     },
     createVotesDataRow: function (table, planet) {
         const row = templates.createVotesRow(planet);
@@ -159,8 +153,8 @@ export let dom = {
         }
     },
     changeNavBarAfterLogin: function (isUserLoggedIn, username) {
-        document.querySelector('#all-content').dataset.username = username;
-        document.querySelector('#all-content').dataset.login = 'True';
+        dom.datasetContainer.dataset.username = username;
+        dom.datasetContainer.dataset.login = 'True';
 
         dom.mainNavBar.innerHTML = templates.loggedInNavBar();
         dom.userNameNavBar.innerHTML = templates.displayUserName(username);
@@ -218,14 +212,13 @@ export let dom = {
         }
     },
     listVotedPlanets: function (response) {
-        const table = document.querySelector('#votes');
         const voted_planets = response;
-        table.dataset.votes = voted_planets.length;
+        dom.votesTable.dataset.votes = voted_planets.length;
 
         dom.createVotesHeader();
 
         for (const planet of voted_planets) {
-            dom.createVotesDataRow(table, planet);
+            dom.createVotesDataRow(dom.votesTable, planet);
         }
     },
     displayVotingColumn: function () {

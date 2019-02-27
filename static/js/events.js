@@ -12,9 +12,9 @@ export let events = {
         }
         if (event.target.className === "btn btn-secondary btn-resident") {
             dom.residentTotalModal.style.display = 'block';
-            const planet = event.target.dataset.planet;
-            const title = document.querySelector('#which-planet');
-            title.innerHTML = `Residents of ${planet}`;
+            const currentPlanet = event.target.dataset.planet;
+            const residentModalTitle = document.querySelector('#which-planet');
+            residentModalTitle.innerHTML = `Residents of ${currentPlanet}`;
 
             dom.addLoadingImage('#resident-table', 'loading3', 'residents');
             dom.createResidentsTable(event);
@@ -141,13 +141,13 @@ export let events = {
     openVoteStatistics: function () {
         const modal = document.querySelector('#votes-container');
         modal.style.display = 'block';
-        const username = document.querySelector('#all-content').dataset.username;
+
+        const username = dom.datasetContainer.dataset.username;
         document.cookie = `username=${username}`;
         dataHandler.getVotes(dom.listVotedPlanets);
     },
     closeVoteStatistics: function () {
-        const table = document.querySelector('#votes');
-        table.innerHTML = "";
+        dom.votesTable.innerHTML = "";
 
         const modal = document.querySelector('#votes-container');
         modal.style.display = 'none';
@@ -155,7 +155,7 @@ export let events = {
     saveVote: function (event) {
         const planetId = parseInt(event.target.dataset.planetid);
         const planetName = event.target.dataset.planetname;
-        const username = document.querySelector('#all-content').dataset.username;
+        const username = dom.datasetContainer.dataset.username;
         const currentDate = new Date();
         const submissionTime =
             currentDate.getFullYear() + '-0' + (currentDate.getMonth() + 1) + '-' + currentDate.getDate() + ' ' +
