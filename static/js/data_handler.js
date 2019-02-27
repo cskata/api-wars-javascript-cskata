@@ -58,7 +58,7 @@ export let dataHandler = {
             }
         });
     },
-    registerNewUser: function (data) {
+    registerNewUser: function (data, callback) {
         $.ajax({
             type: "POST",
             url: "/registration",
@@ -66,7 +66,7 @@ export let dataHandler = {
             dataType: "json",
             data: JSON.stringify(data),
             success: function () {
-                dom.emptyRegFormFields();
+                callback();
             }
         });
     },
@@ -80,22 +80,21 @@ export let dataHandler = {
             success: function (response) {
                 if (response === false) {
                     alert('Invalid username or password!');
-                    dom.emptyLoginFormFields();
                     events.openLoginModal();
                 } else {
                     dom.showLoggedInElements('True', data['username']);
-                    dom.emptyLoginFormFields();
                 }
+                dom.emptyLoginFormFields();
             }
         });
     },
-    logUserOut: function () {
+    logUserOut: function (callback) {
         $.ajax({
             type: "GET",
             dataType: "json",
             url: '/logout',
             success: function () {
-                dom.showLoggedOutElements();
+                callback();
             }
         });
     }

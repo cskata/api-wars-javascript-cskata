@@ -148,7 +148,7 @@ export let events = {
             username: username,
             password: password
         };
-        dataHandler.registerNewUser(newUserData);
+        dataHandler.registerNewUser(newUserData, dom.emptyRegFormFields);
     },
     allowLogin: function () {
         const submitLoginButton = document.querySelector('#logbtn');
@@ -210,8 +210,7 @@ export let events = {
         logOutButton.addEventListener('click', events.logUserOut);
     },
     logUserOut: function () {
-        dataHandler.logUserOut();
-        // dom.changeNavBarAfterLogOut();
+        dataHandler.logUserOut(dom.showLoggedOutElements);
     },
 
 };

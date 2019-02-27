@@ -90,7 +90,6 @@ function switchPage(event) {
     const step = parseInt(event.target.dataset.value);    //direction is stored in button's dataset (1 / -1)
     const nextPage = currentPageNo + step;
     currentPage.dataset.page = nextPage.toString();
-
     currentPage.innerHTML = "";
     loadPlanetsData();
 }

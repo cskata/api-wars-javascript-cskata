@@ -275,12 +275,12 @@ export let dom = {
     },
     formatResidentData: function (row, residentData) {
         if (residentData['height'] !== 'unknown') {
-            const height = parseInt(residentData['height']) / 100;
-            residentData['height'] = height.toString() + ' m';
+            const height = (parseInt(residentData['height']) / 100).toFixed(2);
+            residentData['height'] = `${height} m`;
         }
 
         if (residentData['mass'] !== 'unknown') {
-            residentData['mass'] = residentData['mass'] + ' kg';
+            residentData['mass'] = `${residentData['mass']} kg`;
         }
 
         const icon = document.createElement('i');
