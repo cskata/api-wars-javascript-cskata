@@ -162,26 +162,13 @@ export let dom = {
         events.addVotingModalEvents();
         events.addSounds();
     },
-    // openRegModal: function () {
-    //     dom.registrationModal.style.display = 'block';
-    //     const totalRegModal = document.querySelector('#inner-reg-modal');
-    //     totalRegModal.addEventListener('click', dom.closeRegModal);
+    // openLoginModal: function () {
+    //     dom.loginModal.style.display = 'block';
     // },
-    // closeRegModal: function (event) {
-    //     if (event.target.id === "close-reg-modal" ||
-    //         event.target.id === "close-reg-button" ||
-    //         event.target.id === "reg-x") {
-    //         dom.emptyRegFormFields();
-    //         dom.registrationModal.style.display = 'none';
-    //     }
+    // closeLoginModal: function () {
+    //     dom.emptyLoginFormFields();
+    //     dom.loginModal.style.display = 'none';
     // },
-    openLoginModal: function () {
-        dom.loginModal.style.display = 'block';
-    },
-    closeLoginModal: function () {
-        dom.emptyLoginFormFields();
-        dom.loginModal.style.display = 'none';
-    },
     swapMainBackgrounds: function (backgroundImage) {
         const body = document.querySelector('#main');
         body.style.backgroundImage = backgroundImage;

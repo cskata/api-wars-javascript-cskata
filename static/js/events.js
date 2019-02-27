@@ -53,13 +53,20 @@ export let events = {
     },
     loginNavClickEvents: function () {
         const loginLink = document.querySelector('#login');
-        loginLink.addEventListener('click', dom.openLoginModal);
-
-        const loginModalCloseButtonTopRight = document.querySelector('#close-login-modal');
-        loginModalCloseButtonTopRight.addEventListener('click', dom.closeLoginModal);
-
-        const loginModalCloseButtonTopLeft = document.querySelector('#close-login-button');
-        loginModalCloseButtonTopLeft.addEventListener('click', dom.closeLoginModal);
+        loginLink.addEventListener('click', events.openLoginModal);
+    },
+    openLoginModal: function () {
+        dom.loginModal.style.display = 'block';
+        const totalLoginModal = document.querySelector('#inner-login-modal');
+        totalLoginModal.addEventListener('click', events.closeLoginModal);
+    },
+    closeLoginModal: function (event) {
+        if (event.target.id === "close-login-modal" ||
+            event.target.id === "close-login-button" ||
+            event.target.id === "log-x") {
+            dom.emptyLoginFormFields();
+            dom.loginModal.style.display = 'none';
+        }
     },
     addLaserSaberSound: function () {
         const navItems = document.querySelectorAll('.nav-link');

@@ -20,9 +20,11 @@
 </div>
 
 <div id="votes-container" class="total-modal-display">
-    <div class="total-modal-content-votes">
+    <div id="inner-vote-modal" class="total-modal-content-votes">
         <header class="modal-header">
-            <span id="close-votes" class="x-close-button button-display-top-right"><i class="fas fa-times"></i></span>
+            <span id="close-votes" class="x-close-button button-display-top-right">
+                <i id="vote-x" class="fas fa-times"></i>
+            </span>
             <h4 class="modal-title">Voting statistics</h4>
         </header>
         <div id="resident-datacontainer" class="inner-data-container">
@@ -70,16 +72,16 @@
 </div>
 
 <div id="login-container" class="total-modal-display">
-    <div class="total-modal-content">
+    <div id="inner-login-modal" class="total-modal-content">
         <header class="modal-header">
-            <span id="close-login-modal" class="x-close-button button-display-top-right"><i
-                    class="fas fa-times"></i></span>
+            <span id="close-login-modal" class="x-close-button button-display-top-right">
+                <i id="log-x" class="fas fa-times"></i>
+            </span>
             <h4 class="modal-title">Login</h4>
         </header>
         <div id="loginform-container" class="inner-data-container">
             <div id="login-form">
                 <br>
-                {#                <form action="{{ url_for('log_in_user') }}" method=POST>#}
                 <label id="new_user_reg" class="label">Username</label>
                 <p><input id="username" name="username" type="text"
                           class="input" placeholder="username" required></p>
@@ -90,7 +92,6 @@
                 <p>
                     <button type="submit" id="logbtn" class="login-button">Login</button>
                 </p>
-                {#                </form>#}
             </div>
         </div>
         <footer class="modal-footer">
