@@ -222,6 +222,13 @@ export let dom = {
             button.style.display = 'block';
         }
     },
+    hideVoteButtons: function () {
+        const voteButtons = document.querySelectorAll('.vote-btn');
+
+        for (const button of voteButtons) {
+            button.style.display = 'none';
+        }
+    },
     whichPaginationIsDisabled: function (whichPage) {
         if (parseInt(whichPage) === 1) {
             dom.elements.prevButton.disabled = true;
@@ -239,7 +246,7 @@ export let dom = {
     },
     showLoggedOutElements: function () {
         dom.changeNavBarAfterLogOut();
-        // TODO hide vote column and buttons
+        dom.hideVoteButtons();
     },
     emptyLoginFormFields: function () {
         document.querySelector('#username').value = "";
