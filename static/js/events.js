@@ -24,8 +24,8 @@ export let events = {
     },
     closeResidentModal: function (event) {
         if (event.target.id === "close-resident-button" ||
-            event.target.className === "x-close-button button-display-top-right" ||
-            event.target.className === "fas fa-times") {
+            event.target.id === "close-resident-modal" ||
+            event.target.id === "x-res") {
             dom.residentTable.innerHTML = "";
             dom.residentTotalModal.style.display = 'none';
         }
@@ -36,13 +36,20 @@ export let events = {
     },
     regNavClickEvents: function () {
         const registrationLink = document.querySelector('#registration');
-        registrationLink.addEventListener('click', dom.openRegModal);
-
-        const registrationModalCloseButtonTopRight = document.querySelector('#close-reg-modal');
-        registrationModalCloseButtonTopRight.addEventListener('click', dom.closeRegModal);
-
-        const registrationModalCloseButtonTopLeft = document.querySelector('#close-reg-button');
-        registrationModalCloseButtonTopLeft.addEventListener('click', dom.closeRegModal);
+        registrationLink.addEventListener('click', events.openRegModal);
+    },
+    openRegModal: function () {
+        dom.registrationModal.style.display = 'block';
+        const totalRegModal = document.querySelector('#inner-reg-modal');
+        totalRegModal.addEventListener('click', events.closeRegModal);
+    },
+    closeRegModal: function (event) {
+        if (event.target.id === "close-reg-modal" ||
+            event.target.id === "close-reg-button" ||
+            event.target.id === "reg-x") {
+            dom.emptyRegFormFields();
+            dom.registrationModal.style.display = 'none';
+        }
     },
     loginNavClickEvents: function () {
         const loginLink = document.querySelector('#login');
