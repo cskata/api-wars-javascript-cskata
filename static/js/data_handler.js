@@ -84,6 +84,7 @@ export let dataHandler = {
                     events.openLoginModal();
                 } else {
                     dom.showLoggedInElements('True', data['username']);
+                    dom.emptyLoginFormFields();
                 }
             }
         });
