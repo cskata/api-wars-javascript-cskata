@@ -49,9 +49,11 @@ export let dataHandler = {
             success: function (response) {
                 if (response === false) {
                     events.addUserToDatabase();
+                    events.closeRegModal();
                 } else {
                     alert('Username is already taken, please choose something else.');
                     dom.emptyRegFormFields();
+                    events.openRegModal();
                 }
             }
         });
@@ -79,9 +81,9 @@ export let dataHandler = {
                 if (response === false) {
                     alert('Invalid username or password!');
                     dom.emptyLoginFormFields();
+                    events.openLoginModal();
                 } else {
                     dom.showLoggedInElements('True', data['username']);
-                    dom.closeLoginModal();
                 }
             }
         });
