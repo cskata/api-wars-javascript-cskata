@@ -261,7 +261,7 @@ body {
 }
 
 .x-close-button:hover {
-    background-color: #ffffff;
+    background-color: #03aefa;
 }
 
 .button-display-top-right {
@@ -348,9 +348,8 @@ body {
 
 .fa-times:hover {
     cursor: pointer;
-    transform: rotate(180deg);
     opacity: 1;
-    color: #03aefa;
+    color: #ffffff;
 }
 
 

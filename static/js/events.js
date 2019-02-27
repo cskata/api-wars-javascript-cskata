@@ -12,12 +12,22 @@ export let events = {
         }
         if (event.target.className === "btn btn-secondary btn-resident") {
             dom.residentTotalModal.style.display = 'block';
+            dom.residentInnerModal.addEventListener('click', events.closeResidentModal);
+
             const currentPlanet = event.target.dataset.planet;
             const residentModalTitle = document.querySelector('#which-planet');
             residentModalTitle.innerHTML = `Residents of ${currentPlanet}`;
 
             dom.addLoadingImage('#resident-table', 'loading3', 'residents');
             dom.createResidentsTable(event);
+        }
+    },
+    closeResidentModal: function (event) {
+        if (event.target.id === "close-resident-button" ||
+            event.target.className === "x-close-button button-display-top-right" ||
+            event.target.className === "fas fa-times") {
+            dom.residentTable.innerHTML = "";
+            dom.residentTotalModal.style.display = 'none';
         }
     },
     addNavBarClickEvents: function () {

@@ -90,7 +90,7 @@ function fillRowWithPlanetData(newRow, planet, planetDataKeys) {
 function switchPage(event) {
     const currentPage = dom.mainPlanetTable;
     const currentPageNo = parseInt(dom.mainPlanetTable.dataset.page);
-    const step = parseInt(event.target.dataset.value);    //direction is stored in button's dataset (1/-1)
+    const step = parseInt(event.target.dataset.value);    //direction is stored in button's dataset (1 / -1)
     const nextPage = currentPageNo + step;
     currentPage.dataset.page = nextPage.toString();
 
@@ -98,27 +98,16 @@ function switchPage(event) {
     loadPlanetsData();
 }
 
-function closeResidentModal() {
-    dom.residentTable.innerHTML = "";
-    dom.residentTotalModal.style.display = 'none';
-}
 
-
-function addButtonClickEvents() {
+function allowPagination() {
     dom.nextButton.addEventListener('click', switchPage);
     dom.prevButton.addEventListener('click', switchPage);
-
-    const residentModalCloseButtonTopRight = document.querySelector('#close-resident-modal');
-    residentModalCloseButtonTopRight.addEventListener('click', closeResidentModal);
-
-    const residentModalCloseButtonTopLeft = document.querySelector('#close-resident-button');
-    residentModalCloseButtonTopLeft.addEventListener('click', closeResidentModal);
 }
 
 
 function init() {
     loadPlanetsData();
-    addButtonClickEvents();
+    allowPagination();
 
     const isUserLoggedIn = dom.datasetContainer.dataset.login;
     dom.changeNavBarElements(isUserLoggedIn);
