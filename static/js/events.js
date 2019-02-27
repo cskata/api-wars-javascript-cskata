@@ -46,12 +46,10 @@ export let events = {
     closeRegModal: function (event) {
         if (event.target.id === "close-reg-modal" ||
             event.target.id === "close-reg-button" ||
-            event.target.id === "reg-x") {
+            event.target.id === "reg-x" ||
+            event.target.id === "reg-button") {
             dom.emptyRegFormFields();
             dom.registrationModal.style.display = 'none';
-        }
-        if (event.target.id === "reg-button") {
-           dom.registrationModal.style.display = 'none';
         }
     },
     loginNavClickEvents: function () {
@@ -66,12 +64,10 @@ export let events = {
     closeLoginModal: function (event) {
         if (event.target.id === "close-login-modal" ||
             event.target.id === "close-login-button" ||
-            event.target.id === "log-x") {
+            event.target.id === "log-x" ||
+            event.target.id === "logbtn") {
             dom.emptyLoginFormFields();
             dom.loginModal.style.display = 'none';
-        }
-        if (event.target.id === "logbtn") {
-           dom.loginModal.style.display = 'none';
         }
     },
     addLaserSaberSound: function () {
