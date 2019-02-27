@@ -4,15 +4,12 @@ import {templates} from "./templates.js";
 import {events} from "./events.js";
 
 
-init();
-
-
 function loadPlanetsData() {
-    const whichPage = dom.mainPlanetTable.dataset.page;
+    const whichPage = dom.elements.mainPlanetTable.dataset.page;
     const targetURL = `https://swapi.co/api/planets/?page=${whichPage}`;
 
-    dom.prevButton.disabled = true;
-    dom.nextButton.disabled = true;
+    dom.elements.prevButton.disabled = true;
+    dom.elements.nextButton.disabled = true;
 
     dom.addLoadingImage('#planet-data', 'loading3');
     dataHandler.getAllPlanetData(createPlanetTable, targetURL, whichPage);
@@ -29,8 +26,8 @@ function createPlanetTable(planets, whichPage) {
     insertPlanetHeadersData();
     insertPlanetsData(planets);
 
-    dom.prevButton.disabled = false;
-    dom.nextButton.disabled = false;
+    dom.elements.prevButton.disabled = false;
+    dom.elements.nextButton.disabled = false;
     dom.whichPaginationIsDisabled(whichPage);
 
     templates.createPageNumber(whichPage);
@@ -39,7 +36,7 @@ function createPlanetTable(planets, whichPage) {
 
 
 function insertPlanetsData(planets) {
-    const table = dom.mainPlanetTable;
+    const table = dom.elements.mainPlanetTable;
     const planetDataKeys = templates.planetDataKeys;
 
     for (let i = 0; i < planets.length; i++) {
@@ -88,8 +85,8 @@ function fillRowWithPlanetData(newRow, planet, planetDataKeys) {
 
 
 function switchPage(event) {
-    const currentPage = dom.mainPlanetTable;
-    const currentPageNo = parseInt(dom.mainPlanetTable.dataset.page);
+    const currentPage = dom.elements.mainPlanetTable;
+    const currentPageNo = parseInt(dom.elements.mainPlanetTable.dataset.page);
     const step = parseInt(event.target.dataset.value);    //direction is stored in button's dataset (1 / -1)
     const nextPage = currentPageNo + step;
     currentPage.dataset.page = nextPage.toString();
@@ -100,8 +97,8 @@ function switchPage(event) {
 
 
 function allowPagination() {
-    dom.nextButton.addEventListener('click', switchPage);
-    dom.prevButton.addEventListener('click', switchPage);
+    dom.elements.nextButton.addEventListener('click', switchPage);
+    dom.elements.prevButton.addEventListener('click', switchPage);
 }
 
 
@@ -109,13 +106,17 @@ function init() {
     loadPlanetsData();
     allowPagination();
 
-    const isUserLoggedIn = dom.datasetContainer.dataset.login;
+    const isUserLoggedIn = dom.elements.datasetContainer.dataset.login;
     dom.changeNavBarElements(isUserLoggedIn);
 
     if (isUserLoggedIn === 'True') {
         events.addVotingModalEvents();
+        // TODO ide jöjjön a logout eventje
     } else {
         events.allowRegistration();
         events.allowLogin();
     }
 }
+
+
+init();

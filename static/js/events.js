@@ -3,7 +3,7 @@ import {dataHandler} from "./data_handler.js";
 
 export let events = {
     addPlanetTableClickEvents: function () {
-        const planetTable = dom.mainPlanetTable;
+        const planetTable = dom.elements.mainPlanetTable;
         planetTable.addEventListener('click', events.planetTableClickEvents);
     },
     planetTableClickEvents: function (event) {
@@ -11,8 +11,8 @@ export let events = {
             events.saveVote(event);
         }
         if (event.target.className === "btn btn-secondary btn-resident") {
-            dom.residentTotalModal.style.display = 'block';
-            dom.residentInnerModal.addEventListener('click', events.closeResidentModal);
+            dom.elements.residentTotalModal.style.display = 'block';
+            dom.elements.residentInnerModal.addEventListener('click', events.closeResidentModal);
 
             const currentPlanet = event.target.dataset.planet;
             const residentModalTitle = document.querySelector('#which-planet');
@@ -26,20 +26,24 @@ export let events = {
         if (event.target.id === "close-resident-button" ||
             event.target.id === "close-resident-modal" ||
             event.target.id === "x-res") {
-            dom.residentTable.innerHTML = "";
-            dom.residentTotalModal.style.display = 'none';
+            dom.elements.residentTable.innerHTML = "";
+            dom.elements.residentTotalModal.style.display = 'none';
         }
     },
-    addNavBarClickEvents: function () {
-        events.regNavClickEvents();
-        events.loginNavClickEvents();
+    addNavBarClickEvents: function (isUserLoggedIn) {
+        if (isUserLoggedIn === 'True') {
+            // TODO ide is kell a logoutos event
+        } else {
+            events.regNavClickEvents();
+            events.loginNavClickEvents();
+        }
     },
     regNavClickEvents: function () {
         const registrationLink = document.querySelector('#registration');
         registrationLink.addEventListener('click', events.openRegModal);
     },
     openRegModal: function () {
-        dom.registrationModal.style.display = 'block';
+        dom.elements.registrationModal.style.display = 'block';
         const innerRegModal = document.querySelector('#inner-reg-modal');
         innerRegModal.addEventListener('click', events.closeRegModal);
     },
@@ -48,10 +52,10 @@ export let events = {
             event.target.id === "close-reg-button" ||
             event.target.id === "reg-x") {
             dom.emptyRegFormFields();
-            dom.registrationModal.style.display = 'none';
+            dom.elements.registrationModal.style.display = 'none';
         }
         if (event.target.id === "reg-button") {
-            dom.registrationModal.style.display = 'none';
+            dom.elements.registrationModal.style.display = 'none';
         }
     },
     loginNavClickEvents: function () {
@@ -59,7 +63,7 @@ export let events = {
         loginLink.addEventListener('click', events.openLoginModal);
     },
     openLoginModal: function () {
-        dom.loginModal.style.display = 'block';
+        dom.elements.loginModal.style.display = 'block';
         const innerLoginModal = document.querySelector('#inner-login-modal');
         innerLoginModal.addEventListener('click', events.closeLoginModal);
     },
@@ -68,10 +72,10 @@ export let events = {
             event.target.id === "close-login-button" ||
             event.target.id === "log-x") {
             dom.emptyLoginFormFields();
-            dom.loginModal.style.display = 'none';
+            dom.elements.loginModal.style.display = 'none';
         }
         if (event.target.id === "logbtn") {
-            dom.loginModal.style.display = 'none';
+            dom.elements.loginModal.style.display = 'none';
         }
     },
     addLaserSaberSound: function () {
@@ -120,11 +124,11 @@ export let events = {
         audio.currentTime = 0;
     },
     addSounds: function () {
-        this.addLaserSaberSound();
-        this.addMainThemeSong();
+        events.addLaserSaberSound();
+        events.addMainThemeSong();
         const userName = document.querySelector('#logged-in-username');
         if (userName && userName.innerHTML === 'menta') {
-            this.addWoof();
+            events.addWoof();
         }
     },
     allowRegistration: function () {
@@ -163,9 +167,9 @@ export let events = {
         voteStatisticsLink.addEventListener('click', this.openVoteStatistics);
     },
     openVoteStatistics: function () {
-        dom.votesModal.style.display = 'block';
+        dom.elements.votesModal.style.display = 'block';
 
-        const username = dom.datasetContainer.dataset.username;
+        const username = dom.elements.datasetContainer.dataset.username;
         document.cookie = `username=${username}`;
         dataHandler.getVotes(dom.listVotedPlanets);
 
@@ -176,14 +180,14 @@ export let events = {
         if (event.target.id === "close-votes-modal" ||
             event.target.id === "close-votes-button" ||
             event.target.id === "vote-x") {
-            dom.votesTable.innerHTML = "";
-            dom.votesModal.style.display = 'none';
+            dom.elements.votesTable.innerHTML = "";
+            dom.elements.votesModal.style.display = 'none';
         }
     },
     saveVote: function (event) {
         const planetId = parseInt(event.target.dataset.planetid);
         const planetName = event.target.dataset.planetname;
-        const username = dom.datasetContainer.dataset.username;
+        const username = dom.elements.datasetContainer.dataset.username;
         const currentDate = new Date();
         const submissionTime =
             currentDate.getFullYear() + '-0' + (currentDate.getMonth() + 1) + '-' + currentDate.getDate() + ' ' +

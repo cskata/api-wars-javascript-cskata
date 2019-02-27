@@ -3,20 +3,6 @@ import {events} from "./events.js";
 import {dataHandler} from "./data_handler.js";
 
 export let dom = {
-    datasetContainer: document.querySelector('#all-content'),
-    registrationModal: document.querySelector('#registration-container'),
-    loginModal: document.querySelector('#login-container'),
-    mainPlanetTable: document.querySelector('#planets'),
-    residentTable: document.querySelector('#residents'),
-    residentTotalModal: document.querySelector('#resident-container'),
-    prevButton: document.querySelector('#prev-button'),
-    nextButton: document.querySelector('#next-button'),
-    residentInnerModal: document.querySelector('#residents-inner-container'),
-    mainNavBar: document.querySelector('#main-navbar'),
-    userNameNavBar: document.querySelector('#username-navbar'),
-    pageNumber: document.querySelector('#page-container'),
-    votesTable: document.querySelector('#votes'),
-    votesModal: document.querySelector('#votes-container'),
     createResidentButton: function (planet) {
         const residentBtn = document.createElement('button');
 
@@ -44,7 +30,7 @@ export let dom = {
         voteBtn.dataset.planetid = planetId;
         voteBtn.dataset.planetname = planet['name'];
 
-        if (dom.datasetContainer.dataset.login === "") {
+        if (dom.elements.datasetContainer.dataset.login === "") {
             voteBtn.style.display = 'none';
         }
 
@@ -52,16 +38,16 @@ export let dom = {
     },
     createPlanetDataRows: function (planetsPerPage) {
         const header = templates.createPlanetHeaderElement();
-        dom.mainPlanetTable.appendChild(header);
+        dom.elements.mainPlanetTable.appendChild(header);
 
         for (let i = 0; i < planetsPerPage; i++) {
             const newRow = templates.createPlanetRow();
-            dom.mainPlanetTable.appendChild(newRow);
+            dom.elements.mainPlanetTable.appendChild(newRow);
         }
     },
     createResidentHeader: function () {
         const header = templates.createResidentHeaderElement();
-        dom.residentTable.appendChild(header);
+        dom.elements.residentTable.appendChild(header);
     },
     createResidentDataRows: function (table) {
         const row = templates.createResidentRow();
@@ -78,13 +64,13 @@ export let dom = {
         dom.createResidentHeader();
         dom.insertResidentHeaderData();
 
-        dom.residentTable.style.display = 'none';
+        dom.elements.residentTable.style.display = 'none';
         const residentsAsString = event.target.dataset.residents;   //list of residents is stored as 1 string in the dataset
         const residentsURLs = residentsAsString.split(',');    //splitting the string into separate URLs
 
         for (let i = 0; i < residentsURLs.length; i++) {
-            dom.createResidentDataRows(dom.residentTable);
-            dataHandler.getResidentsData(dom.addDataToResidentsModal, dom.residentTable, residentsURLs, i);
+            dom.createResidentDataRows(dom.elements.residentTable);
+            dataHandler.getResidentsData(dom.addDataToResidentsModal, dom.elements.residentTable, residentsURLs, i);
         }
     },
     addDataToResidentsModal: function (residentData, table, i) {
@@ -101,7 +87,7 @@ export let dom = {
     },
     createVotesHeader: function () {
         const header = templates.createVotesHeaderElement();
-        dom.votesTable.appendChild(header);
+        dom.elements.votesTable.appendChild(header);
     },
     createVotesDataRow: function (table, planet) {
         const row = templates.createVotesRow(planet);
@@ -115,7 +101,7 @@ export let dom = {
         loadingImage.id = 'loading-image';
 
         if (location === 'residents') {
-            dom.residentInnerModal.classList.add('hide-res-bg');
+            dom.elements.residentInnerModal.classList.add('hide-res-bg');
         } else {
             dom.swapMainBackgrounds("url(/static/images/black.jpg)");
             dom.hidePageNumber();
@@ -134,7 +120,7 @@ export let dom = {
 
         if (dataContainer.lastChild.nodeName === 'IMG') {
             if (location === 'residents') {
-                dom.residentInnerModal.classList.remove('hide-res-bg');
+                dom.elements.residentInnerModal.classList.remove('hide-res-bg');
             } else {
                 dom.swapMainBackgrounds("url(/static/images/universe.jpg)");
                 dom.showPageNumber();
@@ -144,22 +130,22 @@ export let dom = {
     },
     changeNavBarElements: function (isUserLoggedIn) {
         if (isUserLoggedIn === 'True') {
-            const username = dom.datasetContainer.dataset.username;
-            dom.mainNavBar.innerHTML = templates.loggedInNavBar();
-            dom.userNameNavBar.innerHTML = templates.displayUserName(username);
+            const username = dom.elements.datasetContainer.dataset.username;
+            dom.elements.mainNavBar.innerHTML = templates.loggedInNavBar();
+            dom.elements.userNameNavBar.innerHTML = templates.displayUserName(username);
         } else {
-            dom.mainNavBar.innerHTML = templates.notLoggedInNavBar();
-            dom.userNameNavBar.innerHTML = "";
-            events.addNavBarClickEvents();
+            dom.elements.mainNavBar.innerHTML = templates.notLoggedInNavBar();
+            dom.elements.userNameNavBar.innerHTML = "";
         }
+        events.addNavBarClickEvents(isUserLoggedIn);
         events.addSounds();
     },
     changeNavBarAfterLogin: function (isUserLoggedIn, username) {
-        dom.datasetContainer.dataset.username = username;
-        dom.datasetContainer.dataset.login = 'True';
+        dom.elements.datasetContainer.dataset.username = username;
+        dom.elements.datasetContainer.dataset.login = 'True';
 
-        dom.mainNavBar.innerHTML = templates.loggedInNavBar();
-        dom.userNameNavBar.innerHTML = templates.displayUserName(username);
+        dom.elements.mainNavBar.innerHTML = templates.loggedInNavBar();
+        dom.elements.userNameNavBar.innerHTML = templates.displayUserName(username);
 
         events.addVotingModalEvents();
         events.addSounds();
@@ -175,18 +161,18 @@ export let dom = {
         mainTitle.style.backgroundImage = backgroundImage;
     },
     showPageNumber: function () {
-        dom.pageNumber.style.opacity = '0.8';
+        dom.elements.pageNumber.style.opacity = '0.8';
     },
     hidePlanetVotingHeader: function () {
-        if (dom.datasetContainer.dataset.login === "") {
+        if (dom.elements.datasetContainer.dataset.login === "") {
             const headers = document.querySelectorAll('.planet-header');
             const lastHeader = headers[templates.planetHeaderNames.length - 1];
             lastHeader.style.display = 'none';
         }
     },
     hidePageNumber: function () {
-        dom.pageNumber.innerHTML = "";
-        dom.pageNumber.style.opacity = '0';
+        dom.elements.pageNumber.innerHTML = "";
+        dom.elements.pageNumber.style.opacity = '0';
     },
     addVoteButton: function (row, planet) {
         const lastColumn = row.children[templates.planetHeaderNames.length - 1];
@@ -194,23 +180,23 @@ export let dom = {
         lastColumn.appendChild(voteBtn);
         voteBtn.parentElement.style.textAlign = 'center';
 
-        if (dom.datasetContainer.dataset.login === "") {
+        if (dom.elements.datasetContainer.dataset.login === "") {
             voteBtn.style.display = 'none';
             voteBtn.parentElement.style.display = 'none';
         }
     },
     listVotedPlanets: function (response) {
         const voted_planets = response;
-        dom.votesTable.dataset.votes = voted_planets.length;
+        dom.elements.votesTable.dataset.votes = voted_planets.length;
 
         dom.createVotesHeader();
 
         for (const planet of voted_planets) {
-            dom.createVotesDataRow(dom.votesTable, planet);
+            dom.createVotesDataRow(dom.elements.votesTable, planet);
         }
     },
     displayVotingColumn: function () {
-        const planetTableRows = dom.mainPlanetTable.rows;
+        const planetTableRows = dom.elements.mainPlanetTable.rows;
 
         for (const row of planetTableRows) {
             const lasCell = row.children[7];
@@ -226,12 +212,12 @@ export let dom = {
     },
     whichPaginationIsDisabled: function (whichPage) {
         if (parseInt(whichPage) === 1) {
-            dom.prevButton.disabled = true;
+            dom.elements.prevButton.disabled = true;
         } else if (parseInt(whichPage) > 1 && parseInt(whichPage) < 7) {
-            dom.prevButton.disabled = false;
-            dom.nextButton.disabled = false;
+            dom.elements.prevButton.disabled = false;
+            dom.elements.nextButton.disabled = false;
         } else if (parseInt(whichPage) === 7) {
-            dom.nextButton.disabled = true;
+            dom.elements.nextButton.disabled = true;
         }
     },
     showLoggedInElements: function (loginStatus, username) {
@@ -249,7 +235,6 @@ export let dom = {
     },
     formatPlanetData: function (planet) {
         if (planet['diameter'] !== 'unknown') {
-            // planet['diameter'] = planet['diameter'].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             planet['diameter'] = parseInt(planet['diameter']).toLocaleString('en-US');
             planet['diameter'] = `${planet['diameter']} km`;
         }
@@ -259,7 +244,7 @@ export let dom = {
         }
 
         if (planet['population'] !== 'unknown') {
-            planet['population'] = planet['population'].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            planet['population'] = parseInt(planet['population']).toLocaleString('en-US');
             planet['population'] = `${planet['population']} people`;
         }
 
@@ -276,11 +261,9 @@ export let dom = {
         }
 
         const icon = document.createElement('i');
-        icon.classList.add('fas');
-        icon.classList.add('fa-lg');
-        icon.classList.add('centered-icon');
+        icon.classList.add('fas', 'fa-lg', 'centered-icon');
 
-        const lastResidentCell = 7;
+        const lastResidentCell = templates.residentHeaders.length - 1;
 
         if (residentData['gender'] === 'female') {
             icon.classList.add('fa-venus');
@@ -296,5 +279,21 @@ export let dom = {
         }
 
         return residentData;
+    },
+    elements: {
+        datasetContainer: document.querySelector('#all-content'),
+        registrationModal: document.querySelector('#registration-container'),
+        loginModal: document.querySelector('#login-container'),
+        mainPlanetTable: document.querySelector('#planets'),
+        residentTable: document.querySelector('#residents'),
+        residentTotalModal: document.querySelector('#resident-container'),
+        prevButton: document.querySelector('#prev-button'),
+        nextButton: document.querySelector('#next-button'),
+        residentInnerModal: document.querySelector('#residents-inner-container'),
+        mainNavBar: document.querySelector('#main-navbar'),
+        userNameNavBar: document.querySelector('#username-navbar'),
+        pageNumber: document.querySelector('#page-container'),
+        votesTable: document.querySelector('#votes'),
+        votesModal: document.querySelector('#votes-container')
     }
 };

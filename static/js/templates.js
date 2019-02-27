@@ -103,6 +103,6 @@ export let templates = {
         return userName;
     },
     createPageNumber: function (whichPage) {
-        dom.pageNumber.innerHTML = `${whichPage} / 7`;
+        dom.elements.pageNumber.innerHTML = `${whichPage} / 7`;
     }
 };
