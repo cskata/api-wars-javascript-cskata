@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, session, request, url_for, jsonify
 import data_manager
+import mimetypes
 
 app = Flask(__name__)
 app.secret_key = "titkoskulcs"
@@ -7,6 +8,7 @@ app.secret_key = "titkoskulcs"
 
 @app.route('/')
 def index():
+    mimetypes.add_type("application/javascript", ".js", True)
     if 'username' not in session:
         return render_template('index.html')
     else:
